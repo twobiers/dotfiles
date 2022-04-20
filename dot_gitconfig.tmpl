@@ -1,0 +1,21 @@
+[commit]
+	gpgsign = true
+[core]
+	longpaths = true
+	autocrlf = true
+{{ if eq .chezmoi.os "windows" }}
+	excludesFile = {{ .chezmoi.homeDir }}\\.gitignore
+        sshcommand = plink -agent
+{{ else }}
+        excludeFile = {{ .chezmoi.homeDir }}/.gitignore
+{{ end }}
+[user]
+	email = 22715034+twobiers@users.noreply.github.com
+	name = twobiers
+	signingkey = A67F16C775263A042C3973600F1206AF317A578E
+[alias]
+	change-commits = "!f() { VAR=$1; OLD=$2; NEW=$3; shift 3; git filter-branch --env-filter \"if [[ \\\"$`echo $VAR`\\\" = '$OLD' ]]; then export $VAR='$NEW'; fi\" $@; }; f"
+[pull]
+	rebase = true
+[init]
+	defaultBranch = main
