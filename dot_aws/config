@@ -1,0 +1,14 @@
+[default]
+region = eu-central-1
+output = yaml
+
+[profile thund-cide]
+mfa_serial = arn:aws:iam::833218649934:mfa/thund
+
+[profile admin-cide]
+source_profile = thund-cide
+role_arn = arn:aws:iam::833218649934:role/Administrator
+mfa_serial = arn:aws:iam::833218649934:mfa/thund
+
+[profile localstack]
+region = eu-central-1
