@@ -11,3 +11,9 @@ try {
 Catch {
     Write-Host "Starship is not installed"
 }
+
+# Register Autocompletions
+$completions = @("chezmoi", "dotnet", "kubectl")
+foreach ($script in $completions) {
+    . $HOME/.config/powershell/completions/$script.ps1
+}
