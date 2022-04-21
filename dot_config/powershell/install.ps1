@@ -47,4 +47,38 @@ Write-Host "Installing winget packages..." -ForegroundColor "Yellow"
 winget install Microsoft.PowerToys --source winget
 winget install Microsoft.WindowsTerminal.Preview --source winget
 
+Write-Host "Installing fonts..." -ForegroundColor "Yellow"
+$Uri = "https://github.com/ryanoasis/nerd-fonts/releases/latest/download/JetBrainsMono.zip"
+$Location $Env:Userprofile\Downloads\JetbrainsMono.zip
+iwr -Uri $Uri -OutFile $Location
+$DestinationPath = "$ENV:USERPROFILE\Downloads\JetBrainsMono"
+Expand-Archive -Path $OutputFilename -DestinationPath $DestinationPath -Force
+# Based on this gist: https://gist.github.com/anthonyeden/0088b07de8951403a643a8485af2709b?permalink_comment_id=3651336#gistcomment-3651336
+foreach($FontFile in Get-ChildItem $OutputFilename -Include '*.ttf','*.ttc','*.otf' -recurse ) {
+	$targetPath = Join-Path $SystemFontsPath $FontFile.Name
+	if(!(Test-Path -Path $targetPath)) {
+		#Extract Font information for Reqistry 
+		$ShellFolder = (New-Object -COMObject Shell.Application).Namespace($fontSourceFolder)
+		$ShellFile = $ShellFolder.ParseName($FontFile.name)
+		$ShellFileType = $ShellFolder.GetDetailsOf($ShellFile, 2)
+
+		#Set the $FontType Variable
+		If ($ShellFileType -Like '*TrueType font file*') {$FontType = '(TrueType)'}
+			
+		#Update Registry and copy font to font directory
+		$RegName = $ShellFolder.GetDetailsOf($ShellFile, 21) + ' ' + $FontType
+		New-ItemProperty -Name $RegName -Path "HKLM:\Software\Microsoft\Windows NT\CurrentVersion\Fonts" -PropertyType string -Value $FontFile.name -Force | out-null
+		Copy-item $FontFile.FullName -Destination $SystemFontsPath
+	}
+}
+Remove-Item $OutputFilename
+Remove-Item -R $DestinationPath
+
 Refresh-Environment
+
+################ 
+
+$decision = $Host.UI.PromptForChoice("Install", "Base instllation finished, do you also want to apply windows defaults?", @('&Yes', '&No'), 1)
+if ($decision -eq 0) {
+    . ./windows.ps1
+}
