@@ -12,6 +12,9 @@ Catch {
     Write-Host "Starship is not installed"
 }
 
+# Register Aliases
+. $HOME/.config/powershell/aliases.ps1
+
 # Register Autocompletions
 $completions = @("chezmoi", "dotnet", "kubectl")
 foreach ($script in $completions) {
