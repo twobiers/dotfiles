@@ -19,6 +19,7 @@ if ((Get-Command cinst -ErrorAction SilentlyContinue | Select-Object Definition)
 }
 
 Write-Host "Installing Choco packages" -ForegroundColor "Yellow"
+choco install chezmoi             --limit-output
 choco install git.install         --limit-output -params '"/GitAndUnixToolsOnPath /NoShellIntegration"'
 choco install gsudo               --limit-output
 choco install vscode              --limit-output
