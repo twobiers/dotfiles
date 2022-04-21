@@ -17,3 +17,7 @@ $completions = @("chezmoi", "dotnet", "kubectl")
 foreach ($script in $completions) {
     . $HOME/.config/powershell/completions/$script.ps1
 }
+
+# Chezmoi Env Vars
+$env:SHELL = "pwsh -NoLogo"
+$env:EDITOR = "code"
