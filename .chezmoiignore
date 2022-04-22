@@ -4,3 +4,6 @@ README.md
 Documents/**
 AppData/**
 {{ end }}
+{{ if ne .chezmoi.os "linux" }}
+.bashrc
+{{ end }}
