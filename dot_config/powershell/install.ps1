@@ -12,8 +12,8 @@ Write-Host "Installing PowerShell Modules..." -ForegroundColor "Yellow"
 Install-Module Posh-Git -Scope CurrentUser -Force
 
 Write-Host "Installing Choco..." -ForegroundColor "Yellow"
-if ((Get-Command cinst -ErrorAction SilentlyContinue | Select-Object Definition) -eq $null) {
-    iex (new-object net.webclient).DownloadString('https://chocolatey.org/install.ps1')
+if ($null -eq (Get-Command cinst -ErrorAction SilentlyContinue | Select-Object Definition)) {
+    Invoke-Expression (new-object net.webclient).DownloadString('https://chocolatey.org/install.ps1')
     Refresh-Environment
     choco feature enable -n=allowGlobalConfirmation
 }
@@ -27,6 +27,39 @@ choco install sharex              --limit-output
 choco install docker-desktop      --limit-output
 choco install kubernetes-cli      --limit-output
 choco install spotify             --limit-output
+choco install keepassxc --limit-output
+
+choco install adobereader --limit-output
+choco install firefox --limit-output
+choco install googledrive --limit-output
+
+choco install discord --limit-output
+choco install discord-canary --limit-output
+
+choco install jetbrainstoolbox --limit-output
+
+choco install starship --limit-output
+
+# GPG
+choco install gpg4win --limit-output
+
+# Java Tooling
+choco install temurin --limit-output
+choco install gradle --limit-output
+choco install maven --limit-output
+
+# .NET Tooling
+choco install dotnet --limit-output
+
+# Rust Tooling
+choco install rustup.install --limit-output
+
+# AWS
+choco install aws-vault --limit-output
+choco install awscli --limit-output
+
+choco install equalizerapo --limit-output
+
 
 Write-Host "Installing winget..." -ForegroundColor "Yellow"
 $hasPackageManager = Get-AppPackage -name 'Microsoft.DesktopAppInstaller'
@@ -37,22 +70,24 @@ if (!$hasPackageManager -or [version]$hasPackageManager.Version -lt [version]"1.
 
     [Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12
     $releases = Invoke-RestMethod -uri $releases_url
-    $latestRelease = $releases.assets | Where { $_.browser_download_url.EndsWith('msixbundle') } | Select -First 1
+    $latestRelease = $releases.assets | Where-Object { $_.browser_download_url.EndsWith('msixbundle') } | Select-Object -First 1
 
     "Installing winget from $($latestRelease.browser_download_url)"
     Add-AppxPackage -Path $latestRelease.browser_download_url
 }
 
 Write-Host "Installing winget packages..." -ForegroundColor "Yellow"
-winget install Microsoft.PowerToys --source winget
-winget install Microsoft.WindowsTerminal.Preview --source winget
+winget install Microsoft.PowerToys --source winget --silent --accept-package-agreements  --accept-source-agreements
+winget install Microsoft.WindowsTerminal.Preview --source winget --silent --accept-package-agreements  --accept-source-agreements
+winget install microsoft.powershell --silent --accept-package-agreements  --accept-source-agreements
+winget install Microsoft.Teams --silent --accept-package-agreements  --accept-source-agreements
 
 Write-Host "Installing fonts..." -ForegroundColor "Yellow"
 $Uri = "https://github.com/ryanoasis/nerd-fonts/releases/latest/download/JetBrainsMono.zip"
-$Location $Env:Userprofile\Downloads\JetbrainsMono.zip
-iwr -Uri $Uri -OutFile $Location
-$DestinationPath = "$ENV:USERPROFILE\Downloads\JetBrainsMono"
-Expand-Archive -Path $OutputFilename -DestinationPath $DestinationPath -Force
+$Location = "$HOME\Downloads\JetbrainsMono.zip"
+Invoke-WebRequest -Uri $Uri -OutFile $Location
+$DestinationPath = "$HOME\Downloads\JetBrainsMono"
+Expand-Archive -Path $Location -DestinationPath $DestinationPath -Force
 # Based on this gist: https://gist.github.com/anthonyeden/0088b07de8951403a643a8485af2709b?permalink_comment_id=3651336#gistcomment-3651336
 foreach($FontFile in Get-ChildItem $OutputFilename -Include '*.ttf','*.ttc','*.otf' -recurse ) {
 	$targetPath = Join-Path $SystemFontsPath $FontFile.Name
@@ -73,8 +108,6 @@ foreach($FontFile in Get-ChildItem $OutputFilename -Include '*.ttf','*.ttc','*.o
 }
 Remove-Item $OutputFilename
 Remove-Item -R $DestinationPath
-
-Refresh-Environment
 
 ################ 
 
