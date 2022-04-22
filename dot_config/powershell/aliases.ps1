@@ -12,4 +12,4 @@ ${function:drop} = { Set-Location ~\Documents\Dropbox }
 ${function:dt} = { Set-Location ~\Desktop }
 ${function:docs} = { Set-Location ~\Documents }
 ${function:dl} = { Set-Location ~\Downloads }
-${function:prj} = { Set-Location ~\Documents\Projekte }
+${function:prj} = { Set-Location P: }

@@ -55,6 +55,10 @@ choco install dotnet --limit-output
 # Rust Tooling
 choco install rustup.install --limit-output
 
+# Node Tooling
+choco install nvm --limit-output
+choco install nodejs --limit-output
+
 # AWS
 choco install aws-vault --limit-output
 choco install awscli --limit-output
