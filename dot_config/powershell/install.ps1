@@ -65,6 +65,8 @@ choco install awscli --limit-output
 # TODO: Config needs to be applied manually
 choco install equalizerapo --limit-output
 
+choco install zoom --limit-output
+
 
 Write-Host "Installing winget..." -ForegroundColor "Yellow"
 $hasPackageManager = Get-AppPackage -name 'Microsoft.DesktopAppInstaller'
