@@ -11,7 +11,6 @@
 	# Hardcoded. Because that doesn't work although it works in execute-template (dashes between braces intendend to maintain the comment)
 	# excludeFile = {-{ .chezmoi.homeDir | replace "\" "\\" }-}\\.gitignore
 	excludeFile = C:\\Users\\tobi\\.gitignore
-	sshcommand = plink -agent
 {{ else }}
     excludeFile = {{ .chezmoi.homeDir }}/.gitignore
 {{ end }}

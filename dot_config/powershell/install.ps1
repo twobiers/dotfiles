@@ -28,6 +28,7 @@ choco install docker-desktop      --limit-output
 choco install kubernetes-cli      --limit-output
 choco install spotify             --limit-output
 choco install keepassxc --limit-output
+choco install everything --limit-output
 
 choco install adobereader --limit-output
 choco install firefox --limit-output
@@ -58,6 +59,10 @@ choco install rustup.install --limit-output
 choco install aws-vault --limit-output
 choco install awscli --limit-output
 
+# Sound
+# TODO: Peace needs to be installed manually
+# TODO: APO needs to be installed for devices
+# TODO: Config needs to be applied manually
 choco install equalizerapo --limit-output
 
 
@@ -109,7 +114,28 @@ foreach($FontFile in Get-ChildItem $OutputFilename -Include '*.ttf','*.ttc','*.o
 Remove-Item $OutputFilename
 Remove-Item -R $DestinationPath
 
-################ 
+################
+# SSH / GPG Settings
+################
+$pageantDir = "C:\tools\wsl-ssh-pageant"
+$pageantPath = "$pageantDir\wsl-ssh-pageant-amd64-gui.exe"
+$pageantSockPath = "$pageantDir\wsl-ssh-agent.sock"
+$pageantPipeName = "winssh-pageant"
+$autostartDir = "$HOME\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\Startup"
+If(!(Test-Path $pageantDir)) {
+	New-Item -ItemType Directory -Force -Path $pageantDir
+}
+Invoke-WebRequest -Uri "https://github.com/benpye/wsl-ssh-pageant/releases/download/20201121.2/wsl-ssh-pageant-amd64-gui.exe" -OutFile $pageantPath
+$Shortcut = $WshShell.CreateShortcut("$autostartDir\start-wsl-pageant.lnk")
+$Shortcut.TargetPath = $pageantPath
+$Shortcut.Arguments = "-force -systray -verbose -wsl $pageantSockPath -winssh $pageantPipeName"
+$Shortcut.Save()
+[Environment]::SetEnvironmentVariable("GIT_SSH", "C:\Windows\system32\OpenSSH\ssh.exe", 'Machine')
+[Environment]::SetEnvironmentVariable("SSH_AUTH_SOCK", "\\.\pipe\$pageantPipeName", 'Machine')
+
+Write-Output "PowerShell.exe -WindowStyle Hidden -Command 'gpg-connect-agent /bye'" | Out-File "$autostartDir/start-gpg-connect-agent.bat"
+
+################
 
 $decision = $Host.UI.PromptForChoice("Install", "Base instllation finished, do you also want to apply windows defaults?", @('&Yes', '&No'), 1)
 if ($decision -eq 0) {
