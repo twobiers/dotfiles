@@ -68,12 +68,14 @@ format = '\[[$symbol$branch]($style)\]'
 [java]
 format = '\[[$symbol($version)]($style)\]'
 symbol = " "
+style = "red"
 
 [julia]
 format = '\[[$symbol($version)]($style)\]'
 
 [kotlin]
 format = '\[[$symbol($version)]($style)\]'
+style = "bold 202"
 
 [kubernetes]
 disabled = false
