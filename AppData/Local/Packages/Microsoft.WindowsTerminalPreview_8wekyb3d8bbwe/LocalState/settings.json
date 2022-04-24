@@ -27,7 +27,8 @@
                 "splitMode": "duplicate"
             },
             "keys": "alt+shift+d"
-        }
+        },
+        { "command": "commandPalette", "keys": "f1" }
     ],
     "copyFormatting": "none",
     "copyOnSelect": false,
