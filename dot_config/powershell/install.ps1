@@ -63,6 +63,8 @@ choco install nodejs --limit-output
 choco install aws-vault --limit-output
 choco install awscli --limit-output
 choco install kubernetes-kops --limit-output
+choco install kubernetes-helm --limit-output
+choco install minikube --limit-output
 
 # Sound
 # TODO: Peace needs to be installed manually
