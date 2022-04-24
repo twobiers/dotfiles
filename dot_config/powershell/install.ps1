@@ -145,6 +145,12 @@ $Shortcut.Save()
 Write-Output "PowerShell.exe -WindowStyle Hidden -Command 'gpg-connect-agent /bye'" | Out-File "$autostartDir/start-gpg-connect-agent.bat"
 
 ################
+# WSL 2
+################
+wsl --install
+wsl --install -d Ubuntu
+
+
 
 $decision = $Host.UI.PromptForChoice("Install", "Base instllation finished, do you also want to apply windows defaults?", @('&Yes', '&No'), 1)
 if ($decision -eq 0) {
