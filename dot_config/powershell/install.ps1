@@ -19,60 +19,60 @@ if ($null -eq (Get-Command cinst -ErrorAction SilentlyContinue | Select-Object D
 }
 
 Write-Host "Installing Choco packages..." -ForegroundColor "Yellow"
-choco install chezmoi             --limit-output
-choco install git.install         --limit-output -params '"/GitAndUnixToolsOnPath /NoShellIntegration"'
-choco install gsudo               --limit-output
-choco install vscode              --limit-output
-choco install sharex              --limit-output
-choco install docker-desktop      --limit-output
-choco install kubernetes-cli      --limit-output
-choco install spotify             --limit-output
-choco install keepassxc --limit-output
-choco install everything --limit-output
+choco install chezmoi             --limit-output -y
+choco install git.install         --limit-output -params '"/GitAndUnixToolsOnPath /NoShellIntegration"' -y
+choco install gsudo               --limit-output -y
+choco install vscode              --limit-output -y
+choco install sharex              --limit-output -y
+choco install docker-desktop      --limit-output -y
+choco install kubernetes-cli      --limit-output -y
+choco install spotify             --limit-output -y
+choco install keepassxc --limit-output -y
+choco install everything --limit-output -y
 
-choco install adobereader --limit-output
-choco install firefox --limit-output
-choco install googledrive --limit-output
+choco install adobereader --limit-output -y
+choco install firefox --limit-output -y
+choco install googledrive --limit-output -y
 
-choco install discord --limit-output
-choco install discord-canary --limit-output
+choco install discord --limit-output -y
+choco install discord-canary --limit-output -y
 
-choco install jetbrainstoolbox --limit-output
+choco install jetbrainstoolbox --limit-output -y
 
-choco install starship --limit-output
+choco install starship --limit-output -y
 
 # GPG
-choco install gpg4win --limit-output
+choco install gpg4win --limit-output -y
 
 # Java Tooling
-choco install temurin --limit-output
-choco install gradle --limit-output
-choco install maven --limit-output
+choco install temurin --limit-output -y
+choco install gradle --limit-output -y
+choco install maven --limit-output -y
 
 # .NET Tooling
-choco install dotnet --limit-output
+choco install dotnet --limit-output -y
 
 # Rust Tooling
-choco install rustup.install --limit-output
+choco install rustup.install --limit-output -y
 
 # Node Tooling
-choco install nvm --limit-output
-choco install nodejs --limit-output
+choco install nvm --limit-output -y
+choco install nodejs --limit-output -y
 
 # AWS
-choco install aws-vault --limit-output
-choco install awscli --limit-output
-choco install kubernetes-kops --limit-output
-choco install kubernetes-helm --limit-output
-choco install minikube --limit-output
+choco install aws-vault --limit-output -y
+choco install awscli --limit-output -y
+choco install kubernetes-kops --limit-output -y
+choco install kubernetes-helm --limit-output -y
+choco install minikube --limit-output -y
 
 # Sound
 # TODO: Peace needs to be installed manually
 # TODO: APO needs to be installed for devices
 # TODO: Config needs to be applied manually
-choco install equalizerapo --limit-output
+choco install equalizerapo --limit-output -y
 
-choco install zoom --limit-output
+choco install zoom --limit-output -y
 
 
 Write-Host "Installing winget..." -ForegroundColor "Yellow"
