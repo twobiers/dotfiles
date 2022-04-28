@@ -126,6 +126,7 @@ Remove-Item -R $DestinationPath
 ################
 # SSH / GPG Settings
 ################
+$WshShell = New-Object -ComObject WScript.Shell
 $pageantDir = "C:\tools\wsl-ssh-pageant"
 $pageantPath = "$pageantDir\wsl-ssh-pageant-amd64-gui.exe"
 $pageantSockPath = "$pageantDir\wsl-ssh-agent.sock"
