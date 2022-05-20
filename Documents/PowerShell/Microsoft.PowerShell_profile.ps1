@@ -26,7 +26,7 @@ Catch {
 . $HOME/.config/powershell/aliases.ps1
 
 # Register Autocompletions
-$completions = @("chezmoi", "dotnet", "kubectl", "choco")
+$completions = @("chezmoi", "dotnet", "kubectl", "choco", "kubefwd")
 foreach ($script in $completions) {
     . $HOME/.config/powershell/completions/$script.ps1
 }
