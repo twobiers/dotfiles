@@ -1,6 +1,6 @@
 [aws]
 format = '\[[$symbol($profile)(\($region\))(\[$duration\])]($style)\]'
-symbol = "  "
+symbol = "󰸏  "
 
 [cmake]
 format = '\[[$symbol($version)]($style)\]'
@@ -80,6 +80,7 @@ style = "bold 202"
 [kubernetes]
 disabled = false
 format = '\[[$symbol$context( \($namespace\))]($style)\]'
+symbol = "󱃾 "
 [kubernetes.context_aliases]
 "k8s.aws.innovation-hub.de" = "IHBR"
 
