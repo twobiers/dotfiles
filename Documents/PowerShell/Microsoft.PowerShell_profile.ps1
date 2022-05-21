@@ -22,6 +22,16 @@ Catch {
     Write-Host "Starship is not installed"
 }
 
+$modules = @("Microsoft.PowerShell.TextUtility")
+
+foreach ($mod in $modules) {
+    if (!(Get-Module -Name $mod)) {
+        Write-Host "Module $mod is not installed, run";
+        Write-Host -ForegroundColor yellow "Install-Module -Name $mod -AllowPrerelease"
+        Write-Host "to install"
+    }
+}
+
 # Register Aliases
 . $HOME/.config/powershell/aliases.ps1
 
