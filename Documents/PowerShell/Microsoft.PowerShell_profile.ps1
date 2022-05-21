@@ -40,7 +40,11 @@ foreach ($mod in $modules) {
 # Register Autocompletions
 $completions = @("chezmoi", "dotnet", "kubectl", "choco", "kubefwd")
 foreach ($script in $completions) {
-    . $HOME/.config/powershell/completions/$script.ps1
+    if(Get-Command $script -ErrorAction SilentlyContinue) {
+        . $HOME/.config/powershell/completions/$script.ps1
+    } else {
+        Write-Host -ForegroundColor Yellow "Could not find $script installed, but a completion script is registered. Skipping it...."
+    }
 }
 
 # Chezmoi Env Vars

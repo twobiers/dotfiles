@@ -23,7 +23,7 @@ filter __kubectl_escapeStringWithSpecialChars {
     $_ -replace '\s|#|@|\$|;|,|''|\{|\}|\(|\)|"|`|\||<|>|&','`$&'
 }
 
-Register-ArgumentCompleter -CommandName 'kubectl' -ScriptBlock {
+Register-ArgumentCompleter -CommandName @('kubectl', (Get-Alias -Definition 'kubectl' | Select-Object -ExpandProperty Name) | ForEach-Object { $_ }) -ScriptBlock {
     param(
             $WordToComplete,
             $CommandAst,
