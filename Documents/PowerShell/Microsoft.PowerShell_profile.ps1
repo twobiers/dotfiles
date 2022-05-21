@@ -25,7 +25,9 @@ Catch {
 $modules = @("Microsoft.PowerShell.TextUtility")
 
 foreach ($mod in $modules) {
-    if (!(Get-Module -Name $mod)) {
+    try {
+        Import-Module $mod
+    } catch {
         Write-Host "Module $mod is not installed, run";
         Write-Host -ForegroundColor yellow "Install-Module -Name $mod -AllowPrerelease"
         Write-Host "to install"
