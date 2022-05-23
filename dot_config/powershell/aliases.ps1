@@ -24,11 +24,12 @@ if(Get-Command kubectl -ErrorAction SilentlyContinue) {
 if (Get-Command bat -ErrorAction SilentlyContinue) {
     if((Get-Alias -Name cat).Definition -ne "Invoke-Bat") {
         Remove-Alias -Name cat -Force
+        $bat = bat --style=plain --paging=never
         function Invoke-Bat {
             if($MyInvocation.ExpectingInput) {
-                $input | bat --style=plain --paging=never
+                $input | & $bat
             } else {
-                bat --style=plain --paging=never $args
+                & $bat $args
             }
         }
         Set-Alias -Name cat -Value Invoke-Bat -Option ReadOnly
