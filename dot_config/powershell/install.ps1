@@ -145,6 +145,9 @@ $Shortcut.Save()
 
 Write-Output "PowerShell.exe -WindowStyle Hidden -Command 'gpg-connect-agent /bye'" | Out-File "$autostartDir/start-gpg-connect-agent.bat"
 
+# Import public GPG key from github
+Invoke-WebRequest https://github.com/twobiers.gpg | gpg --import
+
 ################
 # WSL 2
 ################
