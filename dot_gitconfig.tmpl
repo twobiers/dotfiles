@@ -27,6 +27,8 @@
 	path = ~/.config/git/author-ihbr.inc
 
 [alias]
+    yolo = "!git add -A && git commit -m \"$(curl --silent --fail http://whatthecommit.com/index.txt)\""
+    ll = "log --oneline"
 	change-commits = "!f() { VAR=$1; OLD=$2; NEW=$3; shift 3; git filter-branch --env-filter \"if [[ \\\"$`echo $VAR`\\\" = '$OLD' ]]; then export $VAR='$NEW'; fi\" $@; }; f"
 [pull]
 	rebase = true
