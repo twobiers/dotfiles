@@ -20,6 +20,11 @@ if(Get-Command kubectl -ErrorAction SilentlyContinue) {
     Set-Alias -Name kctl -Value kubectl -Option ReadOnly
 }
 
+# Docker
+if(Get-Command docker -ErrorAction SilentlyContinue) {
+    Set-Alias -Name d -Value docker -Option ReadOnly
+}
+
 # cat -> bat
 if (Get-Command bat -ErrorAction SilentlyContinue) {
     Remove-Alias -Name cat -Force
