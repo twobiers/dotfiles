@@ -38,7 +38,7 @@ foreach ($mod in $modules) {
 . $HOME/.config/powershell/aliases.ps1
 
 # Register Autocompletions
-$completions = @("chezmoi", "dotnet", "kubectl", "choco", "kubefwd")
+$completions = @("chezmoi", "dotnet", "kubectl", "choco", "kubefwd", "docker")
 foreach ($script in $completions) {
     if(Get-Command $script -ErrorAction SilentlyContinue) {
         . $HOME/.config/powershell/completions/$script.ps1
