@@ -27,6 +27,11 @@ $modules = @("Microsoft.PowerShell.TextUtility", "PSFzf")
 foreach ($mod in $modules) {
     try {
         Import-Module $mod
+
+        if($mod -eq "PSFzf") {
+            Set-PSReadLineKeyHandler -Key Tab -ScriptBlock { Invoke-FzfTabCompletion }
+            Set-PsFzfOption -PSReadlineChordProvider 'Ctrl+t' -PSReadlineChordReverseHistory 'Ctrl+r'
+        }
     } catch {
         Write-Host "Module $mod is not installed, run";
         Write-Host -ForegroundColor yellow "Install-Module -Name $mod -AllowPrerelease"
