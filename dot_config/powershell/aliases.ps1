@@ -16,6 +16,10 @@ ${function:prj} = { Set-Location P: }
 
 ${function:chezmoi-cd} = { Set-Location $(chezmoi source-path) }
 
+if(Get-Command Invoke-Fzf -ErrorAction SilentlyContinue) {
+    ${function:fzf} { Invoke-Fzf }
+}
+
 # Kubernetes
 if(Get-Command kubectl -ErrorAction SilentlyContinue) {
     Set-Alias -Name k -Value kubectl -Option ReadOnly

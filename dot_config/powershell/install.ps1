@@ -65,6 +65,7 @@ choco install awscli --limit-output -y
 choco install kubernetes-kops --limit-output -y
 choco install kubernetes-helm --limit-output -y
 choco install minikube --limit-output -y
+choco install kubens kubectx --limit-output -y
 
 # Sound
 # TODO: Peace needs to be installed manually
@@ -73,6 +74,10 @@ choco install minikube --limit-output -y
 choco install equalizerapo --limit-output -y
 
 choco install zoom --limit-output -y
+
+# Other tools
+choco install fzf --limit-output -y
+Install-Module -Name PSFzf
 
 
 Write-Host "Installing winget..." -ForegroundColor "Yellow"
