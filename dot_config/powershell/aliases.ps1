@@ -17,7 +17,7 @@ ${function:prj} = { Set-Location P: }
 ${function:chezmoi-cd} = { Set-Location $(chezmoi source-path) }
 
 if(Get-Command Invoke-Fzf -ErrorAction SilentlyContinue) {
-    ${function:fzf} { Invoke-Fzf }
+    ${function:fzf} = { Invoke-Fzf }
 }
 
 # Kubernetes
