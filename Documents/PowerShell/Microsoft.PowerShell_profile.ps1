@@ -47,6 +47,5 @@ foreach ($script in $completions) {
     }
 }
 
-# Chezmoi Env Vars
-$env:SHELL = "pwsh -NoLogo"
-$env:EDITOR = "code"
+$env:SHELL = "pwsh" # Fzf does not like the '-NoLogo' option
+$env:EDITOR = "code --wait"
