@@ -1,0 +1,10 @@
+style:
+  tag:
+    color: cyan
+  comment:
+    color: grey
+  snippet:
+    color: white
+
+shell:
+  command: pwsh
