@@ -14,6 +14,8 @@ ${function:docs} = { Set-Location ~\Documents }
 ${function:dl} = { Set-Location ~\Downloads }
 ${function:prj} = { Set-Location P: }
 
+${function:chezmoi-cd} = { Set-Location $(chezmoi source-path) }
+
 # Kubernetes
 if(Get-Command kubectl -ErrorAction SilentlyContinue) {
     Set-Alias -Name k -Value kubectl -Option ReadOnly
