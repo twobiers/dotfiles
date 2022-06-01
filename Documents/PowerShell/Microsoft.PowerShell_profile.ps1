@@ -22,7 +22,7 @@ Catch {
     Write-Host "Starship is not installed"
 }
 
-$modules = @("Microsoft.PowerShell.TextUtility")
+$modules = @("Microsoft.PowerShell.TextUtility", "PSFzf")
 
 foreach ($mod in $modules) {
     try {
