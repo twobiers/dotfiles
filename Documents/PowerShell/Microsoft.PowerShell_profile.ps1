@@ -23,6 +23,18 @@ if ($host.name -eq "ConsoleHost") {
         Write-Host "Starship is not installed"
     }
 
+    try {
+        if(Get-Command zoxide) {
+            Invoke-Expression (& {
+                $hook = if ($PSVersionTable.PSVersion.Major -lt 6) { 'prompt' } else { 'pwd' }
+                (zoxide init --hook $hook powershell | Out-String)
+            })            
+        }
+    }
+    Catch {
+        Write-Host "zoxide not installed"
+    }
+
     $modules = @("Microsoft.PowerShell.TextUtility", "PSFzf", "Terminal-Icons", "PSReadLine")
 
     foreach ($mod in $modules) {
