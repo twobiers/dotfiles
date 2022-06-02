@@ -78,6 +78,7 @@ choco install zoom --limit-output -y
 # Other tools
 choco install fzf --limit-output -y
 choco install navi --limit-output -y
+choco install zoxide --limit-output -y
 Install-Module -Name PSFzf
 
 
