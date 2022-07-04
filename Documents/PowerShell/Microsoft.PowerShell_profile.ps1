@@ -57,7 +57,7 @@ if ($host.name -eq "ConsoleHost") {
     . $HOME/.config/powershell/aliases.ps1
 
     # Register Autocompletions
-    $completions = @("chezmoi", "dotnet", "kubectl", "choco", "kubefwd", "docker", "zoxide")
+    $completions = @("chezmoi", "dotnet", "kubectl", "choco", "kubefwd", "docker", "zoxide", "winget")
     foreach ($script in $completions) {
         if(Get-Command $script -ErrorAction SilentlyContinue) {
             . $HOME/.config/powershell/completions/$script.ps1
