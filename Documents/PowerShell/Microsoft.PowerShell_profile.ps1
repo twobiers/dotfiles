@@ -69,3 +69,5 @@ if ($host.name -eq "ConsoleHost") {
     $env:SHELL = "pwsh" # Fzf does not like the '-NoLogo' option
     $env:EDITOR = "code --wait"
 }
+
+$PSDefaultParameterValues['Out-Default:OutVariable'] = '__'
