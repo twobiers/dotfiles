@@ -120,6 +120,9 @@ source $ZSH/oh-my-zsh.sh
 eval "$(zoxide init zsh)"
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
+# Hide difference between parial line and normal
+PROMPT_EOL_MARK=''
+
 ### KEYBINDINGS
 ### https://stackoverflow.com/a/68987551/4567795
 
@@ -171,7 +174,8 @@ export KEY_SHIFT_CTRL_E=$'^[[101;6u'
 export KEY_SHIFT_CTRL_LEFT=$'^[[1;6D'
 export KEY_SHIFT_CTRL_RIGHT=$'^[[1;6C'
 export KEY_CTRL_D=$'\x04' # ^D
-export KEY_DEL=$'^[[3~' # ^Del
+export KEY_DEL=$'^[[3~' # Del
+export KEY_BACKSPACE=$'^?' # Backspace
 
 # -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
 
@@ -182,6 +186,16 @@ function widget::delete-selection() {
         zle kill-region
     else
         zle delete-char
+    fi
+}
+
+# delete 
+zle -N widget::delete-selection-back
+function widget::delete-selection-back() {
+    if ((REGION_ACTIVE)) then
+        zle kill-region
+    else
+        zle backward-delete-char
     fi
 }
 
@@ -304,6 +318,7 @@ for keyname        kcap   seq                   mode        widget (
     shift-ctrl-left   x   $KEY_SHIFT_CTRL_LEFT  select      beginning-of-line
 
     del               x   $KEY_DEL              delselect   widget::delete-selection
+    del               x   $KEY_BACKSPACE        delselect   widget::delete-selection-back
 
     a                 x       'a'               insertchar  'a'
     b                 x       'b'               insertchar  'b'
