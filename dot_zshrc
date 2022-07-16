@@ -315,7 +315,7 @@ for keyname        kcap   seq                   mode        widget (
     shift-ctrl-left   x   $KEY_SHIFT_CTRL_LEFT  select      beginning-of-line
 
     del               x   $KEY_DEL              delselect   widget::delete-selection
-    del               x   $KEY_BACKSPACE              delselect   widget::delete-selection-back
+    backspace         x   $KEY_BACKSPACE        delselect   widget::delete-selection-back
 
     a                 x       'a'               insertchar  'a'
     b                 x       'b'               insertchar  'b'
