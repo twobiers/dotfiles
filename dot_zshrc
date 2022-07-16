@@ -120,9 +120,6 @@ source $ZSH/oh-my-zsh.sh
 eval "$(zoxide init zsh)"
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
-# Hide difference between parial line and normal
-PROMPT_EOL_MARK=''
-
 ### KEYBINDINGS
 ### https://stackoverflow.com/a/68987551/4567795
 
@@ -189,7 +186,7 @@ function widget::delete-selection() {
     fi
 }
 
-# delete 
+# delete
 zle -N widget::delete-selection-back
 function widget::delete-selection-back() {
     if ((REGION_ACTIVE)) then
@@ -318,7 +315,7 @@ for keyname        kcap   seq                   mode        widget (
     shift-ctrl-left   x   $KEY_SHIFT_CTRL_LEFT  select      beginning-of-line
 
     del               x   $KEY_DEL              delselect   widget::delete-selection
-    del               x   $KEY_BACKSPACE        delselect   widget::delete-selection-back
+    del               x   $KEY_BACKSPACE              delselect   widget::delete-selection-back
 
     a                 x       'a'               insertchar  'a'
     b                 x       'b'               insertchar  'b'
@@ -436,3 +433,10 @@ export ZSH_AUTOSUGGEST_ACCEPT_WIDGETS=(
     widget::key-cmd-right
     widget::key-shift-cmd-right
 )
+
+export PATH="$PATH:$HOME/bin"
+
+
+# Add RVM to PATH for scripting. Make sure this is the last PATH variable change.
+export PATH="$PATH:$HOME/.rvm/bin"
+[[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm"
