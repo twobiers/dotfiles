@@ -1,5 +1,3 @@
 emulate sh
 . ~/.profile
 emulate zsh
-
-source ~/.rvm/scripts/rvm
