@@ -1,9 +1,23 @@
+#Requires -Version 7
+
 # Import-Module posh-git
 # Import-Module oh-my-posh
 # Set-Theme Paradox
 # oh-my-posh --init --shell pwsh --config "~/iterm3.omp.json" | Invoke-Expression
 
-if ($host.name -eq "ConsoleHost") {
+function IsInteractiveShell {
+    # Test each Arg for match of abbreviated '-NonInteractive' command.
+    $NonInteractive = [Environment]::GetCommandLineArgs() | Where-Object { $_ -like '-NonI*' }
+
+    if ([Environment]::UserInteractive -and -not $NonInteractive) {
+        # We are in an interactive shell.
+        return $true
+    }
+
+    return $false
+}
+
+if (IsInteractiveShell) {
     # TODO: This is relatively slow
     function Invoke-Starship-PreCommand {
         $loc = Get-Location
@@ -55,19 +69,39 @@ if ($host.name -eq "ConsoleHost") {
     }
 
     # Register Aliases
-    . $HOME/.config/powershell/aliases.ps1
+    # . $HOME/.config/powershell/aliases.ps1
 
     # Register Autocompletions
-    $completions = @("chezmoi", "dotnet", "kubectl", "choco", "kubefwd", "docker", "zoxide", "winget")
-    foreach ($script in $completions) {
-        if (Get-Command $script -ErrorAction SilentlyContinue) {
-            . $HOME/.config/powershell/completions/$script.ps1
+    $tools = @(
+        "bat",
+        "chezmoi",
+        "choco",
+        "docker",
+        "dotnet",
+        "fzf",
+        "kubectl",
+        "kubefwd",
+        "winget",
+        "zoxide"
+    )
+    $installedTools = (Get-Command $tools -ErrorAction SilentlyContinue).Name -replace '.exe', ''
+    $notAvailable = $tools | Where-Object { $installedTools -NotContains $_ }
+    $tools = $tools | Where-Object { $installedTools -Contains $_ }
+    $toolsBasePath = "$HOME/.config/powershell/tools"
+    foreach ($tool in $tools) {
+        $toolPath = "$toolsBasePath/$tool.ps1"
+        $toolCompletionPath = "$toolsBasePath/${tool}_completion.ps1"
+        if (Test-Path $toolPath) {
+            . $toolPath
         }
-        else {
-            Write-Host -ForegroundColor Yellow "Could not find $script installed, but a completion script is registered. Skipping it...."
+        if (Test-Path $toolCompletionPath) {
+            . $toolCompletionPath
         }
     }
 
+    if ($notAvailable.Count -gt 0) {
+        Write-Host -ForegroundColor yellow "The following tools are not available: $notAvailable"
+    }
     $env:SHELL = "pwsh" # Fzf does not like the '-NoLogo' option
     $env:EDITOR = "code --wait"
 }
