@@ -1,27 +1,36 @@
+"$schema" = 'https://starship.rs/config-schema.json'
+
 [aws]
 format = '\[[$symbol($profile)(\($region\))(\[$duration\])]($style)\]'
 symbol = "󰸏  "
+disabled = true
 
 [cmake]
 format = '\[[$symbol($version)]($style)\]'
+disabled = true
 
 [cmd_duration]
 format = '\[[⏱ $duration]($style)\]'
 
 [cobol]
 format = '\[[$symbol($version)]($style)\]'
+disabled = true
 
 [conda]
 format = '\[[$symbol$environment]($style)\]'
+disabled = true
 
 [crystal]
 format = '\[[$symbol($version)]($style)\]'
+disabled = true
 
 [dart]
 format = '\[[$symbol($version)]($style)\]'
+disabled = true
 
 [deno]
 format = '\[[$symbol($version)]($style)\]'
+disabled = true
 
 [directory]
 read_only = " "
@@ -35,15 +44,19 @@ format = '\[[$symbol($version)(🎯 $tfm)]($style)\]'
 
 [elixir]
 format = '\[[$symbol($version \(OTP $otp_version\))]($style)\]'
+disabled = true
 
 [elm]
 format = '\[[$symbol($version)]($style)\]'
+disabled = true
 
 [erlang]
 format = '\[[$symbol($version)]($style)\]'
+disabled = true
 
 [gcloud]
 format = '\[[$symbol$account(@$domain)(\($region\))]($style)\]'
+disabled = true
 
 [git_branch]
 format = '\[[$symbol$branch]($style)\]'
@@ -54,6 +67,11 @@ format = '([\[$all_status$ahead_behind\]]($style))'
 ahead = "⇡${count}"
 diverged = "⇕⇡${ahead_count}⇣${behind_count}"
 behind = "⇣${count}"
+{{ if eq .chezmoi.os "linux" }}
+{{   if (.chezmoi.kernel.osrelease | lower | contains "microsoft") }}
+disabled = true # Really slow on WSL windows paths. Therefore disabled.
+{{   end }}
+{{ end }}
 
 [golang]
 format = '\[[$symbol($version)]($style)\]'
@@ -61,9 +79,11 @@ symbol = " "
 
 [helm]
 format = '\[[$symbol($version)]($style)\]'
+disabled = true
 
 [hg_branch]
 format = '\[[$symbol$branch]($style)\]'
+disabled = true
 
 [java]
 format = '\[[$symbol($version)]($style)\]'
@@ -72,6 +92,7 @@ style = "red"
 
 [julia]
 format = '\[[$symbol($version)]($style)\]'
+disabled = true
 
 [kotlin]
 format = '\[[$symbol($version)]($style)\]'
@@ -86,46 +107,56 @@ symbol = "󱃾 "
 
 [lua]
 format = '\[[$symbol($version)]($style)\]'
+disabled = true
 
 [memory_usage]
 format = '\[$symbol[$ram( | $swap)]($style)\]'
 
 [nim]
 format = '\[[$symbol($version)]($style)\]'
+disabled = true
 
 [nix_shell]
 format = '\[[$symbol$state( \($name\))]($style)\]'
 symbol = " "
+disabled = true
 
 [nodejs]
 format = '\[[$symbol($version)]($style)\]'
 
 [ocaml]
 format = '\[[$symbol($version)(\($switch_indicator$switch_name\))]($style)\]'
+disabled = true
 
 [openstack]
 format = '\[[$symbol$cloud(\($project\))]($style)\]'
+disabled = true
 
 [package]
 format = '\[[$symbol$version]($style)\]'
 
 [perl]
 format = '\[[$symbol($version)]($style)\]'
+disabled = true
 
 [php]
 format = '\[[$symbol($version)]($style)\]'
+disabled = true
 
 [pulumi]
 format = '\[[$symbol$stack]($style)\]'
+disabled = true
 
 [purescript]
 format = '\[[$symbol($version)]($style)\]'
+disabled = true
 
 [python]
 format = '\[[${symbol}${pyenv_prefix}(${version})(\($virtualenv\))]($style)\]'
 
 [red]
 format = '\[[$symbol($version)]($style)\]'
+disabled = true
 
 [ruby]
 format = '\[[$symbol($version)]($style)\]'
@@ -135,15 +166,18 @@ format = '\[[$symbol($version)]($style)\]'
 
 [scala]
 format = '\[[$symbol($version)]($style)\]'
+disabled = true
 
 [sudo]
 format = '\[[as $symbol]\]'
 
 [swift]
 format = '\[[$symbol($version)]($style)\]'
+disabled = true
 
 [terraform]
 format = '\[[$symbol$workspace]($style)\]'
+disabled = true
 
 [time]
 format = '\[[$time]($style)\]'
@@ -151,12 +185,14 @@ disabled = false
 
 [username]
 format = '\[[$user]($style)\]'
+disabled = true
 
 [vagrant]
 format = '\[[$symbol($version)]($style)\]'
 
 [vlang]
 format = '\[[$symbol($version)]($style)\]'
+disabled = true
 
 [zig]
 format = '\[[$symbol($version)]($style)\]'
