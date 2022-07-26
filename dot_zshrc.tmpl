@@ -434,6 +434,18 @@ export ZSH_AUTOSUGGEST_ACCEPT_WIDGETS=(
     widget::key-shift-cmd-right
 )
 
+{{ if eq .chezmoi.os "linux" }}
+{{   if (.chezmoi.kernel.osrelease | lower | contains "microsoft") }}
+
+keep_current_path() {
+  printf "\e]9;9;%s\e\\" "$(wslpath -w "$PWD")"
+}
+precmd_functions+=(keep_current_path)
+
+{{   end }}
+{{ end }}
+
+
 export PATH="$PATH:$HOME/bin"
 
 

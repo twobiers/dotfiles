@@ -122,3 +122,11 @@ eval "$(zoxide init bash)"
 [ -f ~/.fzf.bash ] && source ~/.fzf.bash
 export PATH="$HOME/.rbenv/bin:$PATH"
 eval "$(rbenv init - bash)"
+
+{{ if eq .chezmoi.os "linux" }}
+{{   if (.chezmoi.kernel.osrelease | lower | contains "microsoft") }}
+
+PROMPT_COMMAND=${PROMPT_COMMAND:+"$PROMPT_COMMAND; "}'printf "\e]9;9;%s\e\\" "$(wslpath -w "$PWD")"'
+
+{{   end }}
+{{ end }}
