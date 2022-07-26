@@ -18,36 +18,6 @@ function IsInteractiveShell {
 }
 
 if (IsInteractiveShell) {
-    # TODO: This is relatively slow
-    function Invoke-Starship-PreCommand {
-        $loc = Get-Location
-        $prompt = "$([char]27)]9;12$([char]7)"
-        if ($loc.Provider.Name -eq "FileSystem") {
-            $prompt += "$([char]27)]9;9;`"$($loc.Path)`"$([char]7)"
-        }
-        $host.ui.Write($prompt)
-    }
-
-    try {
-        if (Get-Command starship) {
-            Invoke-Expression (&starship init powershell)
-        }
-    }
-    Catch {
-        Write-Host "Starship is not installed"
-    }
-
-    try {
-        if (Get-Command zoxide) {
-            Invoke-Expression (& {
-                    $hook = if ($PSVersionTable.PSVersion.Major -lt 6) { 'prompt' } else { 'pwd' }
-                (zoxide init --hook $hook powershell | Out-String)
-                })            
-        }
-    }
-    Catch {
-        Write-Host "zoxide not installed"
-    }
 
     $modules = @("Microsoft.PowerShell.TextUtility", "Terminal-Icons", "PSReadLine")
 
@@ -78,7 +48,8 @@ if (IsInteractiveShell) {
         "winget",
         "zoxide",
         "rg",
-        "kaf"
+        "kaf",
+        "starship"
     )
     $installedTools = (Get-Command $tools -ErrorAction SilentlyContinue).Name -replace '.exe', ''
     $notAvailable = $tools | Where-Object { $installedTools -NotContains $_ }
