@@ -82,7 +82,8 @@ if (IsInteractiveShell) {
         "kubectl",
         "kubefwd",
         "winget",
-        "zoxide"
+        "zoxide",
+        "rg"
     )
     $installedTools = (Get-Command $tools -ErrorAction SilentlyContinue).Name -replace '.exe', ''
     $notAvailable = $tools | Where-Object { $installedTools -NotContains $_ }
