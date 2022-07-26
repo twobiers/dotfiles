@@ -1,0 +1,1 @@
+Invoke-Expression (@(kaf completion powershell) -replace " ''\)$", " ' ')" -join "`n")
