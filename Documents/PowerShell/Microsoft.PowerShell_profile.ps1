@@ -49,17 +49,11 @@ if (IsInteractiveShell) {
         Write-Host "zoxide not installed"
     }
 
-    $modules = @("Microsoft.PowerShell.TextUtility", "PSFzf", "Terminal-Icons", "PSReadLine")
+    $modules = @("Microsoft.PowerShell.TextUtility", "Terminal-Icons", "PSReadLine")
 
     foreach ($mod in $modules) {
         try {
             Import-Module $mod
-
-            if ($mod -eq "PSFzf") {
-                # Don't replace tab completion for the moment. I don't like it. PSReadline works like a charm for me
-                #    Set-PSReadLineKeyHandler -Key Tab -ScriptBlock { Invoke-FzfTabCompletion }
-                Set-PsFzfOption -PSReadlineChordProvider 'Ctrl+t' -PSReadlineChordReverseHistory 'Ctrl+r'
-            }
         }
         catch {
             Write-Host "Module $mod is not installed, run";
