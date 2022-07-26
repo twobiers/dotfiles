@@ -19,6 +19,9 @@ function IsInteractiveShell {
 
 if (IsInteractiveShell) {
 
+    Set-PSReadLineOption -PredictionSource HistoryAndPlugin 
+    Set-PSReadLineOption -PredictionViewStyle ListView
+
     $modules = @("Microsoft.PowerShell.TextUtility", "Terminal-Icons", "PSReadLine")
 
     foreach ($mod in $modules) {
