@@ -117,7 +117,7 @@ source $ZSH/oh-my-zsh.sh
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 
-if ! type zoxide > /dev/null; then
+if type zoxide > /dev/null; then
     eval "$(zoxide init zsh)"
 fi
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
@@ -450,7 +450,7 @@ precmd_functions+=(keep_current_path)
 
 export PATH="$PATH:$HOME/bin"
 
-if ! type rbenv > /dev/null; then
+if type rbenv > /dev/null; then
     # Add RVM to PATH for scripting. Make sure this is the last PATH variable change.
     # export PATH="$PATH:$HOME/.rvm/bin"
     # [[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm"
