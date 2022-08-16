@@ -78,11 +78,11 @@ ZSH_THEME="powerlevel10k/powerlevel10k"
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
 plugins=(
-    git 
-    docker 
-    docker-compose 
-    fzf 
-    # zsh-shift-select 
+    git
+    docker
+    docker-compose
+    fzf
+    # zsh-shift-select
     # zsh-autocomplete
 )
 
@@ -130,14 +130,14 @@ fi
 #   you might have different signals. you can see what
 #   signal each of your keys sends by running `$> cat`
 #   and pressing keys (you'll be able to see most keys)
-#   also some of the signals sent might be set in your 
+#   also some of the signals sent might be set in your
 #   terminal emulator application/program
 #   configurations/preferences. finally some terminals
 #   have a feature that shows you what signals are sent
 #   per key press.
 #
 # for context, at the time of writing these variables are
-#   set for the kitty terminal program, i.e these signals  
+#   set for the kitty terminal program, i.e these signals
 #   are mostly ones sent by default by this terminal.
 export KEY_ALT_F='ƒ'
 export KEY_ALT_B='∫'
@@ -423,11 +423,11 @@ for keyname        kcap   seq                   mode        widget (
     bindkey $seq widget::key-$keyname
 }
 
-# suggested by "e.nikolov", fixes autosuggest completion being 
+# suggested by "e.nikolov", fixes autosuggest completion being
 # overriden by keybindings: to have [zsh] autosuggest [plugin
 # feature] complete visible suggestions, you can assign an array
-# of shell functions to the `ZSH_AUTOSUGGEST_ACCEPT_WIDGETS` 
-# variable. when these functions are triggered, they will also 
+# of shell functions to the `ZSH_AUTOSUGGEST_ACCEPT_WIDGETS`
+# variable. when these functions are triggered, they will also
 # complete any visible suggestion. Example:
 export ZSH_AUTOSUGGEST_ACCEPT_WIDGETS=(
     widget::key-right
