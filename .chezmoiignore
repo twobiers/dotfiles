@@ -1,9 +1,12 @@
 README.md
+.editorconfig
+
 {{ if ne .chezmoi.os "windows" }}
 .wslconfig
 Documents/**
 AppData/**
 {{ end }}
+
 {{ if ne .chezmoi.os "linux" }}
 .bashrc
 {{ end }}
