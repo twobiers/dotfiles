@@ -1,6 +1,6 @@
 # Hashes of fonts:
 {{ range (glob (joinPath .chezmoi.homeDir ".local/share/fonts/*.ttf")) -}}
-# {{ . | sha256sum }}
+# {{ include . | sha256sum }}
 {{ end -}}
 
 # Based on this gist: https://gist.github.com/anthonyeden/0088b07de8951403a643a8485af2709b?permalink_comment_id=3651336#gistcomment-3651336
