@@ -8,10 +8,4 @@ if not type -q fisher
   curl -sL https://git.io/fisher | source && fisher install jorgebucaran/fisher
 end
 
-## Install starship
-if not type -q starship
-  echo "installing starship"
-  curl -fsSL https://starship.rs/install.sh | source
-end
-
 echo -e "\033[0;32m>>>>> Finish Setting Up Fish shell <<<<<\033[0m"
