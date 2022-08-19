@@ -5,8 +5,10 @@ README.md
 .wslconfig
 Documents/**
 AppData/**
+.chezmoiscripts/windows/**
 {{ end }}
 
 {{ if ne .chezmoi.os "linux" }}
 .bashrc
+.chezmoiscripts/linux/**
 {{ end }}
