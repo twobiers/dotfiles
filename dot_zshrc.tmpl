@@ -91,6 +91,19 @@ plugins=(
 )
 
 export ZSH_AUTOSUGGEST_BUFFER_MAX_SIZE=20
+
+{{ if eq .chezmoi.os "linux" }}
+{{   if (.chezmoi.kernel.osrelease | lower | contains "microsoft") }}
+
+# NTFS Mounts in WSL2 are slow as they are used under the 9P protocol
+# Therefore we exclude the drives. However, notice that this affect 
+# commands like code or docker that provide native interopt.
+
+ZSH_HIGHLIGHT_DIRS_BLACKLIST+=(/mnt/c)
+
+{{   end }}
+{{ end }}
+
 fpath+=${ZSH_CUSTOM:-${ZSH:-~/.oh-my-zsh}/custom}/plugins/zsh-completions/src
 
 source $ZSH/oh-my-zsh.sh
