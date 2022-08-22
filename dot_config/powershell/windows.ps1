@@ -19,7 +19,7 @@ Set-ItemProperty "HKCU:\Software\Microsoft\Windows\CurrentVersion\Explorer\Advan
 Write-Host "Other Tweaks..." -ForegroundColor "Yellow"
 
 # Disable Web Search
-Set-ItemProperty "HKCU:\Software\Policies\Microsoft\Windows" "DisableSearchBoxSuggestions" 1
+# Set-ItemProperty "HKCU:\Software\Policies\Microsoft\Windows" "DisableSearchBoxSuggestions" 1
 
 # Let me directly login instead of showing a picture and hitting a button
 Set-ItemProperty "HKCU:\Software\Policies\Microsoft\Windows" "NoLockScreen" 1
