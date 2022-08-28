@@ -30,5 +30,8 @@ else
 fi
 export GPG_AGENT_SOCK=$HOME/.gnupg/S.gpg-agent
 
+# Use .kubeconfig from windows mount
+export KUBECONFIG=/mnt/c/users/tobi/.kube/config
+
 {{   end }}
 {{ end }}
