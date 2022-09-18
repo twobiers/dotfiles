@@ -11,4 +11,8 @@ AppData/**
 {{ if ne .chezmoi.os "linux" }}
 .bashrc
 .chezmoiscripts/linux/**
+.zshrc
+.zprofile
+.fzf.bashrc
+.fzf.zsh
 {{ end }}
