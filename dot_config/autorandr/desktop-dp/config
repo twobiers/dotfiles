@@ -1,0 +1,26 @@
+output DVI-D-0
+off
+output HDMI-0
+off
+output DP-0
+off
+output DP-1
+off
+output DP-3
+off
+output DP-4
+off
+output DP-2
+crtc 0
+mode 3840x2160
+pos 0x0
+primary
+rate 60.00
+x-prop-non_desktop 0
+output DP-5
+crtc 1
+mode 1920x1080
+pos 3840x200
+rate 60.00
+transform 1.750000,0.000000,0.000000,0.000000,1.750000,0.000000,0.000000,0.000000,1.000000
+x-prop-non_desktop 0
