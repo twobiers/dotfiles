@@ -6,10 +6,18 @@ fi
 
 # Auto-completion
 # ---------------
+if test -f "/usr/share/fzf/completion.zsh"; then
+  source "/usr/share/fzf/completion.zsh"
+fi
+
 [[ $- == *i* ]] && source "/home/tobi/.fzf/shell/completion.zsh" 2> /dev/null
 
 # Key bindings
 # ------------
+if test -f "/usr/share/fzf/key-bindings.zsh"; then
+  source "/usr/share/fzf/key-bindings.zsh"
+fi
+
 if test -f "/home/tobi/.fzf/shell/key-bindings.zsh"; then
   source "/home/tobi/.fzf/shell/key-bindings.zsh"
 fi
