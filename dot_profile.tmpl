@@ -2,6 +2,17 @@ if test -f "$HOME/.cargo/env"; then
   . "$HOME/.cargo/env"
 fi
 
+append_path () {
+    case ":$PATH:" in
+        *:"$1":*)
+            ;;
+        *)
+            PATH="${PATH:+$PATH:}$1"
+    esac
+}
+
+append_path "$HOME/bin"
+
 export EDITOR=code
 
 {{ if eq .chezmoi.os "linux" }}
