@@ -478,3 +478,7 @@ fi
 if type kitty > /dev/null; then
   alias icat="kitty +kitten icat"
 fi
+
+if test -d /home/tobi/.local/share/JetBrains/Toolbox/scripts; then
+  export PATH="$PATH:/home/tobi/.local/share/JetBrains/Toolbox/scripts"
+fi

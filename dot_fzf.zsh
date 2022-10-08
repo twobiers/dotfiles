@@ -10,4 +10,6 @@ fi
 
 # Key bindings
 # ------------
-source "/home/tobi/.fzf/shell/key-bindings.zsh"
+if test -f "/home/tobi/.fzf/shell/key-bindings.zsh"; then
+  source "/home/tobi/.fzf/shell/key-bindings.zsh"
+fi
