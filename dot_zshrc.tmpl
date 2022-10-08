@@ -89,7 +89,7 @@ export ZSH_AUTOSUGGEST_BUFFER_MAX_SIZE=20
 {{   if (.chezmoi.kernel.osrelease | lower | contains "microsoft") }}
 
 # NTFS Mounts in WSL2 are slow as they are used under the 9P protocol
-# Therefore we exclude the drives. However, notice that this could affect 
+# Therefore we exclude the drives. However, notice that this could affect
 # commands like code or docker that provide native interopt.
 
 ZSH_HIGHLIGHT_DIRS_BLACKLIST+=(/mnt/c)
@@ -468,4 +468,8 @@ if type rbenv > /dev/null; then
     # [[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm"
     export PATH="$HOME/.rbenv/bin:$PATH"
     eval "$(rbenv init - zsh)"
+fi
+
+if test -f /usr/share/nvm/init-nvm.sh; then
+    source /usr/share/nvm/init-nvm.sh
 fi
