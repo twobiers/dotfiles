@@ -1,0 +1,18 @@
+[global_config]
+[keybindings]
+  split_horiz = <Primary><Shift>KP_Subtract
+  split_vert = <Primary><Shift>KP_Add
+[profiles]
+  [[default]]
+    cursor_color = "#aaaaaa"
+    palette = "#000000:#cd0000:#00cd00:#cdcd00:#0000cd:#cd00cd:#00cdcd:#faebd7:#404040:#ff0000:#00ff00:#ffff00:#0000ff:#ff00ff:#00ffff:#ffffff"
+    bold_is_bright = True
+[layouts]
+  [[default]]
+    [[[window0]]]
+      type = Window
+      parent = ""
+    [[[child1]]]
+      type = Terminal
+      parent = window0
+[plugins]
