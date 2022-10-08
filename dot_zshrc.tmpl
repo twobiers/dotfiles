@@ -83,7 +83,8 @@ plugins=(
     zoxide
 )
 
-export ZSH_AUTOSUGGEST_BUFFER_MAX_SIZE=20
+ZSH_AUTOSUGGEST_BUFFER_MAX_SIZE=20
+ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=240'
 
 {{ if eq .chezmoi.os "linux" }}
 {{   if (.chezmoi.kernel.osrelease | lower | contains "microsoft") }}
@@ -472,4 +473,8 @@ fi
 
 if test -f /usr/share/nvm/init-nvm.sh; then
     source /usr/share/nvm/init-nvm.sh
+fi
+
+if type kitty > /dev/null; then
+  alias icat="kitty +kitten icat"
 fi
