@@ -1,1 +1,16 @@
-{}
+{
+    "com.github.trepichio.ulauncher-window-switcher": {
+        "id": "com.github.trepichio.ulauncher-window-switcher",
+        "url": "https://github.com/trepichio/ulauncher-window-switcher",
+        "updated_at": "2022-10-09T16:57:07.741672",
+        "last_commit": "5d4b221c5d59f991d3b934f36ee7c1d6bbe419c4",
+        "last_commit_time": "2022-07-17T08:25:36"
+    },
+    "com.github.hillaryychan.ulauncher-fzf": {
+        "id": "com.github.hillaryychan.ulauncher-fzf",
+        "url": "https://github.com/hillaryychan/ulauncher-fzf",
+        "updated_at": "2022-10-09T16:57:20.019229",
+        "last_commit": "fc0d3ba350795980d51d6afc855c122522335e11",
+        "last_commit_time": "2022-08-31T11:24:40"
+    }
+}
