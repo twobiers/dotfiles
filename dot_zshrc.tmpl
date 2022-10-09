@@ -296,7 +296,8 @@ bindkey                   $KEY_CTRL_U                       backward-kill-line
 bindkey                   $KEY_CMD_BACKSPACE                backward-kill-line
 bindkey                   $KEY_CMD_Z                        undo
 bindkey                   $KEY_SHIFT_CMD_Z                  redo
-bindkey                   $KEY_CTRL_R                       history-incremental-search-backward
+# We use fzf here
+# bindkey                   $KEY_CTRL_R                       history-incremental-search-backward
 bindkey                   $KEY_CMD_C                        widget::copy-selection
 bindkey                   $KEY_CMD_X                        widget::cut-selection
 bindkey                   $KEY_CMD_V                        widget::paste
