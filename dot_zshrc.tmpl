@@ -521,3 +521,26 @@ if [[ -x "${_datagrip}" ]]; then
         { "${_datagrip}" "$@" & } &>/dev/null; disown
     }
 fi
+
+# ALIASES
+{{- if lookPath "git" }}
+alias g=git
+{{- end }}
+
+{{- if lookPath "docker" }}
+alias d=docker
+{{- end }}
+
+{{- if lookPath "kubectl" }}
+alias k=kubectl
+{{- end }}
+
+{{- if lookPath "bat" }}
+alias cat=bat
+{{- else if lookPath "batcat" }}
+alias cat=batcat
+{{- end }}
+
+{{- if lookPath "exa" }}
+alias ls=exa
+{{- end }}
