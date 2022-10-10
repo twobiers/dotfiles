@@ -462,8 +462,6 @@ precmd_functions+=(keep_current_path)
 {{   end }}
 {{ end }}
 
-eval "$(starship init zsh)"
-
 if type rbenv > /dev/null; then
     # Add RVM to PATH for scripting. Make sure this is the last PATH variable change.
     # export PATH="$PATH:$HOME/.rvm/bin"
@@ -544,3 +542,10 @@ alias cat=batcat
 {{- if lookPath "exa" }}
 alias ls=exa
 {{- end }}
+
+function chezmoi-cd() {
+  cd $(chezmoi source-path)
+}
+
+
+eval "$(starship init zsh)"
