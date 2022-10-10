@@ -534,7 +534,7 @@ alias k=kubectl
 {{- end }}
 
 {{- if lookPath "bat" }}
-alias cat=bat
+alias cat="bat --style=plain --paging=never"
 {{- else if lookPath "batcat" }}
 alias cat=batcat
 {{- end }}
