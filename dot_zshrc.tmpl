@@ -76,6 +76,7 @@ plugins=(
     docker-compose
     kubectl
     fzf
+    gpg-agent
     # zsh-shift-select
     zsh-autosuggestions
     zsh-completions
@@ -547,5 +548,6 @@ function chezmoi-cd() {
   cd $(chezmoi source-path)
 }
 
+gpg-connect-agent updatestartuptty /bye
 
 eval "$(starship init zsh)"
