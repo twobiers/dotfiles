@@ -1,0 +1,9 @@
+#!/usr/bin/env bash
+
+sep=$(echo 2B | xxd -r -p)
+git config --get-regexp 'alias\.' \
+    | cut -c 7- \
+    | sed -e "s/^/m/" -e "s/ /m${sep}/" \
+    | column -t -s "${sep}" \
+    | sort \
+    | less -SR
