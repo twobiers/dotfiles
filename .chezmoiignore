@@ -1,11 +1,32 @@
 README.md
 .editorconfig
 
+
 {{ if ne .chezmoi.os "windows" }}
 .wslconfig
 Documents/**
 AppData/**
 .chezmoiscripts/windows/**
+
+  {{- if lookPath "kubectl" }}
+    .kube/**
+  {{- end }}
+
+  {{- if lookPath "zsh" }}
+    .zshrc
+    .zprofile
+    .oh-my-zsh/**
+  {{- end }}
+
+  {{- if lookPath "fzf" }}
+    .fzf.bash
+    .fzf.zsh
+  {{- end }}
+
+  {{- if lookPath "rg" }}
+    .ripgreprc
+  {{- end }}
+
 {{ end }}
 
 {{ if ne .chezmoi.os "linux" }}
@@ -13,6 +34,8 @@ AppData/**
 .chezmoiscripts/linux/**
 .zshrc
 .zprofile
-.fzf.bashrc
+.fzf.bash
 .fzf.zsh
+.oh-my-zsh/**
+.nano
 {{ end }}
