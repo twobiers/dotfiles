@@ -1,0 +1,12 @@
+[Unit]
+Description=easyeffects daemon
+After=pipewire.service
+
+[Service]
+Environment="G_MESSAGES_DEBUG=easyeffects"
+ExecStart=/usr/bin/easyeffects --gapplication-service
+ExecStop=/usr/bin/easyeffects -q
+Restart=on-failure
+
+[Install]
+WantedBy=graphical-session.target
