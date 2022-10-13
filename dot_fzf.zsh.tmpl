@@ -29,3 +29,8 @@ if [[ -x fd ]]; then
 fi
 
 export FZF_DEFAULT_OPTS="--ansi --height 40% --border"
+
+{{- if lookPath "bat" }}
+  export FZF_DEFAULT_OPTS="$FZF_DEFAULT_OPTS --preview 'bat --style=numbers --color=always --line-range :500 {}'"
+  alias fp='fzf --preview "bat --style=numbers --color=always --line-range :500 {}"'
+{{- end }}
