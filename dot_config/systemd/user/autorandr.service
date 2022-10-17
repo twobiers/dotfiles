@@ -1,0 +1,14 @@
+[Unit]
+Description=autorandr execution hook
+After=gnome-session-x11.target
+StartLimitIntervalSec=5
+StartLimitBurst=1
+
+[Service]
+ExecStart=/usr/bin/autorandr --batch --change --default default
+Type=oneshot
+RemainAfterExit=false
+KillMode=process
+
+[Install]
+WantedBy=gnome-session-x11.target
