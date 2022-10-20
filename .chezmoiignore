@@ -8,22 +8,22 @@ Documents/**
 AppData/**
 .chezmoiscripts/windows/**
 
-  {{- if not lookPath "kubectl" }}
+  {{- if not (lookPath "kubectl") }}
     .kube/**
   {{- end }}
 
-  {{- if not lookPath "zsh" }}
+  {{- if not (lookPath "zsh") }}
     .zshrc
     .zprofile
     .oh-my-zsh/**
   {{- end }}
 
-  {{- if not lookPath "fzf" }}
+  {{- if not (lookPath "fzf") }}
     .fzf.bash
     .fzf.zsh
   {{- end }}
 
-  {{- if not lookPath "rg" }}
+  {{- if not (lookPath "rg") }}
     .ripgreprc
   {{- end }}
 
