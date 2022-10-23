@@ -162,6 +162,9 @@ export KEY_CMD_BACKSPACE=$'^[b'   # arbitrary; added via kitty config (send_text
 export KEY_CMD_Z=$'^[[122;9u'
 export KEY_SHIFT_CMD_Z="^[[122;10u"
 export KEY_CTRL_R=$'\x12' # ^R
+export KEY_CTRL_C=$'\x03' # ^C
+export KEY_CTRL_X=$'\x18' # ^X
+export KEY_CTRL_V=$'\x16' # ^V
 export KEY_CMD_C=$'^[[99;9u'
 export KEY_CMD_X=$'^[[120;9u'
 export KEY_CMD_V=$'^[[118;9u'
@@ -196,7 +199,7 @@ export KEY_BACKSPACE=$'^?' # Backspace
 # delete
 zle -N widget::delete-selection
 function widget::delete-selection() {
-    if ((REGION_ACTIVE)) then
+    if ((REGION_ACTIVE)); then
         zle kill-region
     else
         zle delete-char
@@ -206,7 +209,7 @@ function widget::delete-selection() {
 # delete
 zle -N widget::delete-selection-back
 function widget::delete-selection-back() {
-    if ((REGION_ACTIVE)) then
+    if ((REGION_ACTIVE)); then
         zle kill-region
     else
         zle backward-delete-char
@@ -218,16 +221,19 @@ zle -N widget::copy-selection
 function widget::copy-selection {
     if ((REGION_ACTIVE)); then
         zle copy-region-as-kill
-        printf "%s" $CUTBUFFER | pbcopy
+        printf "%s" $CUTBUFFER | xsel --clipboard --input
+    else
+        # Nothing is selected, so default to the interrupt command
+        zle send-break
     fi
 }
 
 # cut selected terminal text to clipboard
 zle -N widget::cut-selection
 function widget::cut-selection() {
-    if ((REGION_ACTIVE)) then
+    if ((REGION_ACTIVE)); then
         zle kill-region
-        printf "%s" $CUTBUFFER | pbcopy
+        printf "%s" $CUTBUFFER | xsel --clipboard --input
     fi
 }
 
@@ -235,8 +241,8 @@ function widget::cut-selection() {
 zle -N widget::paste
 function widget::paste() {
     ((REGION_ACTIVE)) && zle kill-region
-    RBUFFER="$(pbpaste)${RBUFFER}"
-    CURSOR=$(( CURSOR + $(echo -n "$(pbpaste)" | wc -m | bc) ))
+    RBUFFER="$(xsel --clipboard --output) ${RBUFFER}"
+    CURSOR=$(( CURSOR + $(echo -n "$(xsel --clipboard --output)" | wc -m | bc) ))
 }
 
 # select entire prompt
@@ -287,6 +293,19 @@ function widget::util-insertchar() {
     zle forward-char
 }
 
+function zle-pre-cmd {
+  # We are now in buffer editing mode. Clear the interrupt combo `Ctrl + C` by setting it to the null character, so it
+  # can be used as the copy-to-clipboard key instead
+  stty intr "^@"
+}
+precmd_functions=("zle-pre-cmd" ${precmd_functions[@]})
+
+function zle-pre-exec {
+  # We are now out of buffer editing mode. Restore the interrupt combo `Ctrl + C`.
+  stty intr "^C"
+}
+preexec_functions=("zle-pre-exec" ${preexec_functions[@]})
+
 #                       |  key sequence                   | command
 # --------------------- | ------------------------------- | -------------
 
@@ -299,6 +318,9 @@ bindkey                   $KEY_CMD_Z                        undo
 bindkey                   $KEY_SHIFT_CMD_Z                  redo
 # We use fzf here
 # bindkey                   $KEY_CTRL_R                       history-incremental-search-backward
+bindkey                   $KEY_CTRL_C                       widget::copy-selection
+bindkey                   $KEY_CTRL_X                       widget::cut-selection
+bindkey                   $KEY_CTRL_V                       widget::paste
 bindkey                   $KEY_CMD_C                        widget::copy-selection
 bindkey                   $KEY_CMD_X                        widget::cut-selection
 bindkey                   $KEY_CMD_V                        widget::paste
