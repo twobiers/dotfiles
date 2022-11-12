@@ -86,6 +86,10 @@ plugins=(
     zoxide
 )
 
+zstyle ':autocomplete:*' fzf-completion yes
+zstyle ':autocomplete:recent-dirs' backend zoxide
+bindkey -M menuselect '^M' accept-line
+
 ZSH_AUTOSUGGEST_BUFFER_MAX_SIZE=20
 ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=240'
 
@@ -501,6 +505,7 @@ fi
 
 if type kitty > /dev/null; then
   alias icat="kitty +kitten icat"
+  alias ssh="kitty +kitten ssh"
 fi
 
 
