@@ -90,6 +90,8 @@ zstyle ':autocomplete:*' fzf-completion yes
 zstyle ':autocomplete:recent-dirs' backend zoxide
 bindkey -M menuselect '^M' accept-line
 
+unsetopt share_history
+
 ZSH_AUTOSUGGEST_BUFFER_MAX_SIZE=20
 ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=240'
 
