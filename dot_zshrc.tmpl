@@ -73,17 +73,18 @@ PROMPT_EOL_MARK=''
 # Add wisely, as too many plugins slow down shell startup.
 plugins=(
     git
-    docker
-    docker-compose
-    kubectl
+    # docker
+    # docker-compose
+    # kubectl
     fzf
+    # fzf-tab
     gpg-agent
     # zsh-shift-select
     # zsh-autosuggestions
     zsh-autocomplete
-    zsh-completions
+    # zsh-completions
     zsh-syntax-highlighting
-    zoxide
+    # zoxide
 )
 
 zstyle ':autocomplete:*' fzf-completion yes
@@ -475,12 +476,12 @@ for keyname        kcap   seq                   mode        widget (
 # of shell functions to the `ZSH_AUTOSUGGEST_ACCEPT_WIDGETS`
 # variable. when these functions are triggered, they will also
 # complete any visible suggestion. Example:
-export ZSH_AUTOSUGGEST_ACCEPT_WIDGETS=(
-    widget::key-right
-    widget::key-shift-right
-    widget::key-cmd-right
-    widget::key-shift-cmd-right
-)
+# export ZSH_AUTOSUGGEST_ACCEPT_WIDGETS=(
+#     widget::key-right
+#     widget::key-shift-right
+#     widget::key-cmd-right
+#     widget::key-shift-cmd-right
+# )
 
 {{ if eq .chezmoi.os "linux" }}
 {{   if (.chezmoi.kernel.osrelease | lower | contains "microsoft") }}
