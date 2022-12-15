@@ -3,16 +3,6 @@ export PATH="$HOME/.local/bin:$PATH"
 export PATH="$HOME/.scripts:$PATH"
 export PATH="$HOME/.local/share/JetBrains/Toolbox/scripts:$PATH"
 
-{{- if lookPath "code" }}
-export EDITOR=code
-{{- end }}
-{{- if lookPath "firefox" }}
-export BROWSER=firefox
-{{- end }}
-{{- if lookPath "kitty" }}
-export TERMINAL=kitty
-{{- end }}
-
 export XDG_CONFIG_HOME=~/.config
 export XDG_DATA_HOME=~/.local/share
 export XDG_CACHE_HOME=~/.cache

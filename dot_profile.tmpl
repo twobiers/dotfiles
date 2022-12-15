@@ -13,8 +13,6 @@ append_path () {
 
 append_path "$HOME/bin"
 
-export EDITOR=code
-
 {{ if eq .chezmoi.os "linux" }}
 {{   if (.chezmoi.kernel.osrelease | lower | contains "microsoft") }}
 
