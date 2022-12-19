@@ -581,4 +581,7 @@ function chezmoi-cd() {
 
 gpg-connect-agent updatestartuptty /bye
 
+{{- if lookPath "direnv" }}
+eval "$(direnv hook zsh)"
+{{- end }}
 eval "$(starship init zsh)"
