@@ -1,6 +1,6 @@
 [Unit]
 Description=autorandr execution hook
-After=gnome-session-x11.target
+After=sleep.target
 StartLimitIntervalSec=5
 StartLimitBurst=1
 
@@ -11,4 +11,4 @@ RemainAfterExit=false
 KillMode=process
 
 [Install]
-WantedBy=gnome-session-x11.target
+WantedBy=sleep.target
