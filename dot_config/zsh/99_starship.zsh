@@ -1,7 +1,7 @@
 #!/usr/bin/env zsh
 
-zinit ice from"gh-r" as"command" atload'eval "$(starship init zsh)"'
-zinit load starship/starship
+znap eval starship 'starship init zsh --print-full-init'
+znap prompt
 
 # if is_in_path "starship"; then
 #   eval "$(starship init zsh)"

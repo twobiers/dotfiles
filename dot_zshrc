@@ -23,67 +23,29 @@ setopt inc_append_history     # add commands to HISTFILE in order of execution
 unsetopt share_history
 
 # Other options
-setopt always_to_end          # cursor moved to the end in full completion
-setopt hash_list_all          # hash everything before completion
+setopt always_to_end # cursor moved to the end in full completion
+setopt hash_list_all # hash everything before completion
 setopt always_to_end
 setopt complete_in_word
-setopt nocorrect              # spelling correction for commands
-setopt list_ambiguous         # complete as much of a completion until it gets ambiguous.
+setopt nocorrect      # spelling correction for commands
+setopt list_ambiguous # complete as much of a completion until it gets ambiguous.
 setopt nolisttypes
 setopt listpacked
 setopt automenu
 
+source "$HOME"/.local/share/zsnap/znap.zsh
 
-### Added by Zinit's installer
-if [[ ! -f $HOME/.local/share/zinit/zinit.git/zinit.zsh ]]; then
-    print -P "%F{33} %F{220}Installing %F{33}ZDHARMA-CONTINUUM%F{220} Initiative Plugin Manager (%F{33}zdharma-continuum/zinit%F{220})…%f"
-    command mkdir -p "$HOME/.local/share/zinit" && command chmod g-rwX "$HOME/.local/share/zinit"
-    command git clone https://github.com/zdharma-continuum/zinit "$HOME/.local/share/zinit/zinit.git" && \
-        print -P "%F{33} %F{34}Installation successful.%f%b" || \
-        print -P "%F{160} The clone has failed.%f%b"
-fi
+znap source ohmyzsh/ohmyzsh \
+  lib/{clipboard,compfix,completion,correction,directories,git,grep,history,spectrum,termsupport} \
+  plugins/{fzf,git,gpg-agent}
 
-source "$HOME/.local/share/zinit/zinit.git/zinit.zsh"
-autoload -Uz _zinit
-(( ${+_comps} )) && _comps[zinit]=_zinit
-
-# Load a few important annexes, without Turbo
-# (this is currently required for annexes)
-zinit light-mode for \
-    zdharma-continuum/zinit-annex-as-monitor \
-    zdharma-continuum/zinit-annex-bin-gem-node \
-    zdharma-continuum/zinit-annex-patch-dl \
-    zdharma-continuum/zinit-annex-rust
-
-# TODO: Turbooooo
-zinit lucid for \
-	OMZL::clipboard.zsh \
-	OMZL::compfix.zsh \
-	OMZL::completion.zsh \
-	OMZL::correction.zsh \
-	OMZL::directories.zsh \
-	OMZL::git.zsh \
-	OMZL::grep.zsh \
-	OMZL::history.zsh \
-	OMZL::key-bindings.zsh \
-	OMZL::spectrum.zsh \
-	OMZL::termsupport.zsh
-
-zinit lucid for \
-  OMZP::fzf \
-  OMZP::git \
-  OMZP::gpg-agent
-
-zinit lucid for \
-  chrissicool/zsh-256color \
-  zdharma-continuum/fast-syntax-highlighting \
-  atpull'zinit creinstall -q .' \
-  zsh-users/zsh-completions \
-  zsh-users/zsh-autosuggestions \
-  marlonrichert/zsh-autocomplete \
-  atclone"dircolors -b LS_COLORS > c.zsh" atpull'%atclone' pick"c.zsh" nocompile'!' \
-  trapd00r/LS_COLORS \
-  unixorn/fzf-zsh-plugin
+znap source chrissicool/zsh-256color
+znap source zdharma-continuum/fast-syntax-highlighting
+znap source zsh-users/zsh-completions
+znap source zsh-users/zsh-autosuggestions
+znap source marlonrichert/zsh-autocomplete
+znap eval trapd00r/LS_COLORS "$(whence -a dircolors gdircolors) -b LS_COLORS"
+znap source unixorn/fzf-zsh-plugin
 
 for f in ${ZDOTDIR:-$HOME/.config/zsh}/*.zsh; do
   source "${f}"

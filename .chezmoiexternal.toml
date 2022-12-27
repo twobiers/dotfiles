@@ -1,8 +1,10 @@
 {{- if eq .chezmoi.os "linux" }}
-[".local/share/zinit/zinit.git"]
+[".local/share/zsnap"]
     type = "git-repo"
-    url = "https://github.com/zdharma-continuum/zinit.git"
+    url = "https://github.com/marlonrichert/zsh-snap.git"
     refreshPeriod = "168h"
+    [".local/share/zsnap".pull]
+        args = ["--depth", "1"]
 {{- end }}
 
 {{- $fontDir := ".local/share/fonts" }}
