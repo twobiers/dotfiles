@@ -48,12 +48,14 @@ export KEY_CMD_RIGHT=$'^[[1;9C'
 export KEY_SHIFT_CMD_LEFT=$'^[[1;10D'
 export KEY_SHIFT_CMD_RIGHT=$'^[[1;10C'
 export KEY_CTRL_A=$'\x01' # ^A
+export KEY_CTRL_D=$'\x04' # ^D
 export KEY_CTRL_E=$'\x05' # ^E
+export KEY_CTRL_LEFT=$'^[[1;5D'
+export KEY_CTRL_RIGHT=$'^[[1;5D'
 export KEY_SHIFT_CTRL_A=$'^[[97;6u'
 export KEY_SHIFT_CTRL_E=$'^[[101;6u'
 export KEY_SHIFT_CTRL_LEFT=$'^[[1;6D'
 export KEY_SHIFT_CTRL_RIGHT=$'^[[1;6C'
-export KEY_CTRL_D=$'\x04' # ^D
 export KEY_DEL=$'^[[3~' # Del
 export KEY_BACKSPACE=$'^?' # Backspace
 
@@ -212,6 +214,8 @@ for keyname        kcap   seq                   mode        widget (
     shift-cmd-left    x   $KEY_SHIFT_CMD_LEFT   select      beginning-of-line
 
     ctrl-e            x   $KEY_CTRL_E           unselect    end-of-line
+    ctrl-right        x   $KEY_CTRL_RIGHT       unselect    forward-word
+    ctrl-left         x   $KEY_CTRL_LEFT        unselect    backward-word
     shift-ctrl-e      x   $KEY_SHIFT_CTRL_E     select      end-of-line
     shift-ctrl-a      x   $KEY_SHIFT_CTRL_A     select      beginning-of-line
     shift-ctrl-right  x   $KEY_SHIFT_CTRL_RIGHT select      forward-word
