@@ -1,0 +1,8 @@
+#!/usr/bin/env zsh
+
+PROMPT_EOL_MARK=''
+ENABLE_CORRECTION="true"
+
+for f in ${ZDOTDIR:-$HOME/.config/zsh}/rc.d/<->-*.zsh(n); do
+  source "${f}"
+done

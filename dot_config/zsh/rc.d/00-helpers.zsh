@@ -1,3 +1,5 @@
+#!/usr/bin/env zsh
+
 function is_in_path {
   if [[ -n $ZSH_VERSION ]]; then
     builtin whence -p "$1" &>/dev/null
