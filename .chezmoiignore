@@ -36,6 +36,5 @@ AppData/**
 .zprofile
 .fzf.bash
 .fzf.zsh
-.oh-my-zsh/**
 .nano
 {{ end }}

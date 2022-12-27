@@ -1,7 +1,5 @@
 #!/usr/bin/env bash
 
-alias ll="ls -ltra"
-
 if is_in_path "kubectl"; then
   alias k="kubectl"
 fi
@@ -19,5 +17,7 @@ if is_in_path "bat"; then
 fi
 
 if is_in_path "exa"; then
-  alias ls=exa
+  alias ls="exa"
+  alias l="exa -abghHlS --git --group-directories-first"
+  alias ll="exa -abghHlS --git --group-directories-first"
 fi

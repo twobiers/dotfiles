@@ -12,4 +12,9 @@ if test -f $XDG_CONFIG_HOME/zsh/local.zshenv; then
   source $XDG_CONFIG_HOME/zsh/local.zshenv
 fi
 
-export GPG_TTY=$(tty)
+if [[ -x bat ]]; then
+  export PAGER=bat
+fi
+
+export DOCKER_BUILDKIT=1
+export COMPOSE_DOCKER_CLI_BUILD=1
