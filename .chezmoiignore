@@ -1,5 +1,6 @@
 README.md
 .editorconfig
+.config/age/**
 
 
 {{ if ne .chezmoi.os "windows" }}

@@ -16,7 +16,11 @@
 {{- end }}
 
 [data.cpu]
-cores = {{ $cpuCores }}
-threads = {{ $cpuThreads }}
+  cores = {{ $cpuCores }}
+  threads = {{ $cpuThreads }}
 [data.memory]
-size = {{ $memoryInGb }}
+  size = {{ $memoryInGb }}
+
+[age]
+  identity = "{{ .chezmoi.homeDir }}/.config/age/key-chezmoi.txt"
+  recipient = "age1te7a3ut540rec7d33jj7l6e3npj8kp6az3kwu68h0zrfuhj2yujsgqh0eu"
