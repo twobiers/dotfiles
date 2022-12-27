@@ -1,0 +1,18 @@
+#!/usr/bin/env zsh
+
+{{ if eq .chezmoi.os "linux" }}
+{{ if (.chezmoi.kernel.osrelease | lower | contains "microsoft") }}
+# Only necessary when on WSL
+
+# NTFS Mounts in WSL2 are slow as they are used under the 9P protocol
+# Therefore we exclude the drives. However, notice that this could affect
+# commands like code or docker that provide native interopt.
+
+ZSH_HIGHLIGHT_DIRS_BLACKLIST+=(/mnt/c)
+
+keep_current_path() {
+  printf "\e]9;9;%s\e\\" "$(wslpath -w "$PWD")"
+}
+precmd_functions+=(keep_current_path)
+{{ end }}
+{{ end }}

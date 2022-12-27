@@ -1,0 +1,5 @@
+#!/usr/bin/env zsh
+
+if [[ -x direnv ]]; then
+  eval "$(direnv hook zsh)"
+fi
