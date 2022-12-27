@@ -58,6 +58,10 @@ export KEY_SHIFT_CTRL_LEFT=$'^[[1;6D'
 export KEY_SHIFT_CTRL_RIGHT=$'^[[1;6C'
 export KEY_DEL=$'^[[3~' # Del
 export KEY_BACKSPACE=$'^?' # Backspace
+export KEY_HOME=$'^[[H' # Home/Pos1
+export KEY_SHIFT_HOME=$'^[[1;2H'
+export KEY_END=$'^[[F' # End
+export KEY_SHIFT_END=$'^[[1;5F'
 
 # -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
 
@@ -174,13 +178,13 @@ preexec_functions=("zle-pre-exec" ${preexec_functions[@]})
 #                       |  key sequence                   | command
 # --------------------- | ------------------------------- | -------------
 
-bindkey                   $KEY_ALT_F                        forward-word
-bindkey                   $KEY_ALT_B                        backward-word
-bindkey                   $KEY_ALT_D                        kill-word
-bindkey                   $KEY_CTRL_U                       backward-kill-line
-bindkey                   $KEY_CMD_BACKSPACE                backward-kill-line
-bindkey                   $KEY_CMD_Z                        undo
-bindkey                   $KEY_SHIFT_CMD_Z                  redo
+# bindkey                   $KEY_ALT_F                        forward-word
+# bindkey                   $KEY_ALT_B                        backward-word
+# bindkey                   $KEY_ALT_D                        kill-word
+# bindkey                   $KEY_CTRL_U                       backward-kill-line
+# bindkey                   $KEY_CMD_BACKSPACE                backward-kill-line
+# bindkey                   $KEY_CMD_Z                        undo
+# bindkey                   $KEY_SHIFT_CMD_Z                  redo
 # We use fzf here
 # bindkey                   $KEY_CTRL_R                       history-incremental-search-backward
 bindkey                   $KEY_CTRL_C                       widget::copy-selection
@@ -203,17 +207,22 @@ for keyname        kcap   seq                   mode        widget (
     shift-right    kRIT   $KEY_SHIFT_RIGHT      select      forward-char
     shift-left     kLFT   $KEY_SHIFT_LEFT       select      backward-char
 
-    alt-right         x   $KEY_ALT_RIGHT        unselect    forward-word
-    alt-left          x   $KEY_ALT_LEFT         unselect    backward-word
-    shift-alt-right   x   $KEY_SHIFT_ALT_RIGHT  select      forward-word
-    shift-alt-left    x   $KEY_SHIFT_ALT_LEFT   select      backward-word
+    # alt-right         x   $KEY_ALT_RIGHT        unselect    forward-word
+    # alt-left          x   $KEY_ALT_LEFT         unselect    backward-word
+    # shift-alt-right   x   $KEY_SHIFT_ALT_RIGHT  select      forward-word
+    # shift-alt-left    x   $KEY_SHIFT_ALT_LEFT   select      backward-word
 
-    cmd-right         x   $KEY_CMD_RIGHT        unselect    end-of-line
-    cmd-left          x   $KEY_CMD_LEFT         unselect    beginning-of-line
-    shift-cmd-right   x   $KEY_SHIFT_CMD_RIGHT  select      end-of-line
-    shift-cmd-left    x   $KEY_SHIFT_CMD_LEFT   select      beginning-of-line
+    # cmd-right         x   $KEY_CMD_RIGHT        unselect    end-of-line
+    # cmd-left          x   $KEY_CMD_LEFT         unselect    beginning-of-line
+    # shift-cmd-right   x   $KEY_SHIFT_CMD_RIGHT  select      end-of-line
+    # shift-cmd-left    x   $KEY_SHIFT_CMD_LEFT   select      beginning-of-line
 
-    ctrl-e            x   $KEY_CTRL_E           unselect    end-of-line
+    home              x   $KEY_HOME        unselect    beginning-of-line
+    end               x   $KEY_END         unselect    end-of-line
+    shift-home        x   $KEY_SHIFT_HOME  select      beginning-of-line
+    shift-end         x   $KEY_SHIFT_END   select      end-of-line
+
+    # ctrl-e            x   $KEY_CTRL_E           unselect    end-of-line
     ctrl-right        x   $KEY_CTRL_RIGHT       unselect    forward-word
     ctrl-left         x   $KEY_CTRL_LEFT        unselect    backward-word
     shift-ctrl-e      x   $KEY_SHIFT_CTRL_E     select      end-of-line
