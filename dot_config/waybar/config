@@ -1,0 +1,105 @@
+{
+    "layer": "top",
+    "position": "top",
+    "height": 32,
+    "modules-left": ["sway/workspaces", "sway/mode"],
+    "modules-center": ["sway/window"],
+    "modules-right": [
+      "custom/spotify",
+      "tray",
+      "pulseaudio",
+      "network",
+      "cpu",
+      "memory",
+      "temperature",
+      "clock"
+    ],
+    "sway/mode": {
+        "format": " {}"
+    },
+    "sway/workspaces": {
+        "format": "{name}",
+        "disable-scroll": true,
+        "disable-markup": false
+    },
+    "sway/window": {
+        "max-length": 80,
+        "tooltip": false
+    },
+    "clock": {
+      "tooltip-format": "{:%Y-%m-%d | %H:%M}",
+      "format": "{:%Y-%m-%d}"
+    },
+    "cpu": {
+      "format": "{usage}% "
+    },
+    "memory": {
+      "format": "{}% "
+    },
+    "temperature": {
+      "critical-threshold": 80,
+      "format": "{temperatureC}°C "
+    },
+    "network": {
+      "format-wifi": "{essid} ({signalStrength}%) ",
+      "format-ethernet": "{ifname}: {ipaddr}/{cidr} ",
+      "format-disconnected": "Disconnected ⚠",
+      "interval": 7,
+      "on-click": "${pkgs.networkmanagerapplet}/bin/nm-connection-editor"
+    },
+    "pulseaudio": {
+      "format": "{volume}% {icon}",
+      "format-bluetooth": "{volume}% {icon}",
+      "format-source": "Mic ",
+      "format-source-muted": "Mic ",
+      "format-muted": " | {format_source}",
+      "format-icons": {
+          "headphone": "",
+          "hands-free": "וֹ",
+          "headset": "",
+          "phone": "",
+          "portable": "",
+          "car": "",
+          "default": ["", ""]
+      },
+      "scroll-step": 1,
+      "on-click": "pavucontrol"
+    },
+    "custom/media": {
+      "format": "{icon} {}",
+      "return-type": "json",
+      "max-length": 50,
+      "format-icons": {
+          "spotify": "",
+          "default": "🎜"
+      },
+      "on-click": "playerctl play-pause",
+      "on-scroll-up": "playerctl next",
+      "on-scroll-down": "playerctl previous",
+      "escape": true,
+      "interval": 1,
+      "exec": "${waybarPackage}/bin/waybar-mediaplayer.py 2> /dev/null"
+    },
+    "battery": {
+      "bat": "BAT0",
+      "adapter": "AC",
+      "states": {
+        "good": 95,
+        "warning": 30,
+        "critical": 15
+      },
+      "format": "{capacity}% {icon}",
+      "format-icons": {
+        "default": [ "", "", "", "", "", "", "", "", "", "" ],
+        "charging": [ "", "", "", "", "", ""],
+        "plugged": [ "ﮣ" ]
+      }
+    },
+    "backlight": {
+      "format": "{percent}% {icon}",
+      "states": [ 0, 50 ],
+      "format-icons": [ "", "" ],
+      "on-click-right": "exec brightnessctl set +2%",
+      "on-click-left": "exec brightnessctl set 2%-"
+    }
+}

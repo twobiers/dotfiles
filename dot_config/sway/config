@@ -18,12 +18,29 @@ set $term kitty
 # Your preferred application launcher
 # Note: pass the final command to swaymsg so that the resulting window can be opened
 # on the original workspace that the command was run on.
-set $menu dmenu_path | dmenu | xargs swaymsg exec --
+# set $menu dmenu_path | dmenu | xargs swaymsg exec --
+set $menu wofi --show drun --insensitive --gtk-dark --allow-images --no-actions
+set $background ~/Pictures/wallpapers/Endy_planet.png
+set $lock swaylock --screenshots --clock --indicator-idle-visible \
+	    --indicator-radius 100 \
+	    --indicator-thickness 7 \
+	    --ring-color 455a64 \
+	    --key-hl-color be5046 \
+	    --text-color ffc107 \
+	    --line-color 00000000 \
+	    --inside-color 00000088 \
+	    --separator-color 00000000 \
+	    --fade-in 0.1 \
+	    --effect-scale 0.5 --effect-blur 7x3 --effect-scale 2 \
+	    --effect-vignette 0.5:0.5 \
+	    --effect-compose "0,1.5%;-1x10%;$HOME/.config/sway/lock.svg" \
+	    "$@"
 
 ### Output configuration
 #
 # Default wallpaper (more resolutions are available in /usr/share/backgrounds/sway/)
-output * bg /usr/share/backgrounds/sway/Sway_Wallpaper_Blue_1920x1080.png fill
+# output * bg /usr/share/backgrounds/sway/Sway_Wallpaper_Blue_1920x1080.png fill
+output * bg $background fill
 output DP-2 resolution 3840x2160 position 0,0 scale 2
 output DP-3 resolution 1920x1080 position 1920,200
 #
@@ -62,6 +79,7 @@ output DP-3 resolution 1920x1080 position 1920,200
 
 input "type:keyboard" {
     xkb_layout "de"
+    xkb_variant nodeadkeys
     xkb_numlock "enabled"
 }
 
@@ -212,18 +230,23 @@ bindsym $mod+r mode "resize"
 # Status Bar:
 #
 # Read `man 5 sway-bar` for more information about this section.
-bar {
-    position top
+# bar {
+#     position top
 
-    # When the status_command prints a new line to stdout, swaybar updates.
-    # The default just shows the current date and time.
-    status_command while date +'%Y-%m-%d %I:%M:%S %p'; do sleep 1; done
+#     # When the status_command prints a new line to stdout, swaybar updates.
+#     # The default just shows the current date and time.
+#     status_command while date +'%Y-%m-%d %I:%M:%S %p'; do sleep 1; done
 
-    colors {
-        statusline #ffffff
-        background #323232
-        inactive_workspace #32323200 #32323200 #5c5c5c
-    }
-}
+#     colors {
+#         statusline #ffffff
+#         background #323232
+#         inactive_workspace #32323200 #32323200 #5c5c5c
+#     }
+# }
+
+exec_always ~/.config/waybar/waybar.sh
+
+# Lock
+# bindsym $mod+l exec $lock
 
 include /etc/sway/config.d/*
