@@ -9,4 +9,4 @@ ExecStop=/usr/bin/easyeffects -q
 Restart=on-failure
 
 [Install]
-WantedBy=graphical-session.target
+WantedBy=gnome-session.target

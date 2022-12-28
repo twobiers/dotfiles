@@ -11,4 +11,4 @@ RemainAfterExit=false
 KillMode=process
 
 [Install]
-WantedBy=sleep.target
+WantedBy=gnome-session-x11.target
