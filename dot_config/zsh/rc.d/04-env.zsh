@@ -15,6 +15,7 @@ path=(
 export DOCKER_BUILDKIT=1
 export COMPOSE_DOCKER_CLI_BUILD=1
 
-if [[ -x bat ]]; then
+if is_in_path "bat"; then
   export PAGER=bat
+  export MANPAGER="sh -c 'sed -e s/.\\\\x08//g | bat -l man -p'"
 fi
