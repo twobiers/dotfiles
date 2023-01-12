@@ -6,7 +6,7 @@ rule = {
 	},
 	apply_properties = {
 		["audio.format"] = "S32_LE",
-		["audio.rate"] = 41000
+		["audio.rate"] = 48000
 	},
 }
 
