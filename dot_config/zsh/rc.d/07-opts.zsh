@@ -21,3 +21,6 @@ setopt hash_executables_only
 setopt nolisttypes
 setopt listpacked
 setopt automenu
+
+unsetopt correct_all
+unsetopt correct
