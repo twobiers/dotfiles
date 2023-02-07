@@ -12,22 +12,22 @@
 
 ["{{ $fontDir }}/Jetbrains Mono NF Regular.ttf"]
     type = "file"
-    url = "https://github.com/ryanoasis/nerd-fonts/blob/master/patched-fonts/JetBrainsMono/Ligatures/Regular/complete/JetBrains%20Mono%20Regular%20Nerd%20Font%20Complete.ttf?raw=true"
+    url = "https://github.com/ryanoasis/nerd-fonts/blob/master/patched-fonts/JetBrainsMono/Ligatures/Regular/complete/JetBrains%20Mono%20Nerd%20Font%20Complete%20Regular.ttf?raw=true"
     refreshPeriod = "168h"
 
 ["{{ $fontDir }}/Jetbrains Mono NF Bold.ttf"]
     type = "file"
-    url = "https://github.com/ryanoasis/nerd-fonts/blob/master/patched-fonts/JetBrainsMono/Ligatures/Bold/complete/JetBrains%20Mono%20Bold%20Nerd%20Font%20Complete.ttf?raw=true"
+    url = "https://github.com/ryanoasis/nerd-fonts/blob/master/patched-fonts/JetBrainsMono/Ligatures/Bold/complete/JetBrains%20Mono%20Nerd%20Font%20Complete%20Bold.ttf?raw=true"
     refreshPeriod = "168h"
 
 ["{{ $fontDir }}/Jetbrains Mono NF Italic.ttf"]
     type = "file"
-    url = "https://github.com/ryanoasis/nerd-fonts/blob/master/patched-fonts/JetBrainsMono/Ligatures/Italic/complete/JetBrains%20Mono%20Italic%20Nerd%20Font%20Complete.ttf?raw=true"
+    url = "https://github.com/ryanoasis/nerd-fonts/blob/master/patched-fonts/JetBrainsMono/Ligatures/Italic/complete/JetBrains%20Mono%20Nerd%20Font%20Complete%20Italic.ttf?raw=true"
     refreshPeriod = "168h"
 
 ["{{ $fontDir }}/Jetbrains Mono NF BoldItalic.ttf"]
     type = "file"
-    url = "https://github.com/ryanoasis/nerd-fonts/blob/master/patched-fonts/JetBrainsMono/Ligatures/BoldItalic/complete/JetBrains%20Mono%20Bold%20Italic%20Nerd%20Font%20Complete.ttf?raw=true"
+    url = "https://github.com/ryanoasis/nerd-fonts/blob/master/patched-fonts/JetBrainsMono/Ligatures/BoldItalic/complete/JetBrains%20Mono%20Nerd%20Font%20Complete%20Bold%20Italic.ttf?raw=true"
     refreshPeriod = "168h"
 
 {{- else if eq .chezmoi.os "windows" }}
