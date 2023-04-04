@@ -28,7 +28,7 @@
     },
     "clock": {
       "tooltip-format": "{:%Y-%m-%d | %H:%M}",
-      "format": "{:%Y-%m-%d}"
+      "format": "{:%H:%M}"
     },
     "cpu": {
       "format": "{usage}% "
@@ -45,7 +45,7 @@
       "format-ethernet": "{ifname}: {ipaddr}/{cidr} ",
       "format-disconnected": "Disconnected ⚠",
       "interval": 7,
-      "on-click": "${pkgs.networkmanagerapplet}/bin/nm-connection-editor"
+      "on-click": "nm-connection-editor"
     },
     "pulseaudio": {
       "format": "{volume}% {icon}",
@@ -78,7 +78,7 @@
       "on-scroll-down": "playerctl previous",
       "escape": true,
       "interval": 1,
-      "exec": "${waybarPackage}/bin/waybar-mediaplayer.py 2> /dev/null"
+      "exec": "${XDG_CONFIG_HOME}/waybar/waybar-mediaplayer.py 2> /dev/null"
     },
     "battery": {
       "bat": "BAT0",
