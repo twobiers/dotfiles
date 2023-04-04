@@ -12,10 +12,16 @@ path=(
   $path
 )
 
-export DOCKER_BUILDKIT=1
-export COMPOSE_DOCKER_CLI_BUILD=1
+if is_in_path "docker"; then
+  export DOCKER_BUILDKIT=1
+  export COMPOSE_DOCKER_CLI_BUILD=1
+fi
+
+if is_in_path "code"; then
+  export EDITOR="code --wait"
+fi
 
 if is_in_path "bat"; then
-  export PAGER=bat
+  export PAGER="bat"
   export MANPAGER="sh -c 'sed -e s/.\\\\x08//g | bat -l man -p'"
 fi
