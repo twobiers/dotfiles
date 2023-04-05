@@ -1,0 +1,36 @@
+[theme]
+theme = "modern"
+[icons]
+icons = "awesome5"
+
+
+[[block]]
+block = "music"
+
+[[block]]
+block = "cpu"
+
+[[block]]
+block = "memory"
+display_type = "memory"
+format_mem = "{mem_used_percents}"
+format_swap = "{swap_used_percents}"
+
+[[block]]
+block = "disk_space"
+
+[[block]]
+block = "net"
+
+[[block]]
+block = "sound"
+[[block.click]]
+button = "left"
+cmd = "pavucontrol"
+
+[[block]]
+block = "notify"
+
+[[block]]
+block = "time"
+format = " $icon $timestamp.datetime(f:'%a %Y-%m-%d %R', l:de_DE) "
