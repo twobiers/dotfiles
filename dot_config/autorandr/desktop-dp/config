@@ -12,7 +12,6 @@ output DP-5
 off
 output DP-4
 crtc 0
-gamma 2.273:1.0:0.5
 mode 3840x2160
 pos 0x0
 primary
@@ -21,7 +20,6 @@ x-prop-non_desktop 0
 output DP-3
 crtc 1
 filter bilinear
-gamma 2.273:1.0:0.5
 mode 1920x1080
 pos 3840x200
 rate 60.00
