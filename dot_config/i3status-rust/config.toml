@@ -3,7 +3,6 @@ theme = "modern"
 [icons]
 icons = "awesome5"
 
-
 [[block]]
 block = "music"
 

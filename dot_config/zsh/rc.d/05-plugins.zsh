@@ -1,7 +1,7 @@
 #!/usr/bin/env zsh
 
 znap source ohmyzsh/ohmyzsh \
-  lib/{clipboard,compfix,completion,correction,directories,git,grep,history,spectrum,termsupport} \
+  lib/{clipboard,compfix,completion,correction,directories,functions,git,grep,history,spectrum,termsupport} \
   plugins/{aws,fzf,git,gpg-agent}
 
 znap source zsh-users/zsh-completions
