@@ -199,8 +199,8 @@ bindkey                   $KEY_CTRL_L                       widget::scroll-and-c
 
 for keyname        kcap   seq                   mode        widget (
 
-    left           kcub1  $KEY_LEFT             unselect    backward-char
-    right          kcuf1  $KEY_RIGHT            unselect    forward-char
+    # left           kcub1  $KEY_LEFT             unselect    backward-char1
+    # right          kcuf1  $KEY_RIGHT            unselect    forward-char
 
     shift-up       kri    $KEY_SHIFT_UP         select      up-line-or-history
     shift-down     kind   $KEY_SHIFT_DOWN       select      down-line-or-history
