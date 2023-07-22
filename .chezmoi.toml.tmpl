@@ -20,6 +20,9 @@
   threads = {{ $cpuThreads }}
 [data.memory]
   size = {{ $memoryInGb }}
+[data.user]
+  linux = "tobi"
+  windows = "tobia"
 
 [age]
   identity = "{{ .chezmoi.homeDir }}/.config/age/key-chezmoi.txt"

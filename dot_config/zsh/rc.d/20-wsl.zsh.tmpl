@@ -9,10 +9,17 @@
 # commands like code or docker that provide native interopt.
 
 ZSH_HIGHLIGHT_DIRS_BLACKLIST+=(/mnt/c)
+# We excluded the windows path. Make sure that we can still use some interop programs
+path+=(
+  /mnt/c/Users/{{ .user.windows }}/AppData/Local/Programs/Microsoft VS Code/bin
+  /mnt/c/Program Files/Docker/Docker/resources/bin
+)
 
 keep_current_path() {
   printf "\e]9;9;%s\e\\" "$(wslpath -w "$PWD")"
 }
 precmd_functions+=(keep_current_path)
+
+
 {{ end }}
 {{ end }}

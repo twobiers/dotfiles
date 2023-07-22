@@ -1,10 +1,5 @@
 [wsl2]
-{{- if eq .chezmoi.hostname "DESKTOP-3FIUVON" }}
-memory=16GB
-processors=4
-{{- else }}
 memory={{- div .memory.size 4 -}}GB
 processors={{- div .cpu.cores 2 }}
-{{- end }}
 swap=0
 guiApplications=false
