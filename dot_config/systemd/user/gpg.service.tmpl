@@ -6,7 +6,8 @@ Description=GPG Relay
 
 [Service]
 ExecStartPre=/bin/rm -f /home/{{ .user.linux }}/.gnupg/S.gpg-agent
-ExecStart=/usr/bin/socat "UNIX-LISTEN:/home/{{ .user.linux }}/.ssh/agent.sock,fork,unlink-close,unlink-early" EXEC:'/mnt/c/tools/npiperelay/npiperelay.exe -ei -ep -s -a "C:/Users/{{ .user.windows }}/AppData/Local/gnupg/S.gpg-agent"',nofork
+ExecStart=/usr/bin/socat "UNIX-LISTEN:/home/{{ .user.linux }}/.gnupg/S.gpg-agent,fork,unlink-close,unlink-early" EXEC:'/mnt/c/tools/npiperelay/npiperelay.exe -ei -ep -s -a "C:/Users/{{ .user.windows }}/AppData/Local/gnupg/S.gpg-agent"',nofork
+ExecStartPost=/bin/bash -c 'mkdir -p /run/user/1000/gnupg && /usr/bin/ln -s /home/{{ .user.linux }}/.gnupg/S.gpg-agent /run/user/1000/gnupg/S.gpg-agent'
 
 [Install]
 WantedBy=default.target
