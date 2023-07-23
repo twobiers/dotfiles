@@ -20,7 +20,15 @@
     excludeFile = {{ .chezmoi.homeDir }}/.gitignore
 {{ end }}
 	editor = code --wait
+{{ if eq .chezmoi.os "linux" }}
+{{ if (.chezmoi.kernel.osrelease | lower | contains "microsoft") }}
+	fsmonitor = false
+{{ else }}
 	fsmonitor = true
+{{ end }}
+{{ else }}
+	fsmonitor = false
+{{ end }}
 [user]
 	email = 22715034+twobiers@users.noreply.github.com
 	name = twobiers
