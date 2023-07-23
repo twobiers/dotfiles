@@ -1,0 +1,15 @@
+{{ if eq .chezmoi.os "linux" }}
+{{ if (.chezmoi.kernel.osrelease | lower | contains "microsoft") }}
+
+[Unit]
+Description=SSH Relay
+
+[Service]
+ExecStartPre=/bin/rm -f /home/{{ .user.linux }}/.ssh/agent.sock
+ExecStart=/usr/bin/socat "UNIX-LISTEN:/home/{{ .user.linux }}/.ssh/agent.sock,fork,unlink-close,unlink-early" EXEC:"/mnt/c/tools/npiperelay/npiperelay.exe //./pipe/winssh-pageant",nofork
+
+[Install]
+WantedBy=default.target
+
+{{ end }}
+{{ end }}
