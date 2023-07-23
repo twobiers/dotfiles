@@ -22,6 +22,13 @@ keep_current_path() {
 precmd_functions+=(keep_current_path)
 
 # Works a bit
+# To make it work on systemd-based WSL2:
+# sudo systemctl disable --global gpg-agent.socket
+# sudo systemctl disable --global gpg-agent-extra.socket
+# sudo systemctl disable --global gpg-agent-ssh.socket
+# sudo systemctl disable --global gpg-agent-browser.socket
+# sudo systemctl disable --global dirmngr.socket
+
 SOCAT_SSH_PID_FILE=$HOME/.ssh/socat-ssh.pid
 
 if [[ -f $SOCAT_SSH_PID_FILE ]] && kill -0 $(cat $SOCAT_SSH_PID_FILE); then
