@@ -1,6 +1,6 @@
 [gpg]
 {{ if eq .chezmoi.os "windows" }}
-	program = C:\\Program Files (x86)\\GnuPG\\bin\\gpg.exe
+    program = C:\\Program Files (x86)\\GnuPG\\bin\\gpg.exe
 # Workaround for WSL because of: https://github.com/microsoft/WSL/issues/9817#issuecomment-1563056025
 {{ else if eq .chezmoi.os "linux" }}
 {{ if (.chezmoi.kernel.osrelease | lower | contains "microsoft") }}
@@ -10,45 +10,45 @@
     format = "ssh"
 {{ end }}
 [commit]
-	gpgsign = true
+    gpgsign = true
 [core]
-	longpaths = true
+    longpaths = true
 {{ if eq .chezmoi.os "windows" }}
-	autocrlf = true
-	# Hardcoded. Because that doesn't work although it works in execute-template (dashes between braces intendend to maintain the comment)
-	# excludeFile = {-{ .chezmoi.homeDir | replace "\" "\\" }-}\\.gitignore
-	excludeFile = C:\\Users\\tobi\\.gitignore
+    autocrlf = true
+    # Hardcoded. Because that doesn't work although it works in execute-template (dashes between braces intendend to maintain the comment)
+    # excludeFile = {-{ .chezmoi.homeDir | replace "\" "\\" }-}\\.gitignore
+    excludeFile = C:\\Users\\tobi\\.gitignore
 {{ else }}
     excludeFile = {{ .chezmoi.homeDir }}/.gitignore
 {{ end }}
-	editor = code --wait
+    editor = code --wait
 {{ if eq .chezmoi.os "linux" }}
 {{ if (.chezmoi.kernel.osrelease | lower | contains "microsoft") }}
-	fsmonitor = false
+    fsmonitor = false
 {{ else }}
-	fsmonitor = true
+    fsmonitor = true
 {{ end }}
 {{ else }}
-	fsmonitor = true
+    fsmonitor = true
 {{ end }}
 [user]
 	email = 22715034+twobiers@users.noreply.github.com
 	name = twobiers
 {{ if eq .chezmoi.os "darwin" }}
-    signingkey = "~/.ssh/id_ed25519.pub" 
+    signingkey = "~/.ssh/id_ed25519.pub"
 {{ else }}
 	signingkey = A67F16C775263A042C3973600F1206AF317A578E
 {{ end }}
 
 # Conditional Author includes
 [includeIf "gitdir/i:innovation-hub/**"]
-	path = ~/.config/git/author-ihbr.inc
+    path = ~/.config/git/author-ihbr.inc
 [includeIf "gitdir/i:ihbr/**"]
-	path = ~/.config/git/author-ihbr.inc
+    path = ~/.config/git/author-ihbr.inc
 [includeIf "gitdir/i:the-microservice-dungeon/**"]
-	path = ~/.config/git/author-gitlab-noreply.inc
+    path = ~/.config/git/author-gitlab-noreply.inc
 [includeIf "gitdir/i:microservice-dungeon/**"]
-	path = ~/.config/git/author-gitlab-noreply.inc
+    path = ~/.config/git/author-gitlab-noreply.inc
 
 [alias]
     yolo = "!git add -A && git commit -m \"$(curl --silent --fail http://whatthecommit.com/index.txt)\""
@@ -56,20 +56,20 @@
     ca = commit -a --verbose
     cm = commit -m
     cam = commit -a -m
-	cane = commit --amend --no-edit
+    cane = commit --amend --no-edit
 
-	d = diff
-	dc = diff --cached
-	ds = diff --staged
+    d = diff
+    dc = diff --cached
+    ds = diff --staged
 
-	s = status -s
+    s = status -s
 
-	l = log --pretty=format:"%C(yellow)%h\\ %ad%Cred%d\\ %Creset%s%Cblue\\ [%cn]" --decorate --date=short
+    l = log --pretty=format:"%C(yellow)%h\\ %ad%Cred%d\\ %Creset%s%Cblue\\ [%cn]" --decorate --date=short
     # ll = "log --pretty=format:\"%C(yellow)%h%Creset %C(blue)%ad%Creset %s\" --date=format:'%Y-%m-%d %H:%M:%S'"
-	ll = "log --graph --topo-order --decorate --all --boundary --date=short --abbrev-commit --pretty=format:'%Cgreen%ad %Cred%h%Creset -%C(yellow)%d%Creset %s %Cblue[%cn]%Creset %Cblue%G?%Creset'"
-	lll = "log --graph --topo-order --boundary --decorate --all --date=iso8601-strict --no-abbrev-commit --abbrev=40 --pretty=format:'␟%ad␟%h␟%s␟%cn <%ce>␟%G?' | git name-rev --stdin --always --name-only | awk 'BEGIN { FS="␟"; OFS="␟"; } { $4 = substr($4, 1, 50); print $0; }' | column -s'␟' -t"
-	change-commits = "!f() { VAR=$1; OLD=$2; NEW=$3; shift 3; git filter-branch --env-filter \"if [[ \\\"$`echo $VAR`\\\" = '$OLD' ]]; then export $VAR='$NEW'; fi\" $@; }; f"
+    ll = "log --graph --topo-order --decorate --all --boundary --date=short --abbrev-commit --pretty=format:'%Cgreen%ad %Cred%h%Creset -%C(yellow)%d%Creset %s %Cblue[%cn]%Creset %Cblue%G?%Creset'"
+    lll = "log --graph --topo-order --boundary --decorate --all --date=iso8601-strict --no-abbrev-commit --abbrev=40 --pretty=format:'␟%ad␟%h␟%s␟%cn <%ce>␟%G?' | git name-rev --stdin --always --name-only | awk 'BEGIN { FS="␟"; OFS="␟"; } { $4 = substr($4, 1, 50); print $0; }' | column -s'␟' -t"
+    change-commits = "!f() { VAR=$1; OLD=$2; NEW=$3; shift 3; git filter-branch --env-filter \"if [[ \\\"$`echo $VAR`\\\" = '$OLD' ]]; then export $VAR='$NEW'; fi\" $@; }; f"
 [pull]
-	rebase = true
+    rebase = true
 [init]
-	defaultBranch = main
+    defaultBranch = main
