@@ -6,3 +6,7 @@ export NVM_SYMLINK_CURRENT="true"
 if test -f /usr/share/nvm/init-nvm.sh; then
   source /usr/share/nvm/init-nvm.sh
 fi
+
+if test -f $HOME/.bun/bin/bun; then
+  export PATH="$PATH:$HOME/.bun/bin/"
+fi
