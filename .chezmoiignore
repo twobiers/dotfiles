@@ -28,14 +28,16 @@ AppData/**
     .ripgreprc
   {{- end }}
 
+{{ if hasKey .chezmoi.kernel "osrelease" }} 
 {{ if not (.chezmoi.kernel.osrelease | lower | contains "microsoft") }}
 .config/systemd/user/gpg.service
 .config/systemd/user/ssh.service
 {{ end }}
+{{ end }}
 
 {{ end }}
 
-{{ if ne .chezmoi.os "linux" }}
+{{ if eq .chezmoi.os "windows" }}
 .bashrc
 .chezmoiscripts/linux/**
 .zshrc
