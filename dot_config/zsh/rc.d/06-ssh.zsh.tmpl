@@ -1,0 +1,5 @@
+#!/usr/bin/env zsh
+
+{{ if eq .chezmoi.os "darwin" }}
+znap eval ssh-keychain "ssh-add --apple-load-keychain &> /dev/null" 
+{{ end }}
