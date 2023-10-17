@@ -16,8 +16,8 @@ if is_in_path "bat"; then
   alias cat="bat --style=plain --paging=never"
 fi
 
-if is_in_path "exa"; then
-  alias ls="exa"
-  alias l="exa -abghHlS --git --group-directories-first"
-  alias ll="exa -abghHlS --git --group-directories-first"
+if is_in_path "eza"; then
+  alias ls="eza"
+  alias l="eza -abghHlS --git --group-directories-first"
+  alias ll="eza -abghHlS --git --group-directories-first"
 fi

@@ -12,6 +12,11 @@ path=(
   $path
 )
 
+{{ if eq .chezmoi.os "darwin" }}
+path+=("$HOME/Library/Application Support/JetBrains/Toolbox/scripts")
+{{ end }}
+
+
 if is_in_path "docker"; then
   export DOCKER_BUILDKIT=1
   export COMPOSE_DOCKER_CLI_BUILD=1

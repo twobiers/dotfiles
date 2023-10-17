@@ -2,7 +2,7 @@
 
 znap source ohmyzsh/ohmyzsh \
   lib/{clipboard,compfix,completion,correction,directories,functions,git,grep,history,spectrum,termsupport} \
-  plugins/{aws,brew,fzf,git}
+  plugins/{aws,brew,sdk,fzf,git}
 
 znap source zsh-users/zsh-completions
 

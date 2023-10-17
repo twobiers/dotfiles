@@ -2,6 +2,9 @@ README.md
 .editorconfig
 .config/age/**
 
+{{ if ne .chezmoi.os "windows" }}
+.config/zsh/rc.d/22-vgbs-azure.zsh
+{{ end }}
 
 {{ if ne .chezmoi.os "windows" }}
 .wslconfig
