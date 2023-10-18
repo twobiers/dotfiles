@@ -41,8 +41,6 @@ export KEY_SHIFT_RIGHT=${terminfo[kRIT]:-$'^[[1;2C'}
 export KEY_SHIFT_LEFT=${terminfo[kLFT]:-$'^[[1;2D'}
 export KEY_ALT_LEFT=$'^[[1;3D'
 export KEY_ALT_RIGHT=$'^[[1;3C'
-export KEY_SHIFT_ALT_LEFT=$'^[[1;4D'
-export KEY_SHIFT_ALT_RIGHT=$'^[[1;4C'
 export KEY_CMD_LEFT=$'^[[1;9D'
 export KEY_CMD_RIGHT=$'^[[1;9C'
 export KEY_SHIFT_CMD_LEFT=$'^[[1;10D'
@@ -212,26 +210,32 @@ for keyname        kcap   seq                   mode        widget (
     # shift-alt-right   x   $KEY_SHIFT_ALT_RIGHT  select      forward-word
     # shift-alt-left    x   $KEY_SHIFT_ALT_LEFT   select      backward-word
 
-    # cmd-right         x   $KEY_CMD_RIGHT        unselect    end-of-line
-    # cmd-left          x   $KEY_CMD_LEFT         unselect    beginning-of-line
-    # shift-cmd-right   x   $KEY_SHIFT_CMD_RIGHT  select      end-of-line
-    # shift-cmd-left    x   $KEY_SHIFT_CMD_LEFT   select      beginning-of-line
-
     home              x   $KEY_HOME        unselect    beginning-of-line
     end               x   $KEY_END         unselect    end-of-line
     shift-home        x   $KEY_SHIFT_HOME  select      beginning-of-line
     shift-end         x   $KEY_SHIFT_END   select      end-of-line
 
     # ctrl-e            x   $KEY_CTRL_E           unselect    end-of-line
+{{ if eq .chezmoi.os "linux" }}
     ctrl-right        x   $KEY_CTRL_RIGHT       unselect    forward-word
     ctrl-left         x   $KEY_CTRL_LEFT        unselect    backward-word
-    shift-ctrl-e      x   $KEY_SHIFT_CTRL_E     select      end-of-line
-    shift-ctrl-a      x   $KEY_SHIFT_CTRL_A     select      beginning-of-line
     shift-ctrl-right  x   $KEY_SHIFT_CTRL_RIGHT select      forward-word
     shift-ctrl-left   x   $KEY_SHIFT_CTRL_LEFT  select      backward-word
+    shift-ctrl-e      x   $KEY_SHIFT_CTRL_E     select      end-of-line
+    shift-ctrl-a      x   $KEY_SHIFT_CTRL_A     select      beginning-of-line
+{{ end }}
 
+{{ if eq .chezmoi.os "darwin" }}
+    cmd-right        x   $KEY_CMD_RIGHT       unselect    forward-word
+    cmd-left         x   $KEY_CMD_LEFT        unselect    backward-word
+    shift-cmd-right  x   $KEY_SHIFT_CMD_RIGHT select      forward-word
+    shift-cmd-left   x   $KEY_SHIFT_CMD_LEFT  select      backward-word
+{{ end }}
+
+{{ if eq .chezmoi.os "linux" }}
     del               x   $KEY_DEL              delselect   widget::delete-selection
     backspace         x   $KEY_BACKSPACE        delselect   widget::delete-selection-back
+{{ end }}
 
     a                 x       'a'               insertchar  'a'
     b                 x       'b'               insertchar  'b'
