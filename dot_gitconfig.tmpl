@@ -17,9 +17,9 @@
     autocrlf = true
     # Hardcoded. Because that doesn't work although it works in execute-template (dashes between braces intendend to maintain the comment)
     # excludeFile = {-{ .chezmoi.homeDir | replace "\" "\\" }-}\\.gitignore
-    excludeFile = C:\\Users\\tobi\\.gitignore
+    excludesFile = C:\\Users\\tobi\\.gitignore
 {{ else }}
-    excludeFile = {{ .chezmoi.homeDir }}/.gitignore
+    excludesFile = {{ .chezmoi.homeDir }}/.gitignore
 {{ end }}
     editor = code --wait
 {{ if eq .chezmoi.os "linux" }}
