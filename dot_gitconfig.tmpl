@@ -8,6 +8,8 @@
 {{ end }}
 {{ else if eq .chezmoi.os "darwin" }}
     format = "ssh"
+[gpg "ssh"]
+	allowedSignersFile = {{ .chezmoi.homeDir }}/.ssh/allowed_signers
 {{ end }}
 [commit]
     gpgsign = true
