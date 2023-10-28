@@ -2,50 +2,23 @@ README.md
 .editorconfig
 .config/age/**
 
-{{ if ne .chezmoi.os "windows" }}
 .config/zsh/rc.d/22-vgbs-azure.zsh
-{{ end }}
 
-{{ if ne .chezmoi.os "windows" }}
-.wslconfig
-Documents/**
-AppData/**
-.chezmoiscripts/windows/**
+{{- if not (lookPath "kubectl") }}
+  .kube/**
+{{- end }}
 
-  {{- if not (lookPath "kubectl") }}
-    .kube/**
-  {{- end }}
+{{- if not (lookPath "zsh") }}
+  .zshrc
+  .zprofile
+  .oh-my-zsh/**
+{{- end }}
 
-  {{- if not (lookPath "zsh") }}
-    .zshrc
-    .zprofile
-    .oh-my-zsh/**
-  {{- end }}
+{{- if not (lookPath "fzf") }}
+  .fzf.bash
+  .fzf.zsh
+{{- end }}
 
-  {{- if not (lookPath "fzf") }}
-    .fzf.bash
-    .fzf.zsh
-  {{- end }}
-
-  {{- if not (lookPath "rg") }}
-    .ripgreprc
-  {{- end }}
-
-{{ if hasKey .chezmoi.kernel "osrelease" }} 
-{{ if not (.chezmoi.kernel.osrelease | lower | contains "microsoft") }}
-.config/systemd/user/gpg.service
-.config/systemd/user/ssh.service
-{{ end }}
-{{ end }}
-
-{{ end }}
-
-{{ if eq .chezmoi.os "windows" }}
-.bashrc
-.chezmoiscripts/linux/**
-.zshrc
-.zprofile
-.fzf.bash
-.fzf.zsh
-.nano
-{{ end }}
+{{- if not (lookPath "rg") }}
+  .ripgreprc
+{{- end }}
