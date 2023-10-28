@@ -5,9 +5,14 @@
     refreshPeriod = "168h"
 {{- end }}
 
-{{- $fontDir := ".local/share/fonts" }}
-{{- if eq .chezmoi.os "linux" }}
+{{- $fontDir := "" }}
+{{- if eq .chezmoi.os "darwin" }}
+{{-   $fontDir = "Library/Fonts" }}
+{{- else if eq .chezmoi.os "linux" }}
+{{-   $fontDir = ".local/share/fonts" }}
+{{- end }}
 
+{{- if ne "{{ $fontDir }}" "" }}
 ["{{ $fontDir }}/Jetbrains Mono NF Regular.ttf"]
     type = "file"
     url = "https://github.com/ryanoasis/nerd-fonts/blob/master/patched-fonts/JetBrainsMono/Ligatures/Regular/JetBrainsMonoNerdFont-Regular.ttf?raw=true"
