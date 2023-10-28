@@ -1,9 +1,15 @@
+# Chezmoi Development
 README.md
 .editorconfig
+
+# Don't leak any crypto
 .config/age/**
 
+# TODO: I don't know if that is necessary
 .config/zsh/rc.d/22-vgbs-azure.zsh
 
+
+# Exclude configs to prevent a blown up home directory
 {{- if not (lookPath "kubectl") }}
   .kube/**
 {{- end }}
