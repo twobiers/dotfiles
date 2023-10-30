@@ -23,7 +23,7 @@ znap eval trapd00r/LS_COLORS "$(whence -a dircolors gdircolors) -b LS_COLORS"
 znap source unixorn/fzf-zsh-plugin
 
 # Must be loaded after fzf-zsh-plugin
-znap source atuinsh/atuin
+# znap source atuinsh/atuin
 
 znap source Aloxaf/fzf-tab
 zstyle ':fzf-tab:*' fzf-pad 6
