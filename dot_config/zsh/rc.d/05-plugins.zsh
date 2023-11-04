@@ -1,7 +1,7 @@
 #!/usr/bin/env zsh
 
 znap source ohmyzsh/ohmyzsh \
-  lib/{clipboard,compfix,completion,correction,directories,functions,git,grep,history,spectrum,termsupport} \
+  lib/{clipboard,compfix,correction,directories,functions,git,grep,history,spectrum,termsupport} \
   plugins/{aws,azure,brew,sdk,git}
 
 znap source zsh-users/zsh-completions
@@ -27,3 +27,7 @@ znap source unixorn/fzf-zsh-plugin
 
 znap source Aloxaf/fzf-tab
 zstyle ':fzf-tab:*' fzf-pad 6
+
+# We could use carapace for completions which has some cool concepts, but it doesn't pair well
+# atm. Give it a shot later.
+# source <(carapace _carapace)
