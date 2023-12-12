@@ -28,6 +28,8 @@ znap source unixorn/fzf-zsh-plugin
 znap source Aloxaf/fzf-tab
 zstyle ':fzf-tab:*' fzf-pad 6
 
+znap source MichaelAquilina/zsh-you-should-use
+
 # We could use carapace for completions which has some cool concepts, but it doesn't pair well
 # atm. Give it a shot later.
 # source <(carapace _carapace)
