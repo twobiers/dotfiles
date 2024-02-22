@@ -33,6 +33,15 @@
 [includeIf "gitdir/i:microservice-dungeon/**"]
     path = ~/.config/git/author-gitlab-noreply.inc
 
+[url "git@github.com:"]
+	  insteadOf = "https://github.com/"
+[url "git@github.com:"]
+	  insteadOf = "gh:"
+[url "git@gitlab.com:"]
+	  insteadOf = "https://gitlab.com/"
+[url "git@gitlab.com:"]
+	  insteadOf = "gl:"
+
 [alias]
     yolo = "!git add -A && git commit -m \"$(curl --silent --fail http://whatthecommit.com/index.txt)\""
     c = commit --verbose
@@ -52,8 +61,14 @@
     ll = "log --graph --topo-order --decorate --all --boundary --date=short --abbrev-commit --pretty=format:'%Cgreen%ad %Cred%h%Creset -%C(yellow)%d%Creset %s %Cblue[%cn]%Creset %Cblue%G?%Creset'"
     lll = "log --graph --topo-order --boundary --decorate --all --date=iso8601-strict --no-abbrev-commit --abbrev=40 --pretty=format:'␟%ad␟%h␟%s␟%cn <%ce>␟%G?' | git name-rev --stdin --always --name-only | awk 'BEGIN { FS="␟"; OFS="␟"; } { $4 = substr($4, 1, 50); print $0; }' | column -s'␟' -t"
     change-commits = "!f() { VAR=$1; OLD=$2; NEW=$3; shift 3; git filter-branch --env-filter \"if [[ \\\"$`echo $VAR`\\\" = '$OLD' ]]; then export $VAR='$NEW'; fi\" $@; }; f"
+[log]
+    date = iso
 [pull]
     rebase = true
+[push]
+    autosetupremote = true
+[diff]
+    algorithm = histogram
 [init]
     defaultBranch = main
 [rerere]
