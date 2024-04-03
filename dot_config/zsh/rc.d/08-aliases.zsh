@@ -1,22 +1,22 @@
 #!/usr/bin/env bash
 
-if is_in_path "kubectl"; then
+if [[ `which kubectl &>/dev/null` != 0 ]]; then
   alias k="kubectl"
 fi
 
-if is_in_path "git"; then
+if [[ `which git &>/dev/null` != 0 ]]; then
   alias g="git"
 fi
 
-if is_in_path "docker"; then
+if [[ `which docker &>/dev/null` != 0 ]]; then
   alias d="docker"
 fi
 
-if is_in_path "bat"; then
+if [[ `which bat &>/dev/null` != 0 ]]; then
   alias cat="bat --style=plain --paging=never"
 fi
 
-if is_in_path "eza"; then
+if [[ `which eza &>/dev/null` != 0 ]]; then
   alias ls="eza"
   alias l="eza -abghHlS --git --group-directories-first"
   alias ll="eza -abghHlS --git --group-directories-first"

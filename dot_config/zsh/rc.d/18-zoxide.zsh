@@ -2,6 +2,6 @@
 
 # znap eval zoxide 'zoxide init zsh'
 
-if is_in_path "zoxide"; then
+if [[ `which zoxide &>/dev/null` != 0 ]]; then
   eval "$(zoxide init zsh)"
 fi
