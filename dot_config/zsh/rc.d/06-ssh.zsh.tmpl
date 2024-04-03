@@ -1,5 +1,11 @@
 #!/usr/bin/env zsh
 
 {{ if eq .chezmoi.os "darwin" }}
-ssh-add --apple-load-keychain &> /dev/null
+ssh-add --apple-load-keychain &>/dev/null
+{{ end }}
+
+{{ if eq .chezmoi.os "linux" }}
+export GPG_TTY="$(tty)"
+export SSH_AUTH_SOCK=$(gpgconf --list-dirs agent-ssh-socket)
+gpgconf --launch gpg-agent
 {{ end }}
