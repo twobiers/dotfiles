@@ -28,3 +28,7 @@ README.md
 {{- if not (lookPath "rg") }}
   .ripgreprc
 {{- end }}
+
+{{- if not (eq .chezmoi.os "darwin") }}
+  .colima/**
+{{- end }}
