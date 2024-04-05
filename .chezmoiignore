@@ -29,6 +29,11 @@ README.md
   .ripgreprc
 {{- end }}
 
+{{- if not (eq .chezmoi.os "linux") }}
+  .config/sway
+  .config/waybar
+{{- end }}
+
 {{- if not (eq .chezmoi.os "darwin") }}
   .colima/**
 {{- end }}
