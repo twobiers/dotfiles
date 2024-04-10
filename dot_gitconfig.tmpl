@@ -1,4 +1,4 @@
-{{ if eq .chezmoi.os "darwin" }}
+{{ if not (eq .chezmoi.hostname "tobi-endeavouros") }}
 [gpg]
   format = "ssh"
 [gpg "ssh"]
@@ -15,7 +15,7 @@
 [user]
 	email = 22715034+twobiers@users.noreply.github.com
 	name = twobiers
-{{ if eq .chezmoi.os "darwin" }}
+{{ if not (eq .chezmoi.hostname "tobi-endeavouros") }}
   signingkey = "~/.ssh/id_ed25519.pub"
 {{ else }}
 	signingkey = A67F16C775263A042C3973600F1206AF317A578E
