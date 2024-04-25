@@ -14,18 +14,39 @@ path=(
 
 {{ if eq .chezmoi.os "darwin" }}
 path+=("$HOME/Library/Application Support/JetBrains/Toolbox/scripts")
+
+# Replace BSD utils with GNU
+if [ -d "/opt/homebrew/opt/coreutils/libexec/gnubin" ]; then
+  export PATH="/opt/homebrew/opt/coreutils/libexec/gnubin:$PATH"
+  export MANPATH="/opt/homebrew/opt/coreutils/libexec/gnuman:$MANPATH"
+fi
+
+if [ -d "/opt/homebrew/opt/gnu-sed/libexec/gnubin" ]; then
+  export PATH="/opt/homebrew/opt/gnu-sed/libexec/gnubin:$PATH"
+  export MANPATH="/opt/homebrew/opt/gnu-sed/libexec/gnuman:$MANPATH"
+fi
+
+if [ -d "/opt/homebrew/opt/grep/libexec/gnubin" ]; then
+  export PATH="/opt/homebrew/opt/grep/libexec/gnubin:$PATH"
+  export MANPATH="/opt/homebrew/opt/grep/libexec/gnuman:$MANPATH"
+fi
+
 {{ end }}
 
-if [[ $(which docker &>/dev/null && echo $?) == 0 ]]; then
+
+local FOUND_DOCKER=$+commands[docker]
+if [[ $FOUND_DOCKER -eq 1 ]]; then
   export DOCKER_BUILDKIT=1
   export COMPOSE_DOCKER_CLI_BUILD=1
 fi
 
-if [[ $(which code &>/dev/null && echo $?) == 0 ]]; then
+local FOUND_CODE=$+commands[code]
+if [[ $FOUND_CODE -eq 1 ]]; then
   export EDITOR="code --wait"
 fi
 
-if [[ $(which bat &>/dev/null && echo $?) == 0 ]]; then
+local FOUND_BAT=$+commands[bat]
+if [[ $FOUND_BAT -eq 1 ]]; then
   export PAGER="bat"
   export MANPAGER="sh -c 'sed -e s/.\\\\x08//g | bat -l man -p'"
 fi
