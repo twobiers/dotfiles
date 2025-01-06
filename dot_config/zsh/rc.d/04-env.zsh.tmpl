@@ -34,19 +34,16 @@ fi
 {{ end }}
 
 
-local FOUND_DOCKER=$+commands[docker]
-if [[ $FOUND_DOCKER -eq 1 ]]; then
+if type "docker" &> /dev/null; then
   export DOCKER_BUILDKIT=1
   export COMPOSE_DOCKER_CLI_BUILD=1
 fi
 
-local FOUND_CODE=$+commands[code]
-if [[ $FOUND_CODE -eq 1 ]]; then
+if type "code" &> /dev/null; then
   export EDITOR="code --wait"
 fi
 
-local FOUND_BAT=$+commands[bat]
-if [[ $FOUND_BAT -eq 1 ]]; then
+if type "bat" &> /dev/null; then
   export PAGER="bat"
   export MANPAGER="sh -c 'sed -e s/.\\\\x08//g | bat -l man -p'"
 fi
