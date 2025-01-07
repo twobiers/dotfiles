@@ -1,1 +1,1 @@
-znap eval gh-copilot-cli 'github-copilot-cli alias -- "$0"'
+znap eval gh-copilot-cli 'gh copilot alias -- zsh'
