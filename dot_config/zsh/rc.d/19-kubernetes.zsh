@@ -8,3 +8,7 @@ fi
 if type "flux" &> /dev/null; then
   znap eval flux 'flux completion zsh'
 fi
+
+if type "chainsaw" &> /dev/null; then
+  znap eval flux 'chainsaw completion zsh'
+fi
