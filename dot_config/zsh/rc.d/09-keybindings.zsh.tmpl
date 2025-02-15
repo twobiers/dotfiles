@@ -90,7 +90,11 @@ zle -N widget::copy-selection
 function widget::copy-selection {
     if ((REGION_ACTIVE)); then
         zle copy-region-as-kill
+        {{- if eq .chezmoi.os "darwin" }}
+        printf "%s" $CUTBUFFER | pbcopy
+        {{- else }}
         printf "%s" $CUTBUFFER | xsel --clipboard --input
+        {{- end }}
     else
         # Nothing is selected, so default to the interrupt command
         zle send-break
@@ -102,7 +106,11 @@ zle -N widget::cut-selection
 function widget::cut-selection() {
     if ((REGION_ACTIVE)); then
         zle kill-region
+        {{- if eq .chezmoi.os "darwin" }}
+        printf "%s" $CUTBUFFER | pbcopy
+        {{- else }}
         printf "%s" $CUTBUFFER | xsel --clipboard --input
+        {{- end }}
     fi
 }
 
@@ -110,8 +118,13 @@ function widget::cut-selection() {
 zle -N widget::paste
 function widget::paste() {
     ((REGION_ACTIVE)) && zle kill-region
+    {{- if eq .chezmoi.os "darwin" }}
+    RBUFFER="$(pbpaste) ${RBUFFER}"
+    CURSOR=$(( CURSOR + $(echo -n "$(pbpaste)" | wc -m | bc) ))
+    {{- else }}
     RBUFFER="$(xsel --clipboard --output) ${RBUFFER}"
     CURSOR=$(( CURSOR + $(echo -n "$(xsel --clipboard --output)" | wc -m | bc) ))
+    {{- end }}
 }
 
 # select entire prompt
