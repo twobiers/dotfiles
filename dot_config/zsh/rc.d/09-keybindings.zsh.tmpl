@@ -131,7 +131,11 @@ function widget::paste() {
 zle -N widget::select-all
 function widget::select-all() {
     local buflen=$(echo -n "$BUFFER" | wc -m | bc)
+    {{- if eq .chezmoi.os "darwin" }}
+    CURSOR=9999999
+    {{- else }}
     CURSOR=$buflen   # if this is messing up try: CURSOR=9999999
+    {{- end }}
     zle set-mark-command
     while [[ $CURSOR > 0 ]]; do
         zle beginning-of-line
