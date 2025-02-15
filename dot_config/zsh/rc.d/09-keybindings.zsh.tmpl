@@ -130,16 +130,10 @@ function widget::paste() {
 # select entire prompt
 zle -N widget::select-all
 function widget::select-all() {
-    local buflen=$(echo -n "$BUFFER" | wc -m | bc)
-    {{- if eq .chezmoi.os "darwin" }}
-    CURSOR=9999999
-    {{- else }}
-    CURSOR=$buflen   # if this is messing up try: CURSOR=9999999
-    {{- end }}
-    zle set-mark-command
-    while [[ $CURSOR > 0 ]]; do
-        zle beginning-of-line
-    done
+    MARK=0
+    CURSOR=$#BUFFER
+    REGION_ACTIVE=1
+    zle exchange-point-and-mark
 }
 
 # scrolls the screen up, in effect clearing it
