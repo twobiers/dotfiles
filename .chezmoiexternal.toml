@@ -3,10 +3,6 @@
     type = "git-repo"
     url = "https://github.com/marlonrichert/zsh-snap.git"
     refreshPeriod = "168h"
-[".local/share/enhancd"]
-    type = "git-repo"
-    url = "https://github.com/b4b4r07/enhancd.git"
-    refreshPeriod = "168h"
 {{- end }}
 
 {{- $fontDir := "" }}

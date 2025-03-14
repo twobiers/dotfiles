@@ -5,6 +5,8 @@
 	allowedSignersFile = {{ .chezmoi.homeDir }}/.ssh/allowed_signers
 {{ end }}
 
+[column]
+    ui = auto
 [commit]
     gpgsign = true
 [core]
@@ -81,5 +83,16 @@
     enabled = true
 [branch]
 	  sort = -committerdate
+[tag]
+    sort = version:refname
 [rebase]
     autostash = true
+[diff]
+    algorithm = histogram
+    colorMoved = plain
+    mnemonicPrefix = true
+    renames = true
+[fetch]
+    prune = true
+    pruneTags = true
+    all = true
