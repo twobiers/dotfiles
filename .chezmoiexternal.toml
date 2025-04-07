@@ -5,6 +5,13 @@
     refreshPeriod = "168h"
 {{- end }}
 
+{{- if or (eq .chezmoi.os "linux") (eq .chezmoi.os "darwin") }}
+[".local/share/fubectl/fubectl.source"]
+    type = "file"
+    url = "https://rawgit.com/kubermatic/fubectl/main/fubectl.source"
+    refreshPeriod = "168h"
+{{- end }}
+
 {{- $fontDir := "" }}
 {{- if eq .chezmoi.os "darwin" }}
 {{-   $fontDir = "Library/Fonts" }}

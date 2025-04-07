@@ -10,5 +10,7 @@ if type "flux" &> /dev/null; then
 fi
 
 if type "chainsaw" &> /dev/null; then
-  znap eval flux 'chainsaw completion zsh'
+  znap eval chainsaw 'chainsaw completion zsh'
 fi
+
+[ -f "$HOME/.local/share/fubectl/fubectl.source" ] && source "$HOME/.local/share/fubectl/fubectl.source"
