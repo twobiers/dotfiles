@@ -16,6 +16,11 @@ if [[ $(which bat &>/dev/null && echo $?) == 0 ]]; then
   alias cat="bat --style=plain --paging=never"
 fi
 
+if [[ $(which batcat &>/dev/null && echo $?) == 0 ]]; then
+  alias bat="batcat"
+  alias cat="batcat --style=plain --paging=never"
+fi
+
 if [[ $(which eza &>/dev/null && echo $?) == 0 ]]; then
   alias ls="eza"
   alias l="eza -abghHlS --git --group-directories-first"
