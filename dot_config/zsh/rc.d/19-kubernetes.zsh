@@ -13,4 +13,8 @@ if type "chainsaw" &> /dev/null; then
   znap eval chainsaw 'chainsaw completion zsh'
 fi
 
+if type "crossplane" &> /dev/null; then
+  znap eval crossplane 'crossplane completions'
+fi
+
 [ -f "$HOME/.local/share/fubectl/fubectl.source" ] && source "$HOME/.local/share/fubectl/fubectl.source"
