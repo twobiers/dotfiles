@@ -92,8 +92,8 @@ function widget::copy-selection {
         zle copy-region-as-kill
         {{- if eq .chezmoi.os "darwin" }}
         printf "%s" $CUTBUFFER | pbcopy
-        {{- else }}
-        printf "%s" $CUTBUFFER | xsel --clipboard --input
+        {{- else if eq .chezmoi.os "linux" }}
+        printf "%s" $CUTBUFFER | wl-copy
         {{- end }}
     else
         # Nothing is selected, so default to the interrupt command
@@ -109,7 +109,7 @@ function widget::cut-selection() {
         {{- if eq .chezmoi.os "darwin" }}
         printf "%s" $CUTBUFFER | pbcopy
         {{- else }}
-        printf "%s" $CUTBUFFER | xsel --clipboard --input
+        printf "%s" $CUTBUFFER | wl-copy
         {{- end }}
     fi
 }
@@ -122,8 +122,8 @@ function widget::paste() {
     RBUFFER="$(pbpaste) ${RBUFFER}"
     CURSOR=$(( CURSOR + $(echo -n "$(pbpaste)" | wc -m | bc) ))
     {{- else }}
-    RBUFFER="$(xsel --clipboard --output) ${RBUFFER}"
-    CURSOR=$(( CURSOR + $(echo -n "$(xsel --clipboard --output)" | wc -m | bc) ))
+    RBUFFER="$(wl-paste --no-newline) ${RBUFFER}"
+    CURSOR=$(( CURSOR + $(echo -n "$(wl-paste --no-newline)" | wc -m | bc) ))
     {{- end }}
 }
 
