@@ -5,3 +5,5 @@ node_modules/
 .env.production.local
 .env.local
 .envrc
+
+.DS_Store
