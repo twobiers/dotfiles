@@ -31,6 +31,10 @@ if [ -d "/opt/homebrew/opt/grep/libexec/gnubin" ]; then
   export MANPATH="/opt/homebrew/opt/grep/libexec/gnuman:$MANPATH"
 fi
 
+if test -f "/Applications/Visual Studio Code.app/Contents/Resources/app/bin/code"; then
+  export PATH="$PATH:/Applications/Visual Studio Code.app/Contents/Resources/app/bin"
+fi
+
 {{ end }}
 
 
