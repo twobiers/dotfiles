@@ -1,0 +1,62 @@
+id = "spotify"
+url = "https://support.spotify.com/us/article/keyboard-shortcuts/"
+
+[match]
+regex_wmclass = "Spotify"
+regex_title = ".*"
+
+[section]
+[section."Basic"]
+"Ctrl + N" = "Create new playlist"
+"Ctrl + Shift + N" = "Create new folder"
+"Alt + J" = "Open context menu"
+"Ctrl + K" = "Open Quick Search"
+"Ctrl + A" = "Select all"
+"Ctrl + F" = "Filter"
+"Ctrl + Alt + F" = "Search in Your Library"
+"Alt + Shift + F6" = "Log out"
+
+[section."Playback"]
+"Space" = "Play / Pause"
+"Alt + Shift + B" = "Like"
+"Ctrl + S" = "Shuffle"
+"Ctrl + R" = "Repeat"
+"Ctrl + Left" = "Skip to previous"
+"Ctrl + Right" = "Skip to next"
+"Shift + Left" = "Seek backward"
+"Shift + Right" = "Seek forward"
+"Ctrl + Up" = "Raise volume"
+"Ctrl + Down" = "Lower volume"
+"Shift + ," = "Decrease playback speed"
+"Shift + ." = "Decrease playback speed"
+
+[section."Navigation"]
+"Alt + Shift + H" = "Home"
+"Alt + Left" = "Back in history"
+"Alt + Right" = "Forward in history"
+"Ctrl + ," = "Preferences"
+"Alt + Shift + J" = "Currently playing"
+"Ctrl + L" = "Search"
+"Alt + Shift + S" = "Liked songs"
+"Alt + Shift + Q" = "Queue"
+"Alt + Shift + 0" = "Your Library"
+"Alt + Shift + 1" = "Your playlists"
+"Alt + Shift + 2" = "Your podcasts"
+"Alt + Shift + 3" = "Your artists"
+"Alt + Shift + 4" = "Your albums"
+"Alt + Shift + 5" = "Your audiobooks"
+"Alt + Shift + M" = "Made for you"
+"Alt + Shift + N" = "New Releases"
+"Alt + Shift + C" = "Charts"
+"Alt + Shift + U" = "Friend activity"
+"Alt + Shift + D" = "Spotify Connect"
+"Alt + Shift + Y" = "Recents"
+
+[section."Layout"]
+"Alt + Shift + L" = "Toggle left sidebar"
+"Alt + Shift + Left" = "Decrease left sidebar width"
+"Alt + Shift + Right" = "Increase left sidebar width"
+"Alt + Shift + R" = "Toggle right sidebar"
+"Alt + Shift + Down" = "Decrease right sidebar width"
+"Alt + Shift + Up" = "Increase right sidebar width"
+"Shift + C" = "Subtitles"
