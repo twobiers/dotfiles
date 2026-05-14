@@ -2,7 +2,7 @@
 
 znap source ohmyzsh/ohmyzsh \
   lib/{clipboard,compfix,correction,directories,functions,git,grep,history,spectrum,termsupport} \
-  plugins/{aws,azure,sdk,git,terraform}
+  plugins/{sdk,git,terraform}
 
 znap source zsh-users/zsh-completions
 

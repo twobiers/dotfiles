@@ -59,7 +59,7 @@ Templates gate configs by OS using `{{ if eq .chezmoi.os "darwin" }}` / `"linux"
 - `01-` history, `03-` znap plugin manager, `04-` env/PATH (templated), `05-` plugins & atuin
 - `06-` SSH (templated), `07-` opts, `08-` aliases (heavy kubectl aliasing), `09-` keybindings (templated)
 - `10-` chezmoi integration, `11-18` tool-specific setups (direnv, fzf, zoxide, etc.)
-- `19-25` language/platform runtimes (k8s, rust, go, java, docker, azure)
+- `19-25` language/platform runtimes (k8s, rust, go, java, docker)
 - `99-` starship prompt
 
 ### Encryption
