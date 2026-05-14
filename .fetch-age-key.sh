@@ -1,6 +1,6 @@
 #!/bin/sh
 
-set -euox pipefail
+set -euo pipefail
 
 KEY_DIR="$HOME/.config/age"
 KEY_FILE="key-chezmoi.txt"
@@ -16,7 +16,7 @@ type pass-cli >/dev/null 2>&1 || {
 }
 
 if [ -f "$KEY_DIR/$KEY_FILE" ]; then
-  echo "Error: Key file already exists at $KEY_DIR/$KEY_FILE. Skipping to prevent overwriting."
+  echo " Key file already exists at $KEY_DIR/$KEY_FILE. Skipping to prevent overwriting."
   exit 0
 fi
 
