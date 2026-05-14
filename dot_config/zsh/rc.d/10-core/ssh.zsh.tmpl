@@ -1,7 +1,5 @@
-#!/usr/bin/env zsh
+#!/usr/bin/env sh
 
-{{ if eq .chezmoi.os "linux" }}
-export GPG_TTY="$(tty)"
-export SSH_AUTH_SOCK=$(gpgconf --list-dirs agent-ssh-socket)
-gpgconf --launch gpg-agent
-{{ end }}
+{{- if .personal -}}
+export SSH_AUTH_SOCK="{{ .chezmoi.homeDir }}/.ssh/proton-pass-agent.sock"
+{{- end -}}

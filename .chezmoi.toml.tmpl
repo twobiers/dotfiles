@@ -1,3 +1,13 @@
+{{- $work := false }}
+{{- $personal := false }}
+{{- $hostname := .chezmoi.hostname -}}
+
+{{- if eq $hostname "tobi-ubuntu" -}}
+{{-   $personal = true -}}
+{{- else if eq $hostname "tobi-ThinkPad-E15-Gen-3" -}}
+{{-   $personal = true -}}
+{{- end -}}
+
 {{- $cpuCores := 1 }}
 {{- $cpuThreads := 1 }}
 {{- $memoryInGb := 1 }}
@@ -10,6 +20,10 @@
 {{-   $cpuThreads = (output "powershell.exe" "-NoProfile" "-NonInteractive" "-Command" "(Get-CimInstance -ClassName 'Win32_Processor').NumberOfLogicalProcessors") | trim | atoi }}
 {{-   $memoryInGb = (output "powershell.exe" "-NoProfile" "-NonInteractive" "-Command" "(Get-CimInstance -ClassName 'Win32_PhysicalMemory' | Measure-Object -Property capacity -Sum).Sum /1gb") | trim | atoi }}
 {{- end }}
+
+[data]
+  personal = {{ $personal }}
+  work = {{ $work }}
 
 [data.cpu]
   cores = {{ $cpuCores }}
