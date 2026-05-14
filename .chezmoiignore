@@ -30,7 +30,3 @@ README.md
   .config/sway
   .config/waybar
 {{- end }}
-
-{{- if not (eq .chezmoi.os "darwin") }}
-  .colima/**
-{{- end }}

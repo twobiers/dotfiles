@@ -3,9 +3,7 @@
     type = "git-repo"
     url = "https://github.com/marlonrichert/zsh-snap.git"
     refreshPeriod = "168h"
-{{- end }}
 
-{{- if or (eq .chezmoi.os "linux") (eq .chezmoi.os "darwin") }}
 [".local/share/fubectl/fubectl.source"]
     type = "file"
     url = "https://raw.githubusercontent.com/kubermatic/fubectl/refs/heads/main/fubectl.source"
@@ -13,35 +11,11 @@
 {{- end }}
 
 {{- $fontDir := "" }}
-{{- if eq .chezmoi.os "darwin" }}
-{{-   $fontDir = "Library/Fonts" }}
-{{- else if eq .chezmoi.os "linux" }}
+{{- if eq .chezmoi.os "linux" }}
 {{-   $fontDir = ".local/share/fonts" }}
 {{- end }}
 
 {{- if ne "{{ $fontDir }}" "" }}
-["{{ $fontDir }}/Jetbrains Mono NF Regular.ttf"]
-    type = "file"
-    url = "https://github.com/ryanoasis/nerd-fonts/blob/master/patched-fonts/JetBrainsMono/Ligatures/Regular/JetBrainsMonoNerdFont-Regular.ttf?raw=true"
-    refreshPeriod = "168h"
-
-["{{ $fontDir }}/Jetbrains Mono NF Bold.ttf"]
-    type = "file"
-    url = "https://github.com/ryanoasis/nerd-fonts/blob/master/patched-fonts/JetBrainsMono/Ligatures/Bold/JetBrainsMonoNerdFont-Bold.ttf?raw=true"
-    refreshPeriod = "168h"
-
-["{{ $fontDir }}/Jetbrains Mono NF Italic.ttf"]
-    type = "file"
-    url = "https://github.com/ryanoasis/nerd-fonts/blob/master/patched-fonts/JetBrainsMono/Ligatures/Italic/JetBrainsMonoNerdFont-Italic.ttf?raw=true"
-    refreshPeriod = "168h"
-
-["{{ $fontDir }}/Jetbrains Mono NF BoldItalic.ttf"]
-    type = "file"
-    url = "https://github.com/ryanoasis/nerd-fonts/blob/master/patched-fonts/JetBrainsMono/Ligatures/BoldItalic/JetBrainsMonoNerdFont-BoldItalic.ttf?raw=true"
-    refreshPeriod = "168h"
-
-{{- else if eq .chezmoi.os "windows" }}
-
 ["{{ $fontDir }}/Jetbrains Mono NF Regular.ttf"]
     type = "file"
     url = "https://github.com/ryanoasis/nerd-fonts/blob/master/patched-fonts/JetBrainsMono/Ligatures/Regular/JetBrainsMonoNerdFont-Regular.ttf?raw=true"

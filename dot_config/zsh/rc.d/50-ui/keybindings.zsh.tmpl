@@ -85,10 +85,6 @@ function widget::delete-selection-back() {
     fi
 }
 
-function widget::copy-selection::darwin {
-    printf "%s" $CUTBUFFER | pbcopy
-}
-
 function widget::copy-selection::linux {
     if [ -n "$WAYLAND_DISPLAY" ]; then
         printf "%s" $CUTBUFFER | wl-copy
@@ -102,11 +98,7 @@ zle -N widget::copy-selection
 function widget::copy-selection {
     if ((REGION_ACTIVE)); then
         zle copy-region-as-kill
-        {{- if eq .chezmoi.os "darwin" }}
-        widget::copy-selection::darwin
-        {{- else if eq .chezmoi.os "linux" }}
         widget::copy-selection::linux
-        {{- end }}
     else
         # Nothing is selected, so default to the interrupt command
         zle send-break
@@ -118,17 +110,8 @@ zle -N widget::cut-selection
 function widget::cut-selection() {
     if ((REGION_ACTIVE)); then
         zle kill-region
-        {{- if eq .chezmoi.os "darwin" }}
-        widget::copy-selection::darwin
-        {{- else if eq .chezmoi.os "linux" }}
         widget::copy-selection::linux
-        {{- end }}
     fi
-}
-
-function widget::paste::darwin {
-    RBUFFER="$(pbpaste) ${RBUFFER}"
-    CURSOR=$(( CURSOR + $(echo -n "$(pbpaste)" | wc -m | bc) ))
 }
 
 function widget::paste::linux {
@@ -145,11 +128,7 @@ function widget::paste::linux {
 zle -N widget::paste
 function widget::paste() {
     ((REGION_ACTIVE)) && zle kill-region
-    {{- if eq .chezmoi.os "darwin" }}
-    widget::paste::darwin
-    {{- else if eq .chezmoi.os "linux" }}
     widget::paste::linux
-    {{- end }}
 }
 
 # select entire prompt
@@ -261,18 +240,6 @@ for keyname        kcap   seq                   mode        widget (
     end               x   $KEY_END         unselect    end-of-line
     shift-home        x   $KEY_SHIFT_HOME  select      beginning-of-line
     shift-end         x   $KEY_SHIFT_END   select      end-of-line
-{{ end }}
-
-{{ if eq .chezmoi.os "darwin" }}
-    cmd-right        x   $KEY_CMD_RIGHT       unselect    beginning-of-line
-    cmd-left         x   $KEY_CMD_LEFT        unselect    end-of-line
-    shift-cmd-right  x   $KEY_SHIFT_CMD_RIGHT select      beginning-of-line
-    shift-cmd-left   x   $KEY_SHIFT_CMD_LEFT  select      end-of-line
-
-    alt-left          x   $KEY_ALT_LEFT        unselect    backward-word
-    alt-right         x   $KEY_ALT_RIGHT       unselect    forward-word
-    shift-alt-left    x   $KEY_SHIFT_ALT_LEFT  select      backward-word
-    shift-alt-right   x   $KEY_SHIFT_ALT_RIGHT select      forward-word
 {{ end }}
 
     del               x   $KEY_DEL              delselect   widget::delete-selection
