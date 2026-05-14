@@ -1,0 +1,22 @@
+{{ if eq .osid "linux-ubuntu" -}}
+#!/bin/bash
+
+set -eufo pipefail
+
+fc-cache
+
+gsettings set org.gnome.desktop.peripherals.touchpad natural-scroll false
+
+gsettings set org.gnome.shell favorite-apps "[ \
+{{ if lookPath "firefox" -}}
+	'firefox_firefox.desktop', \
+{{ end -}}
+{{ if lookPath "code" -}}
+	'code.desktop', \
+{{ end -}}
+{{ if lookPath "kitty" -}}
+	'kitty.desktop', \
+{{ end -}}
+	'org.gnome.Nautilus.desktop' \
+]"
+{{ end -}}

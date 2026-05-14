@@ -3,3 +3,4 @@ packages:
     apt:
       - zsh
       - fzf
+      - python3-nautilus

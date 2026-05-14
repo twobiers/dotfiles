@@ -8,6 +8,11 @@
 {{-   $personal = true -}}
 {{- end -}}
 
+{{- $osID := .chezmoi.os -}}
+{{- if (and (eq .chezmoi.os "linux") (hasKey .chezmoi.osRelease "id")) -}}
+{{-   $osID = printf "%s-%s" .chezmoi.os .chezmoi.osRelease.id -}}
+{{- end -}}
+
 {{- $cpuCores := 1 }}
 {{- $cpuThreads := 1 }}
 {{- $memoryInGb := 1 }}
@@ -24,6 +29,7 @@
 [data]
   personal = {{ $personal }}
   work = {{ $work }}
+  osid = {{ $osID | quote }}
 
 [data.cpu]
   cores = {{ $cpuCores }}
