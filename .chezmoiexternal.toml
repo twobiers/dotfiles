@@ -1,4 +1,16 @@
 {{- if eq .chezmoi.os "linux" }}
+[".local/bin/age"]
+    type = "archive-file"
+    url = {{ gitHubLatestReleaseAssetURL "FiloSottile/age" (printf "age-*-%s-%s.tar.gz" .chezmoi.os .chezmoi.arch) | quote }}
+    executable = true
+    path = "age/age"
+
+[".local/bin/age-keygen"]
+    type = "archive-file"
+    url = {{ gitHubLatestReleaseAssetURL "FiloSottile/age" (printf "age-*-%s-%s.tar.gz" .chezmoi.os .chezmoi.arch) | quote }}
+    executable = true
+    path = "age/age-keygen"
+
 [".local/share/zsnap"]
     type = "git-repo"
     url = "https://github.com/marlonrichert/zsh-snap.git"
