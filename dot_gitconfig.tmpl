@@ -15,7 +15,10 @@
 [user]
 	email = 22715034+twobiers@users.noreply.github.com
 	name = twobiers
-  signingkey = "key::{{- protonPass (printf "pass://%s/MOSfkjG1MFCMmIpkj3LucCikDqAwkId7y3vAIB6VbejZAYKWBfaEcsOy9tGPR97l8FnelfHG_1AYjSrG8ecySg==/Public key" .proton.pass.shareId) -}}"
+{{- $sshPublicKey := protonPass (printf "pass://%s/MOSfkjG1MFCMmIpkj3LucCikDqAwkId7y3vAIB6VbejZAYKWBfaEcsOy9tGPR97l8FnelfHG_1AYjSrG8ecySg==/Public key" .proton.pass.personal.shareId) -}}
+{{- if $sshPublicKey }}
+  signingkey = "{{- printf "key::%s" ($sshPublicKey | trim) -}}"
+{{- end }}
 
 # Conditional Author includes
 # [includeIf "gitdir/i:<directory>/**"]
