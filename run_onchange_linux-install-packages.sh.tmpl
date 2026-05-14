@@ -1,0 +1,18 @@
+{{ if eq .chezmoi.os "linux" -}}
+#!/bin/bash
+
+set -euo pipefail
+
+sudo apt-get update
+
+packages=(
+{{ range .packages.linux.apt -}}
+	{{ . | quote }}
+{{ end -}}
+)
+
+if (( ${#packages[@]} > 0 )); then
+	sudo apt-get install -y --no-install-recommends "${packages[@]}"
+fi
+
+{{ end -}}
