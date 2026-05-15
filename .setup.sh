@@ -9,9 +9,9 @@ PROTON_ITEM_ID="j9P3ympW5t9M8JrAVWr4ducXN0zGoBVhJlr3ZXDZzwLUi9WSwDQKKHlUIXp0aSQC
 PROTON_FIELD_NAME="KEY"
 PROTON_ITEM_URI="pass://$PROTON_SHARE_ID/$PROTON_ITEM_ID/$PROTON_FIELD_NAME"
 
-function pass-cli:interactive_login() {
+function pass-cli:login() {
   if [[ $(pass-cli test &>/dev/null && echo $?) != 0 ]]; then
-    pass-cli login --interactive
+    pass-cli login
   fi
 }
 
@@ -36,11 +36,11 @@ function chezmoi:fetch_age_key() {
 
 # pass-cli is already installed, so we can skip this setup script
 type pass-cli >/dev/null 2>&1 && {
-  pass-cli:interactive_login
+  pass-cli:login
   chezmoi:fetch_age_key
   exit 0
 }
 
 pass-cli:install
-pass-cli:interactive_login
+pass-cli:login
 chezmoi:fetch_age_key
