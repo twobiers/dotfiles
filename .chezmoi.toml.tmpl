@@ -6,6 +6,9 @@
 {{-   $personal = true -}}
 {{- else if eq $hostname "tobi-ThinkPad-E15-Gen-3" -}}
 {{-   $personal = true -}}
+{{- else if eq $hostname "tobi-chezmoi-test-VirtualBox" -}}
+{{-   $personal = true -}}
+{{-   $work     = true -}}
 {{- end -}}
 
 {{- $osID := .chezmoi.os -}}
