@@ -1,5 +1,5 @@
 #!/usr/bin/env zsh
 
 if [[ $(which pass-cli &>/dev/null && echo $?) == 0 ]]; then
-  eval "$(pass-cli completions zsh)"
+  znap eval pass-cli "$(pass-cli completions zsh)"
 fi
