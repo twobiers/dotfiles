@@ -22,6 +22,11 @@ function pass-cli:install() {
   debug "pass-cli installed, PATH updated to include $HOME/.local/bin"
 }
 
+function pass-cli:load-ssh-keys() {
+  debug "Loading SSH keys from pass-cli vault"
+  pass-cli ssh-agent load
+}
+
 function chezmoi:fetch_age_key() {
   KEY_DIR="$HOME/.config/age"
   KEY_FILE="key-chezmoi.txt"
