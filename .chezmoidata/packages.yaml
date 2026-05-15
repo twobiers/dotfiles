@@ -1,6 +1,7 @@
 linux:
   apt:
     packages:
+      - git
       - zsh
       - fzf
       - python3-nautilus
