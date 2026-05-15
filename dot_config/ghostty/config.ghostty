@@ -9,6 +9,7 @@ keybind = ctrl+shift+arrow_up=goto_split:up
 keybind = shift+home=adjust_selection:beginning_of_line
 keybind = shift+end=adjust_selection:end_of_line
 keybind = ctrl+shift+w=close_surface
+keybind = shift+enter=text:\x1b\r
 
 # We unbind selection buffer modifications right now, as it might interfer with zsh keybindings
 keybind = shift+end=unbind
