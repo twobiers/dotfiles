@@ -12,6 +12,14 @@ keybind = shift+end=adjust_selection:end_of_line
 keybind = ctrl+shift+w=close_surface
 keybind = shift+enter=text:\x1b\r
 
+# We could unbind shift selections as it doesn't work nicely yet
+# keybind = shift+end=unbind
+# keybind = shift+home=unbind
+# keybind = shift+arrow_down=unbind
+# keybind = shift+arrow_left=unbind
+# keybind = shift+arrow_right=unbind
+# keybind = shift+arrow_up=unbind
+
 # Defaults for US layout, not useful here
 keybind = super+ctrl+[=unbind
 keybind = super+ctrl+]=unbind
