@@ -83,5 +83,12 @@ for tool in pass-cli yq jq; do
 done
 
 pass-cli:login
-pass-cli:load-ssh-keys
+
+if ! ssh-add -l &> /dev/null; then
+  log::debug "No SSH identities found in ssh-agent, attempting to load from pass-cli"
+  pass-cli:load-ssh-keys
+else
+  log::debug "SSH identities already loaded in ssh-agent"
+fi
+
 chezmoi:fetch_age_key
