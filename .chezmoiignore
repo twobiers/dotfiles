@@ -30,4 +30,3 @@ README.md
   .config/sway
   .config/waybar
 {{- end }}
-

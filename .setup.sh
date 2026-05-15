@@ -22,15 +22,6 @@ function pass-cli:install() {
   debug "pass-cli installed, PATH updated to include $HOME/.local/bin"
 }
 
-function pass-cli:setup-ssh-agent() {
-  debug "Setting up pass-cli SSH agent integration"
-  mkdir -p "$HOME/.config/systemd/user" || true
-  cp "$(chezmoi source-path)/dot_config/systemd/user/proton-pass-ssh-agent.service" "$HOME/.config/systemd/user/proton-pass-ssh-agent.service"
-  systemctl --user daemon-reload
-  systemctl --user enable --now proton-pass-ssh-agent.service
-  debug "pass-cli SSH agent service enabled and started"
-}
-
 function chezmoi:fetch_age_key() {
   KEY_DIR="$HOME/.config/age"
   KEY_FILE="key-chezmoi.txt"
@@ -43,7 +34,7 @@ function chezmoi:fetch_age_key() {
   debug "Fetching age key to $KEY_DIR/$KEY_FILE"
 
   if [ -f "$KEY_DIR/$KEY_FILE" ]; then
-    debug "Key file already exists at $KEY_DIR/$KEY_FILE. Skipping to prevent overwriting."
+    echo " Key file already exists at $KEY_DIR/$KEY_FILE. Skipping to prevent overwriting."
     return
   fi
 
@@ -51,7 +42,7 @@ function chezmoi:fetch_age_key() {
   mkdir -p "$KEY_DIR" || true
 
   pass-cli item view "$PROTON_ITEM_URI" > "$KEY_DIR/$KEY_FILE" || {
-    debug "Error: Failed to retrieve the key from pass-cli or write to $KEY_DIR/$KEY_FILE."
+    echo "Error: Failed to retrieve the key from pass-cli or write to $KEY_DIR/$KEY_FILE."
     exit 1
   }
   debug "Age key written to $KEY_DIR/$KEY_FILE"
@@ -88,5 +79,4 @@ for tool in pass-cli yq jq; do
 done
 
 pass-cli:login
-pass-cli:setup-ssh-agent
 chezmoi:fetch_age_key

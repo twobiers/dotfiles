@@ -1,3 +1,4 @@
+{{- if .personal -}}
 [Unit]
 Description=Proton Pass SSH Agent
 StartLimitIntervalSec=0
@@ -10,3 +11,4 @@ RestartSec=30
 
 [Install]
 WantedBy=default.target
+{{- end -}}
