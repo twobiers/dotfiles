@@ -61,7 +61,7 @@ export KEY_BACKSPACE=$'^?' # Backspace
 export KEY_HOME=$'^[[H' # Home/Pos1
 export KEY_SHIFT_HOME=$'^[[1;2H'
 export KEY_END=$'^[[F' # End
-export KEY_SHIFT_END=$'^[[1;5F'
+export KEY_SHIFT_END=$'^[[1;2F'
 
 # -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
 
@@ -177,6 +177,42 @@ function widget::util-insertchar() {
     zle forward-char
 }
 
+zle -N widget::emulator-aware-select-left
+function widget::emulator-aware-select-left() {
+  if [[ "$TERM_PROGRAM" == "ghostty" ]]; then
+
+  else
+    widget::util-select backward-char $@
+  fi
+}
+
+zle -N widget::emulator-aware-select-right
+function widget::emulator-aware-select-right() {
+  if [[ "$TERM_PROGRAM" == "ghostty" ]]; then
+
+  else
+     widget::util-select forward-char $@
+  fi
+}
+
+zle -N widget::emulator-aware-select-home
+function widget::emulator-aware-select-home() {
+  if [[ "$TERM_PROGRAM" == "ghostty" ]]; then
+
+  else
+    widget::util-select beginning-of-line $@
+  fi
+}
+
+zle -N widget::emulator-aware-select-end
+function widget::emulator-aware-select-end() {
+  if [[ "$TERM_PROGRAM" == "ghostty" ]]; then
+
+  else
+    widget::util-select end-of-line $@
+  fi
+}
+
 function zle-pre-cmd {
   # We are now in buffer editing mode. Clear the interrupt combo `Ctrl + C` by setting it to the null character, so it
   # can be used as the copy-to-clipboard key instead
@@ -210,6 +246,10 @@ preexec_functions=("zle-pre-exec" ${preexec_functions[@]})
 # bindkey                   $KEY_CMD_V                        widget::paste
 # bindkey                   $KEY_CMD_A                        widget::select-all
 bindkey                   $KEY_CTRL_A                       widget::select-all
+bindkey                   $KEY_SHIFT_LEFT                   widget::emulator-aware-select-left
+bindkey                   $KEY_SHIFT_RIGHT                  widget::emulator-aware-select-right
+bindkey                   $KEY_SHIFT_HOME                   widget::emulator-aware-select-home
+bindkey                   $KEY_SHIFT_END                    widget::emulator-aware-select-end
 
 for keyname        kcap   seq                   mode        widget (
 
