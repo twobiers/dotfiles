@@ -4,6 +4,7 @@ profiles:
       sources:
         ppas:
           - jdxcode/mise
+          - mkasberg/ghostty-ubuntu
       packages:
         - git
         - zsh
@@ -12,6 +13,8 @@ profiles:
         - podman
         - podman-docker
         - podman-compose
+        - uidmap # Required for podman
+        - ghostty
       conditional_packages:
         - when:
             any_installed: [nautilus]
