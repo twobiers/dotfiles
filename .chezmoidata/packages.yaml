@@ -9,6 +9,9 @@ profiles:
         - zsh
         - fzf
         - mise
+        - podman
+        - podman-docker
+        - podman-compose
       conditional_packages:
         - when:
             any_installed: [nautilus]
