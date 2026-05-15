@@ -1,6 +1,7 @@
 # Chezmoi Development
 README.md
 .editorconfig
+lib/**
 
 # Don't leak any crypto
 .config/age/**

@@ -2,8 +2,8 @@
 
 set -euo pipefail
 
-# shellcheck source=../lib.sh
-source "${CHEZMOI_SOURCE_DIR}/.chezmoiscripts/lib.sh"
+# shellcheck source=../../lib/lib.sh
+source "${CHEZMOI_SOURCE_DIR}/lib/lib.sh"
 
 log::info "Installing/updating global runtimes via mise"
 

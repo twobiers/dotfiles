@@ -62,8 +62,8 @@ STATE_REPOS="$STATE_DIR/repos"
 
 touch "$STATE_PKGS" "$STATE_PPAS" "$STATE_REPOS"
 
-# shellcheck source=../lib.sh
-source "${CHEZMOI_SOURCE_DIR}/.chezmoiscripts/lib.sh"
+# shellcheck source=../../lib/lib.sh
+source "${CHEZMOI_SOURCE_DIR}/lib/lib.sh"
 
 log::info "Active profiles: {{ $profiles | join ", " }}"
 
