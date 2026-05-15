@@ -202,25 +202,19 @@ preexec_functions=("zle-pre-exec" ${preexec_functions[@]})
 # bindkey                   $KEY_SHIFT_CMD_Z                  redo
 # We use fzf here
 # bindkey                   $KEY_CTRL_R                       history-incremental-search-backward
-bindkey                   $KEY_CTRL_C                       widget::copy-selection
-bindkey                   $KEY_CTRL_X                       widget::cut-selection
-bindkey                   $KEY_CTRL_V                       widget::paste
-bindkey                   $KEY_CMD_C                        widget::copy-selection
-bindkey                   $KEY_CMD_X                        widget::cut-selection
-bindkey                   $KEY_CMD_V                        widget::paste
-bindkey                   $KEY_CMD_A                        widget::select-all
+# bindkey                   $KEY_CTRL_C                       widget::copy-selection
+# bindkey                   $KEY_CTRL_X                       widget::cut-selection
+# bindkey                   $KEY_CTRL_V                       widget::paste
+# bindkey                   $KEY_CMD_C                        widget::copy-selection
+# bindkey                   $KEY_CMD_X                        widget::cut-selection
+# bindkey                   $KEY_CMD_V                        widget::paste
+# bindkey                   $KEY_CMD_A                        widget::select-all
 bindkey                   $KEY_CTRL_A                       widget::select-all
-bindkey                   $KEY_CTRL_L                       widget::scroll-and-clear-screen
 
 for keyname        kcap   seq                   mode        widget (
 
     # left           kcub1  $KEY_LEFT             unselect    backward-char1
     # right          kcuf1  $KEY_RIGHT            unselect    forward-char
-
-    shift-up       kri    $KEY_SHIFT_UP         select      up-line-or-history
-    shift-down     kind   $KEY_SHIFT_DOWN       select      down-line-or-history
-    shift-right    kRIT   $KEY_SHIFT_RIGHT      select      forward-char
-    shift-left     kLFT   $KEY_SHIFT_LEFT       select      backward-char
 
     # alt-right         x   $KEY_ALT_RIGHT        unselect    forward-word
     # alt-left          x   $KEY_ALT_LEFT         unselect    backward-word
@@ -228,19 +222,11 @@ for keyname        kcap   seq                   mode        widget (
     # shift-alt-left    x   $KEY_SHIFT_ALT_LEFT   select      backward-word
 
     # ctrl-e            x   $KEY_CTRL_E           unselect    end-of-line
-{{ if eq .chezmoi.os "linux" }}
+
     ctrl-right        x   $KEY_CTRL_RIGHT       unselect    forward-word
     ctrl-left         x   $KEY_CTRL_LEFT        unselect    backward-word
-    shift-ctrl-right  x   $KEY_SHIFT_CTRL_RIGHT select      forward-word
-    shift-ctrl-left   x   $KEY_SHIFT_CTRL_LEFT  select      backward-word
-    shift-ctrl-e      x   $KEY_SHIFT_CTRL_E     select      end-of-line
-    shift-ctrl-a      x   $KEY_SHIFT_CTRL_A     select      beginning-of-line
-
-    home              x   $KEY_HOME        unselect    beginning-of-line
-    end               x   $KEY_END         unselect    end-of-line
-    shift-home        x   $KEY_SHIFT_HOME  select      beginning-of-line
-    shift-end         x   $KEY_SHIFT_END   select      end-of-line
-{{ end }}
+    home              x   $KEY_HOME             unselect    beginning-of-line
+    end               x   $KEY_END              unselect    end-of-line
 
     del               x   $KEY_DEL              delselect   widget::delete-selection
     backspace         x   $KEY_BACKSPACE        delselect   widget::delete-selection-back
