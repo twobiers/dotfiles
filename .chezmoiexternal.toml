@@ -26,6 +26,11 @@
     type = "file"
     url = "https://raw.githubusercontent.com/kubermatic/fubectl/refs/heads/main/fubectl.source"
     refreshPeriod = "168h"
+
+[".local/share/nano-syntax-highlighting"]
+    type = "git-repo"
+    url = "https://github.com/galenguyer/nano-syntax-highlighting"
+    refreshPeriod = "168h"
 {{- end }}
 
 {{- $fontDir := "" }}
