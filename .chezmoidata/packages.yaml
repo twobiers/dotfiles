@@ -16,6 +16,7 @@ profiles:
         - uidmap # Required for podman
         - passt # Required for podman
         - ghostty
+        - zoxide
       conditional_packages:
         - when:
             any_installed: [nautilus]

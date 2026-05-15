@@ -1,8 +1,8 @@
 #!/usr/bin/env zsh
 
 znap source ohmyzsh/ohmyzsh \
-  lib/{clipboard,compfix,correction,directories,functions,git,grep,history,spectrum,termsupport} \
-  plugins/{sdk,git,terraform}
+  lib/{clipboard,compfix,directories} \
+  plugins/{git,golang,helm,kind,kubectl,podman,ssh,systemd,terraform}
 
 znap source zsh-users/zsh-completions
 
@@ -20,7 +20,9 @@ znap source zsh-users/zsh-autosuggestions
 # zstyle ':autocomplete:recent-dirs' backend zoxide
 # znap source marlonrichert/zsh-autocomplete
 znap eval trapd00r/LS_COLORS "$(whence -a dircolors gdircolors) -b LS_COLORS"
-znap source unixorn/fzf-zsh-plugin
+
+# Could be useful eventually, but right now I am not using it.
+# znap source unixorn/fzf-zsh-plugin
 
 # Must be loaded after fzf-zsh-plugin
 # znap source atuinsh/atuin

@@ -85,12 +85,8 @@ function widget::delete-selection-back() {
     fi
 }
 
-function widget::copy-selection::linux {
-    if [ -n "$WAYLAND_DISPLAY" ]; then
-        printf "%s" $CUTBUFFER | wl-copy
-    else
-        printf "%s" $CUTBUFFER | xclip -selection clipboard
-    fi
+function widget::copy::linux {
+  printf "%s" $CUTBUFFER | clipcopy
 }
 
 # copy selected terminal text to clipboard
@@ -98,7 +94,7 @@ zle -N widget::copy-selection
 function widget::copy-selection {
     if ((REGION_ACTIVE)); then
         zle copy-region-as-kill
-        widget::copy-selection::linux
+        widget::copy::linux
     else
         # Nothing is selected, so default to the interrupt command
         zle send-break
@@ -110,18 +106,13 @@ zle -N widget::cut-selection
 function widget::cut-selection() {
     if ((REGION_ACTIVE)); then
         zle kill-region
-        widget::copy-selection::linux
+        widget::copy::linux
     fi
 }
 
 function widget::paste::linux {
-    if [ -n "$WAYLAND_DISPLAY" ]; then
-        RBUFFER="$(wl-paste --no-newline) ${RBUFFER}"
-        CURSOR=$(( CURSOR + $(echo -n "$(wl-paste --no-newline)" | wc -m | bc) ))
-    else
-        RBUFFER="$(xclip -selection clipboard -o) ${RBUFFER}"
-        CURSOR=$(( CURSOR + $(echo -n "$(xclip -selection clipboard -o)" | wc -m | bc) ))
-    fi
+  RBUFFER="$(clippaste) ${RBUFFER}"
+  CURSOR=$(( CURSOR + $(echo -n "$(clippaste)" | wc -m | bc) ))
 }
 
 # paste clipboard contents
