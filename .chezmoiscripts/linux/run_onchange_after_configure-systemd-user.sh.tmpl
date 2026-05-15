@@ -3,6 +3,11 @@
 
 set -eufo pipefail
 
+# shellcheck source=../lib.sh
+source "${CHEZMOI_SOURCE_DIR}/.chezmoiscripts/lib.sh"
+
+log::info "Configuring systemd user services"
+
 # Disable GNOME Keyring's SSH agent — proton-pass-ssh-agent handles SSH keys instead
 systemctl --user mask --now gcr-ssh-agent.socket gcr-ssh-agent.service
 {{ end -}}

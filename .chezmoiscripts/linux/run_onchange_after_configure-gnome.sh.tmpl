@@ -3,6 +3,11 @@
 
 set -eufo pipefail
 
+# shellcheck source=../lib.sh
+source "${CHEZMOI_SOURCE_DIR}/.chezmoiscripts/lib.sh"
+
+log::info "Configuring GNOME"
+
 fc-cache
 
 gsettings set org.gnome.desktop.peripherals.touchpad natural-scroll false

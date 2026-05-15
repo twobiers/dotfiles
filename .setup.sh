@@ -1,29 +1,28 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-function debug() {
-  [[ "${DEBUG:-0}" == "1" ]] && echo "[DEBUG] $*" >&2 || true
-}
+# shellcheck source=.chezmoiscripts/lib.sh
+source "$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)/.chezmoiscripts/lib.sh"
 
 function pass-cli:login() {
-  debug "Checking pass-cli session..."
+  log::debug "Checking pass-cli session..."
   if [[ $(pass-cli test &>/dev/null && echo $?) != 0 ]]; then
-    debug "Not logged in, running pass-cli login"
+    log::debug "Not logged in, running pass-cli login"
     pass-cli login
   else
-    debug "Already logged in"
+    log::debug "Already logged in"
   fi
 }
 
 function pass-cli:install() {
-  debug "Installing pass-cli from Proton installer script"
+  log::info "Installing pass-cli from Proton installer script"
   curl -fsSL https://proton.me/download/pass-cli/install.sh | bash
   export PATH="$HOME/.local/bin:$PATH"
-  debug "pass-cli installed, PATH updated to include $HOME/.local/bin"
+  log::debug "pass-cli installed, PATH updated to include $HOME/.local/bin"
 }
 
 function pass-cli:load-ssh-keys() {
-  debug "Loading SSH keys from pass-cli vault"
+  log::debug "Loading SSH keys from pass-cli vault"
   pass-cli ssh-agent load
 }
 
@@ -36,50 +35,50 @@ function chezmoi:fetch_age_key() {
   PROTON_FIELD_NAME="KEY"
   PROTON_ITEM_URI="pass://$PROTON_SHARE_ID/$PROTON_ITEM_ID/$PROTON_FIELD_NAME"
 
-  debug "Fetching age key to $KEY_DIR/$KEY_FILE"
+  log::debug "Fetching age key to $KEY_DIR/$KEY_FILE"
 
   if [ -f "$KEY_DIR/$KEY_FILE" ]; then
-    echo " Key file already exists at $KEY_DIR/$KEY_FILE. Skipping to prevent overwriting."
+    log::info "Key file already exists at $KEY_DIR/$KEY_FILE. Skipping to prevent overwriting."
     return
   fi
 
-  debug "Key file not found, creating $KEY_DIR and retrieving from pass-cli"
+  log::debug "Key file not found, creating $KEY_DIR and retrieving from pass-cli"
   mkdir -p "$KEY_DIR" || true
 
   pass-cli item view "$PROTON_ITEM_URI" > "$KEY_DIR/$KEY_FILE" || {
-    echo "Error: Failed to retrieve the key from pass-cli or write to $KEY_DIR/$KEY_FILE."
+    log::error "Failed to retrieve the key from pass-cli or write to $KEY_DIR/$KEY_FILE."
     exit 1
   }
-  debug "Age key written to $KEY_DIR/$KEY_FILE"
+  log::debug "Age key written to $KEY_DIR/$KEY_FILE"
 }
 
 function yq:install() {
   VERSION=v4.2.0
   PLATFORM=linux_amd64
-  debug "Installing yq $VERSION for $PLATFORM"
+  log::info "Installing yq $VERSION for $PLATFORM"
 
   curl -fsSL https://github.com/mikefarah/yq/releases/download/${VERSION}/yq_${PLATFORM}.tar.gz |\
     tar xz && sudo mv yq_${PLATFORM} /usr/local/bin/yq
-  debug "yq installed to /usr/local/bin/yq"
+  log::debug "yq installed to /usr/local/bin/yq"
 }
 
 function jq:install() {
   VERSION=jq-1.8.1
   PLATFORM=linux-amd64
-  debug "Installing jq $VERSION for $PLATFORM"
+  log::info "Installing jq $VERSION for $PLATFORM"
 
   curl -fsSL https://github.com/jqlang/jq/releases/download/${VERSION}/jq-${PLATFORM} |\
     sudo tee /usr/local/bin/jq && sudo chmod +x /usr/local/bin/jq
-  debug "jq installed to /usr/local/bin/jq"
+  log::debug "jq installed to /usr/local/bin/jq"
 }
 
 for tool in pass-cli yq jq; do
   if ! command -v $tool &> /dev/null; then
-    debug "$tool not found, installing..."
+    log::info "$tool not found, installing..."
     $tool:install
   else
-    debug "$tool is already installed."
-    debug "$(command -v $tool)"
+    log::debug "$tool is already installed."
+    log::debug "$(command -v $tool)"
   fi
 done
 

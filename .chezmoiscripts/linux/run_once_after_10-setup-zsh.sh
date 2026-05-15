@@ -1,9 +1,12 @@
 #!/bin/bash
 set -eufo pipefail
 
-echo "\033[0;32m>>>>> Begin Setting Up Zsh <<<<<\033[0m"
+# shellcheck source=../lib.sh
+source "${CHEZMOI_SOURCE_DIR}/.chezmoiscripts/lib.sh"
+
+log::info "Begin Setting Up Zsh"
 
 export SHELL=/usr/bin/zsh
 chsh -s /usr/bin/zsh
 
-echo "\033[0;32m>>>>> Finish Setting Up Zsh <<<<<\033[0m"
+log::info "Finish Setting Up Zsh"

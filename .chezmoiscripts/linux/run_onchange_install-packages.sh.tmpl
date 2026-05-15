@@ -62,7 +62,10 @@ STATE_REPOS="$STATE_DIR/repos"
 
 touch "$STATE_PKGS" "$STATE_PPAS" "$STATE_REPOS"
 
-echo ">>> Active profiles: {{ $profiles | join ", " }}"
+# shellcheck source=../lib.sh
+source "${CHEZMOI_SOURCE_DIR}/.chezmoiscripts/lib.sh"
+
+log::info "Active profiles: {{ $profiles | join ", " }}"
 
 # ── Desired base packages ────────────────────────────────────────────────────
 DESIRED_PKGS=({{ range $desiredPkgs | uniq }}{{ . | quote }} {{ end }})
@@ -105,14 +108,14 @@ APT_NEEDS_UPDATE=false
 # ── Reconcile PPAs ────────────────────────────────────────────────────────────
 while IFS= read -r ppa; do
   [[ -z "$ppa" ]] && continue
-  echo ">>> Removing PPA: $ppa"
+  log::info "Removing PPA: $ppa"
   sudo add-apt-repository --remove -y "ppa:$ppa" || true
   APT_NEEDS_UPDATE=true
 done < <(comm -23 <(sort "$STATE_PPAS") <(printf '%s\n' ${DESIRED_PPAS[@]+"${DESIRED_PPAS[@]}"} | sort))
 
 while IFS= read -r ppa; do
   [[ -z "$ppa" ]] && continue
-  echo ">>> Adding PPA: $ppa"
+  log::info "Adding PPA: $ppa"
   sudo add-apt-repository -y "ppa:$ppa"
   APT_NEEDS_UPDATE=true
 done < <(comm -13 <(sort "$STATE_PPAS") <(printf '%s\n' ${DESIRED_PPAS[@]+"${DESIRED_PPAS[@]}"} | sort))
@@ -120,7 +123,7 @@ done < <(comm -13 <(sort "$STATE_PPAS") <(printf '%s\n' ${DESIRED_PPAS[@]+"${DES
 # ── Reconcile repos ───────────────────────────────────────────────────────────
 while IFS= read -r repo_id; do
   [[ -z "$repo_id" ]] && continue
-  echo ">>> Removing repo: $repo_id"
+  log::info "Removing repo: $repo_id"
   sudo rm -f "/etc/apt/sources.list.d/${repo_id}.list"
   sudo rm -f "/etc/apt/keyrings/${repo_id}.gpg"
   APT_NEEDS_UPDATE=true
@@ -128,7 +131,7 @@ done < <(comm -23 <(sort "$STATE_REPOS") <(printf '%s\n' ${DESIRED_REPOS[@]+"${D
 
 while IFS= read -r repo_id; do
   [[ -z "$repo_id" ]] && continue
-  echo ">>> Adding repo: $repo_id"
+  log::info "Adding repo: $repo_id"
   sudo mkdir -p /etc/apt/keyrings
   curl -fsSL "${REPO_KEY_URL[$repo_id]}" | sudo gpg --dearmor -o "/etc/apt/keyrings/${repo_id}.gpg"
   printf 'deb [signed-by=/etc/apt/keyrings/%s.gpg] %s %s %s\n' \
@@ -149,7 +152,7 @@ mapfile -t TO_INSTALL < <(
 )
 
 if [[ ${#TO_REMOVE[@]} -gt 0 ]]; then
-  echo ">>> Removing packages: ${TO_REMOVE[*]}"
+  log::info "Removing packages: ${TO_REMOVE[*]}"
   sudo apt-get remove -y "${TO_REMOVE[@]}"
 fi
 
@@ -158,7 +161,7 @@ if [[ ${#TO_INSTALL[@]} -gt 0 || "$APT_NEEDS_UPDATE" == "true" ]]; then
 fi
 
 if [[ ${#TO_INSTALL[@]} -gt 0 ]]; then
-  echo ">>> Installing packages: ${TO_INSTALL[*]}"
+  log::info "Installing packages: ${TO_INSTALL[*]}"
   sudo apt-get install -y --no-install-recommends "${TO_INSTALL[@]}"
 fi
 
@@ -167,5 +170,5 @@ printf '%s\n' ${ALL_DESIRED_PKGS[@]+"${ALL_DESIRED_PKGS[@]}"} | sort -u > "$STAT
 printf '%s\n' ${DESIRED_PPAS[@]+"${DESIRED_PPAS[@]}"} | sort -u > "$STATE_PPAS"
 printf '%s\n' ${DESIRED_REPOS[@]+"${DESIRED_REPOS[@]}"} | sort -u > "$STATE_REPOS"
 
-echo ">>> Done. State written to $STATE_DIR/"
+log::info "Done. State written to $STATE_DIR/"
 {{ end -}}
