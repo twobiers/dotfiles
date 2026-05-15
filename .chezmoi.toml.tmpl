@@ -2,14 +2,13 @@
 {{- $personal := false }}
 {{- $hostname := .chezmoi.hostname -}}
 
-{{- if eq $hostname "tobi-ubuntu" -}}
-{{-   $personal = true -}}
-{{- else if eq $hostname "tobi-ThinkPad-E15-Gen-3" -}}
-{{-   $personal = true -}}
-{{- else if eq $hostname "tobi-chezmoi-test-VirtualBox" -}}
-{{-   $personal = true -}}
-{{-   $work     = true -}}
-{{- end -}}
+{{- $profiles := list "common" }}
+{{- if and (hasKey . "machines") (hasKey .machines $hostname) }}
+  {{- $hostData := index .machines $hostname }}
+  {{- if hasKey $hostData "profiles" }}
+    {{- $profiles = $hostData.profiles }}
+  {{- end }}
+{{- end }}
 
 {{- $osID := .chezmoi.os -}}
 {{- if (and (eq .chezmoi.os "linux") (hasKey .chezmoi.osRelease "id")) -}}
@@ -30,9 +29,12 @@
 {{- end }}
 
 [data]
-  personal = {{ $personal }}
-  work = {{ $work }}
   osid = {{ $osID | quote }}
+
+[data.profiles]
+  {{- range $profiles }}
+  {{ . }} = true
+  {{- end }}
 
 [data.cpu]
   cores = {{ $cpuCores }}
