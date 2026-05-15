@@ -25,7 +25,7 @@ function pass-cli:install() {
 function pass-cli:setup-ssh-agent() {
   debug "Setting up pass-cli SSH agent integration"
   mkdir -p "$HOME/.config/systemd/user" || true
-  cp dot_config/systemd/user/proton-pass-ssh-agent.service "$HOME/.config/systemd/user/proton-pass-ssh-agent.service"
+  cp "$(chezmoi source-path)/dot_config/systemd/user/proton-pass-ssh-agent.service" "$HOME/.config/systemd/user/proton-pass-ssh-agent.service"
   systemctl --user daemon-reload
   systemctl --user enable --now proton-pass-ssh-agent.service
   debug "pass-cli SSH agent service enabled and started"
