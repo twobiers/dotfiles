@@ -22,10 +22,11 @@
     url = "https://github.com/marlonrichert/zsh-snap.git"
     refreshPeriod = "168h"
 
-[".local/share/fubectl/fubectl.source"]
+[".local/bin/yq"]
     type = "file"
-    url = "https://raw.githubusercontent.com/kubermatic/fubectl/refs/heads/main/fubectl.source"
-    refreshPeriod = "168h"
+    url = {{ gitHubLatestReleaseAssetURL "mikefarah/yq" (printf "yq_%s_%s" .chezmoi.os .chezmoi.arch) | quote }}
+    executable = true
+    path = "age/age"
 
 [".local/share/nano-syntax-highlighting"]
     type = "git-repo"
@@ -39,24 +40,10 @@
 {{- end }}
 
 {{- if ne "{{ $fontDir }}" "" }}
-["{{ $fontDir }}/Jetbrains Mono NF Regular.ttf"]
-    type = "file"
-    url = "https://github.com/ryanoasis/nerd-fonts/blob/master/patched-fonts/JetBrainsMono/Ligatures/Regular/JetBrainsMonoNerdFont-Regular.ttf?raw=true"
+[jetbrains_mono]
+    type = "archive"
+    url = {{ gitHubLatestReleaseAssetURL "ryanoasis/nerd-fonts" "JetBrainsMono.tar.xz" | quote }}
+    include = ["**/*.ttf"]
     refreshPeriod = "168h"
-
-["{{ $fontDir }}/Jetbrains Mono NF Bold.ttf"]
-    type = "file"
-    url = "https://github.com/ryanoasis/nerd-fonts/blob/master/patched-fonts/JetBrainsMono/Ligatures/Bold/JetBrainsMonoNerdFont-Bold.ttf?raw=true"
-    refreshPeriod = "168h"
-
-["{{ $fontDir }}/Jetbrains Mono NF Italic.ttf"]
-    type = "file"
-    url = "https://github.com/ryanoasis/nerd-fonts/blob/master/patched-fonts/JetBrainsMono/Ligatures/Italic/JetBrainsMonoNerdFont-Italic.ttf?raw=true"
-    refreshPeriod = "168h"
-
-["{{ $fontDir }}/Jetbrains Mono NF BoldItalic.ttf"]
-    type = "file"
-    url = "https://github.com/ryanoasis/nerd-fonts/blob/master/patched-fonts/JetBrainsMono/Ligatures/BoldItalic/JetBrainsMonoNerdFont-BoldItalic.ttf?raw=true"
-    refreshPeriod = "168h"
-
+    targetPath = "{{ $fontDir }}"
 {{- end }}

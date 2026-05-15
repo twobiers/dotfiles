@@ -52,26 +52,6 @@ function chezmoi:fetch_age_key() {
   log::debug "Age key written to $KEY_DIR/$KEY_FILE"
 }
 
-function yq:install() {
-  VERSION=v4.2.0
-  PLATFORM=linux_amd64
-  log::info "Installing yq $VERSION for $PLATFORM"
-
-  curl -fsSL https://github.com/mikefarah/yq/releases/download/${VERSION}/yq_${PLATFORM}.tar.gz |\
-    tar xz && sudo mv yq_${PLATFORM} /usr/local/bin/yq
-  log::debug "yq installed to /usr/local/bin/yq"
-}
-
-function jq:install() {
-  VERSION=jq-1.8.1
-  PLATFORM=linux-amd64
-  log::info "Installing jq $VERSION for $PLATFORM"
-
-  curl -fsSL https://github.com/jqlang/jq/releases/download/${VERSION}/jq-${PLATFORM} |\
-    sudo tee /usr/local/bin/jq && sudo chmod +x /usr/local/bin/jq
-  log::debug "jq installed to /usr/local/bin/jq"
-}
-
 for tool in pass-cli yq jq; do
   if ! command -v $tool &> /dev/null; then
     log::info "$tool not found, installing..."

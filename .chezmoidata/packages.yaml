@@ -17,6 +17,8 @@ profiles:
         - passt # Required for podman
         - ghostty
         - zoxide
+        - jq
+        - gh
       conditional_packages:
         - when:
             any_installed: [nautilus]
