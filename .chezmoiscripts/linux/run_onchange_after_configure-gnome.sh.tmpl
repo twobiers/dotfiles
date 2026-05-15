@@ -19,6 +19,9 @@ gsettings set org.gnome.shell favorite-apps "[ \
 {{ if lookPath "code" -}}
 	'code.desktop', \
 {{ end -}}
+{{ if lookPath "ghostty" -}}
+	'ghostty.desktop', \
+{{ end -}}
 {{ if lookPath "kitty" -}}
 	'kitty.desktop', \
 {{ end -}}
