@@ -84,4 +84,5 @@ for tool in pass-cli yq jq; do
 done
 
 pass-cli:login
+pass-cli:load-ssh-keys
 chezmoi:fetch_age_key
