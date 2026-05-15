@@ -1,6 +1,7 @@
 font-family = "JetBrainsMono Nerd Font"
 theme = "GitHub Dark"
 split-inherit-working-directory = true
+shell-integration-features=cursor,sudo,title,ssh-env,ssh-terminfo
 keybind = ctrl+shift+d=new_split:auto
 keybind = ctrl+shift+arrow_down=goto_split:down
 keybind = ctrl+shift+arrow_left=goto_split:left
@@ -10,14 +11,6 @@ keybind = shift+home=adjust_selection:beginning_of_line
 keybind = shift+end=adjust_selection:end_of_line
 keybind = ctrl+shift+w=close_surface
 keybind = shift+enter=text:\x1b\r
-
-# We unbind selection buffer modifications right now, as it might interfer with zsh keybindings
-keybind = shift+end=unbind
-keybind = shift+home=unbind
-keybind = shift+arrow_down=unbind
-keybind = shift+arrow_left=unbind
-keybind = shift+arrow_right=unbind
-keybind = shift+arrow_up=unbind
 
 # Defaults for US layout, not useful here
 keybind = super+ctrl+[=unbind
