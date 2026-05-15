@@ -3,10 +3,20 @@
 
 set -euo pipefail
 
+sources_ppas=(
+{{ range .linux.apt.sources.ppas -}}
+  {{ . | quote }}
+{{ end -}}
+)
+
+for ppa in "${sources_ppas[@]}"; do
+  sudo add-apt-repository -y "ppa:${ppa}"
+done
+
 sudo apt-get update
 
 packages=(
-{{ range .packages.linux.apt -}}
+{{ range .linux.apt.packages -}}
 	{{ . | quote }}
 {{ end -}}
 )

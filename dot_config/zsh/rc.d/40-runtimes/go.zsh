@@ -1,5 +1,6 @@
 #!/usr/bin/env bash
 
-export GVM_DIR="$HOME/.gvm"
+mise use -g go@latest
 
-[ -s "$GVM_DIR/scripts/gvm" ] && \. "$NVM_DIR/scripts/gvm"
+export PATH="${PATH}:${HOME}/go/bin"
+export PATH="${PATH}:/usr/local/go/bin"

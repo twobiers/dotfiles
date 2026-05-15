@@ -1,6 +1,10 @@
-packages:
-  linux:
-    apt:
+linux:
+  apt:
+    packages:
       - zsh
       - fzf
       - python3-nautilus
+      - mise
+    sources:
+      ppas:
+      - jdxcode/mise
