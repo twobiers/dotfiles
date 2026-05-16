@@ -2,6 +2,7 @@
 README.md
 .editorconfig
 lib/**
+test-vm.sh
 
 # Don't leak any crypto
 .config/age/**

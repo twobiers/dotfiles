@@ -20,3 +20,9 @@ My dotfiles using [chezmoi](https://github.com/twpayne/chezmoi)
 ```bash
 chezmoi unmanaged ~/.config/zsh | grep -Ev '\.zcompdump|\.zsh_history' | sed "s|^|$HOME/|" | xargs rm
 ```
+
+### Test on my lovely VirtualBox instance
+
+```bash
+./test-vm.sh
+```
