@@ -10,13 +10,12 @@ function pass-cli:login() {
     log::debug "Not logged in, running pass-cli login"
 
     # If PROTON_PASS_PAT is set, use it to login non-interactively
-    if [[ -n "${PROTON_PASS_PAT:-}" ]]; then
-      log::debug "Using PROTON_PASS_PAT for non-interactive login"
-      pass-cli login --pat "$PROTON_PASS_PAT"
+    if [[ -n "${PROTON_PASS_PERSONAL_ACCESS_TOKEN:-}" ]]; then
+      log::debug "Using PROTON_PASS_PERSONAL_ACCESS_TOKEN for non-interactive login"
     else
       log::debug "No PROTON_PASS_PAT found, falling back to interactive login"
-      pass-cli login
     fi
+    pass-cli login
   else
     log::debug "Already logged in"
   fi
