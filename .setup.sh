@@ -31,7 +31,7 @@ function pass-cli:install() {
 
 function pass-cli:load-ssh-keys() {
   log::debug "Loading SSH keys from pass-cli vault"
-  pass-cli ssh-agent load
+  retry 3 2 pass-cli ssh-agent load
 }
 
 function chezmoi:fetch_age_key() {
