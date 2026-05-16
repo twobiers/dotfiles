@@ -62,6 +62,8 @@ export KEY_HOME=$'^[[H' # Home/Pos1
 export KEY_SHIFT_HOME=$'^[[1;2H'
 export KEY_END=$'^[[F' # End
 export KEY_SHIFT_END=$'^[[1;2F'
+export KEY_CTRL_BACKSPACE=$'^H'
+export KEY_CTRL_DELETE=$'^[[3;5~'
 
 # -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
 
@@ -241,6 +243,8 @@ bindkey                   $KEY_SHIFT_LEFT                   widget::emulator-awa
 bindkey                   $KEY_SHIFT_RIGHT                  widget::emulator-aware-select-right
 bindkey                   $KEY_SHIFT_HOME                   widget::emulator-aware-select-home
 bindkey                   $KEY_SHIFT_END                    widget::emulator-aware-select-end
+bindkey                   $KEY_CTRL_DELETE                  kill-word
+bindkey                   $KEY_CTRL_BACKSPACE               backward-kill-word
 
 for keyname        kcap   seq                   mode        widget (
 
