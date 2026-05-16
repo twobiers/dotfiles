@@ -64,6 +64,11 @@ done
 
 pass-cli:login
 
+if [[ -z "${SSH_AUTH_SOCK:-}" ]]; then
+  log::debug "No SSH agent found, starting one"
+  eval "$(ssh-agent -s)" > /dev/null
+fi
+
 if ! ssh-add -l &> /dev/null; then
   log::debug "No SSH identities found in ssh-agent, attempting to load from pass-cli"
   pass-cli:load-ssh-keys
