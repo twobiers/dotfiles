@@ -26,6 +26,12 @@ function pass-cli:load-ssh-keys() {
   pass-cli ssh-agent load
 }
 
+function git:install() {
+  log::info "Installing git from package manager"
+  sudo apt-get update
+  sudo apt-get install -y git
+}
+
 function chezmoi:fetch_age_key() {
   KEY_DIR="$HOME/.config/age"
   KEY_FILE="key-chezmoi.txt"
@@ -52,7 +58,7 @@ function chezmoi:fetch_age_key() {
   log::debug "Age key written to $KEY_DIR/$KEY_FILE"
 }
 
-for tool in pass-cli; do
+for tool in pass-cli git; do
   if ! command -v $tool &> /dev/null; then
     log::info "$tool not found, installing..."
     $tool:install
