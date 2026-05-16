@@ -20,6 +20,7 @@ packages:
           - zoxide
           - jq
           - gh
+          - easyeffects
         conditional_packages:
           - when:
               any_installed: [nautilus]

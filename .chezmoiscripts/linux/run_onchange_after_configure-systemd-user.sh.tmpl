@@ -1,4 +1,3 @@
-{{- if .profiles.personal -}}
 #!/bin/bash
 
 set -eufo pipefail
@@ -8,6 +7,17 @@ source "${CHEZMOI_SOURCE_DIR}/lib/lib.sh"
 
 log::info "Configuring systemd user services"
 
+systemctl --user daemon-reload
+
+if command -v easyeffects &>/dev/null; then
+  systemctl --user enable --now easyeffects.service
+fi
+
+{{- if .profiles.personal }}
+
 # Disable GNOME Keyring's SSH agent — proton-pass-ssh-agent handles SSH keys instead
 systemctl --user mask --now gcr-ssh-agent.socket gcr-ssh-agent.service
-{{ end -}}
+
+systemctl --user enable --now proton-pass-ssh-agent.service
+systemctl --user enable proton-pass-ssh-agent-resume.service
+{{- end }}
