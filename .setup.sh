@@ -52,7 +52,7 @@ function chezmoi:fetch_age_key() {
   log::debug "Age key written to $KEY_DIR/$KEY_FILE"
 }
 
-for tool in pass-cli yq jq; do
+for tool in pass-cli; do
   if ! command -v $tool &> /dev/null; then
     log::info "$tool not found, installing..."
     $tool:install
