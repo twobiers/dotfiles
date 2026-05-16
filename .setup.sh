@@ -38,9 +38,9 @@ function chezmoi:fetch_age_key() {
   KEY_FILE="key-chezmoi.txt"
 
   PROTON_VAULT_NAME="Personal"
-  PROTON_ITEM_ID="j9P3ympW5t9M8JrAVWr4ducXN0zGoBVhJlr3ZXDZzwLUi9WSwDQKKHlUIXp0aSQCN9hcGeZ20RwN9SgIDd2NIg=="
+  PROTON_ITEM_NAME="age-key-chezmoi"
   PROTON_FIELD_NAME="KEY"
-  PROTON_ITEM_URI="pass://$PROTON_VAULT_NAME/$PROTON_ITEM_ID/$PROTON_FIELD_NAME"
+  PROTON_ITEM_URI="pass://$PROTON_VAULT_NAME/$PROTON_ITEM_NAME/$PROTON_FIELD_NAME"
 
   log::debug "Fetching age key to $KEY_DIR/$KEY_FILE"
 
