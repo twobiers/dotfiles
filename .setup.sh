@@ -6,7 +6,7 @@ source "$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)/lib/lib.sh"
 
 function pass-cli:login() {
   log::debug "Checking pass-cli session..."
-  if [[ $(pass-cli test &>/dev/null && echo $?) != 0 ]]; then
+  if [[ $(pass-cli info &>/dev/null && echo $?) != 0 ]]; then
     log::debug "Not logged in, running pass-cli login"
 
     # If PROTON_PASS_PAT is set, use it to login non-interactively
