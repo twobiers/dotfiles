@@ -1,34 +1,35 @@
-profiles:
-  common:
-    apt:
-      sources:
-        ppas:
-          - jdxcode/mise
-          - mkasberg/ghostty-ubuntu
-      packages:
-        - git
-        - zsh
-        - fzf
-        - mise
-        - podman
-        - podman-docker
-        - podman-compose
-        - uidmap # Required for podman
-        - passt # Required for podman
-        - ghostty
-        - zoxide
-        - jq
-        - gh
-      conditional_packages:
-        - when:
-            any_installed: [nautilus]
-          packages:
-            - python3-nautilus
+packages:
+    profiles:
+    common:
+      apt:
+        sources:
+          ppas:
+            - jdxcode/mise
+            - mkasberg/ghostty-ubuntu
+        packages:
+          - git
+          - zsh
+          - fzf
+          - mise
+          - podman
+          - podman-docker
+          - podman-compose
+          - uidmap # Required for podman
+          - passt # Required for podman
+          - ghostty
+          - zoxide
+          - jq
+          - gh
+        conditional_packages:
+          - when:
+              any_installed: [nautilus]
+            packages:
+              - python3-nautilus
 
-  work:
-    apt:
-      packages: []
+    work:
+      apt:
+        packages: []
 
-  private:
-    apt:
-      packages: []
+    personal:
+      apt:
+        packages: []

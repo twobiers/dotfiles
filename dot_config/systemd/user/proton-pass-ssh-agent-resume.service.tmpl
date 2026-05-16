@@ -1,0 +1,14 @@
+{{- if .profiles.personal -}}
+[Unit]
+Description=Restart Proton Pass SSH Agent after sleep
+StopWhenUnneeded=yes
+
+[Service]
+Type=oneshot
+RemainAfterExit=yes
+ExecStart=/bin/true
+ExecStop=/usr/bin/systemctl --user restart proton-pass-ssh-agent.service
+
+[Install]
+WantedBy=suspend.target hibernate.target hybrid-sleep.target suspend-then-hibernate.target
+{{- end -}}

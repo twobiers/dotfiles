@@ -7,7 +7,7 @@
 set -euo pipefail
 
 {{- $profiles := list }}
-{{- range $key, $value := .profiles }}
+{{- range $key, $value := .packages.profiles }}
   {{- if $value }}
     {{- $profiles = append $profiles $key }}
   {{- end }}
@@ -20,8 +20,8 @@ set -euo pipefail
 {{- $condRules    := list }}
 {{- range $profiles }}
   {{- $p := . }}
-  {{- if hasKey $.profiles $p }}
-    {{- $profData := index $.profiles $p }}
+  {{- if hasKey $.packages.profiles $p }}
+    {{- $profData := index $.packages.profiles $p }}
     {{- if hasKey $profData "apt" }}
       {{- $apt := $profData.apt }}
       {{- if hasKey $apt "packages" }}

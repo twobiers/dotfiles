@@ -1,7 +1,0 @@
-machines:
-  tobi-ubuntu:
-    profiles: [common, private]
-  tobi-ThinkPad-E15-Gen-3:
-    profiles: [common, private]
-  tobi-chezmoi-test-VirtualBox:
-    profiles: [common, private, work]

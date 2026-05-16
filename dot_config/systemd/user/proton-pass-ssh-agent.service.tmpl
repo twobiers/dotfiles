@@ -1,13 +1,14 @@
-{{- if .personal -}}
+{{- if .profiles.personal -}}
 [Unit]
 Description=Proton Pass SSH Agent
 StartLimitIntervalSec=0
 
 [Service]
+ExecStartPre=-/usr/bin/rm -f %h/.ssh/proton-pass-agent.sock
 ExecStart=%h/.local/bin/pass-cli ssh-agent start --socket-path %h/.ssh/proton-pass-agent.sock --vault-name Personal
 ExecStartPost=/usr/bin/systemctl --user set-environment SSH_AUTH_SOCK=%h/.ssh/proton-pass-agent.sock
-Restart=on-failure
-RestartSec=30
+Restart=always
+RestartSec=5
 
 [Install]
 WantedBy=default.target

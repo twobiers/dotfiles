@@ -2,12 +2,14 @@
 {{- $personal := false }}
 {{- $hostname := .chezmoi.hostname -}}
 
+{{- $machineProfiles := dict
+    "tobi-ubuntu" (list "common" "personal")
+    "tobi-ThinkPad-E15-Gen-3" (list "common" "personal")
+    "tobi-chezmoi-test-VirtualBox" (list "common" "personal" "work")
+}}
 {{- $profiles := list "common" }}
-{{- if and (hasKey . "machines") (hasKey .machines $hostname) }}
-  {{- $hostData := index .machines $hostname }}
-  {{- if hasKey $hostData "profiles" }}
-    {{- $profiles = $hostData.profiles }}
-  {{- end }}
+{{- if hasKey $machineProfiles $hostname }}
+  {{- $profiles = index $machineProfiles $hostname }}
 {{- end }}
 
 {{- $osID := .chezmoi.os -}}
