@@ -1,5 +1,5 @@
 packages:
-    profiles:
+  profiles:
     common:
       apt:
         sources:
