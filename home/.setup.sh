@@ -29,6 +29,11 @@ function pass-cli:install() {
 }
 
 function pass-cli:load-ssh-keys() {
+  if [[ -n "${SSH_AUTH_SOCK:-}" ]] && ssh-add -l &> /dev/null; then
+    log::debug "SSH_AUTH_SOCK is set and has identities, skipping pass-cli ssh-agent load"
+    return
+  fi
+
   log::debug "Loading SSH keys from pass-cli vault"
   retry 3 2 pass-cli ssh-agent load
 }

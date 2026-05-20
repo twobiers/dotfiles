@@ -1,12 +1,13 @@
 {{- $work := false }}
 {{- $personal := false }}
+{{- $devbox := false }}
 {{- $hostname := .chezmoi.hostname -}}
 
 {{- $machineProfiles := dict
     "tobi-ubuntu" (list "common" "desktop" "personal")
     "tobi-ThinkPad-E15-Gen-3" (list "common" "desktop" "personal")
     "tobi-chezmoi-test-VirtualBox" (list "common" "desktop" "personal" "work")
-    "tobi-devbox" (list "common" "personal" "work")
+    "tobi-devbox" (list "common" "devbox" "work")
 }}
 {{- $profiles := list "common" }}
 {{- if hasKey $machineProfiles $hostname }}

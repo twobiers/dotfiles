@@ -1,4 +1,4 @@
-{{- if dig "personal" false .profiles -}}
+{{- if and (dig "personal" false .profiles) (not (dig "devbox" false .profiles)) -}}
 [Unit]
 Description=Restart Proton Pass SSH Agent after sleep
 StopWhenUnneeded=yes
