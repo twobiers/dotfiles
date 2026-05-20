@@ -3,8 +3,12 @@ packages:
     common:
       apt:
         sources:
-          ppas:
-            - jdxcode/mise
+          repos:
+            - id: mise
+              url: https://mise.jdx.dev/deb
+              key_url: https://mise.jdx.dev/gpg-key.pub
+              suites: [stable]
+              components: [main]
         packages:
           - git
           - zsh
