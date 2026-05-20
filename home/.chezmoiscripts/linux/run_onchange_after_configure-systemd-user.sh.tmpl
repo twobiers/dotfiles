@@ -13,7 +13,7 @@ if command -v easyeffects &>/dev/null; then
   systemctl --user enable --now easyeffects.service
 fi
 
-{{- if .profiles.personal }}
+{{- if dig "personal" false .profiles }}
 
 # Disable GNOME Keyring's SSH agent — proton-pass-ssh-agent handles SSH keys instead
 systemctl --user mask --now gcr-ssh-agent.socket gcr-ssh-agent.service

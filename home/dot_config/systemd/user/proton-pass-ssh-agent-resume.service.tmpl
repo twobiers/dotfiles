@@ -1,4 +1,4 @@
-{{- if .profiles.personal -}}
+{{- if dig "personal" false .profiles -}}
 [Unit]
 Description=Restart Proton Pass SSH Agent after sleep
 StopWhenUnneeded=yes

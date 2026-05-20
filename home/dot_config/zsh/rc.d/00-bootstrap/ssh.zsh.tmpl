@@ -1,5 +1,5 @@
 #!/usr/bin/env sh
 
-{{ if .profiles.personal -}}
+{{ if dig "personal" false .profiles -}}
 export SSH_AUTH_SOCK="{{ .chezmoi.homeDir }}/.ssh/proton-pass-agent.sock"
 {{ end -}}

@@ -1,4 +1,4 @@
-{{- if .profiles.personal -}}
+{{- if dig "personal" false .profiles -}}
 [Unit]
 Description=Proton Pass SSH Agent
 StartLimitIntervalSec=0
