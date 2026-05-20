@@ -34,6 +34,11 @@ function pass-cli:load-ssh-keys() {
     return
   fi
 
+  if [[ -n "${IS_DEVBOX:-}" ]]; then
+    log::debug "Running in devbox, skipping pass-cli ssh-agent load"
+    return
+  fi
+
   log::debug "Loading SSH keys from pass-cli vault"
   retry 3 2 pass-cli ssh-agent load
 }
