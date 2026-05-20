@@ -6,6 +6,7 @@
     "tobi-ubuntu" (list "common" "personal")
     "tobi-ThinkPad-E15-Gen-3" (list "common" "personal")
     "tobi-chezmoi-test-VirtualBox" (list "common" "personal" "work")
+    "tobi-devbox" (list "common" "personal")
 }}
 {{- $profiles := list "common" }}
 {{- if hasKey $machineProfiles $hostname }}
@@ -50,4 +51,4 @@ encryption = "age"
   size = {{ $memoryInGb }}
 
 [hooks.read-source-state.pre]
-  command = ".local/share/chezmoi/.setup.sh"
+  command = ".local/share/chezmoi/home/.setup.sh"
