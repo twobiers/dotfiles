@@ -2,6 +2,10 @@
 
 My dotfiles using [chezmoi](https://github.com/twpayne/chezmoi)
 
+## Repository Layout
+
+All managed dotfiles live under `home/` — the chezmoi source root is set to that directory via `.chezmoiroot`. The repo root itself only holds meta-files (`README.md`, `CLAUDE.md`, `install.sh`, `test-vm.sh`, `.chezmoiroot`).
+
 ## Prerequisites
 
 - **OS**: Linux (Ubuntu or Debian-based with GNOME)

@@ -25,6 +25,10 @@ chezmoi add ~/.some-config-file
 chezmoi edit ~/.some-config-file
 ```
 
+## Repository Layout
+
+The chezmoi source root is set to `home/` via `.chezmoiroot`. All managed dotfiles live under `home/` — the repo root itself holds only meta-files (`.chezmoiroot`, `README.md`, `CLAUDE.md`, `install.sh`, `test-vm.sh`, etc.).
+
 ## Architecture
 
 ### chezmoi File Naming Conventions
@@ -42,7 +46,7 @@ chezmoi uses filename prefixes/suffixes to control behavior:
 
 ### Template Data
 
-`.chezmoi.toml.tmpl` detects CPU cores/threads and memory at init time, storing them under `.data.cpu` and `.data.memory`. Templates also have access to `.chezmoi.os`, `.chezmoi.hostname`, and `.chezmoi.homeDir`.
+`home/.chezmoi.toml.tmpl` detects CPU cores/threads and memory at init time, storing them under `.data.cpu` and `.data.memory`. Templates also have access to `.chezmoi.os`, `.chezmoi.hostname`, and `.chezmoi.homeDir`.
 
 ### Cross-Platform Conditionals
 
@@ -50,11 +54,11 @@ Templates gate configs by OS using `{{ if eq .chezmoi.os "darwin" }}` / `"linux"
 
 ### External Resources
 
-`.chezmoiexternal.toml` pulls external assets (fonts, zsh plugins, kubectl helpers) on a weekly `refreshPeriod`. Managed externals: JetBrains Mono Nerd Font, zsh-snap, fubectl.
+`home/.chezmoiexternal.toml` pulls external assets (fonts, zsh plugins, kubectl helpers) on a weekly `refreshPeriod`. Managed externals: JetBrains Mono Nerd Font, zsh-snap, fubectl.
 
 ### ZSH Configuration Structure
 
-`dot_config/zsh/rc.d/` contains numbered scripts loaded in order:
+`home/dot_config/zsh/rc.d/` contains numbered scripts loaded in order:
 
 - `01-` history, `03-` znap plugin manager, `04-` env/PATH (templated), `05-` plugins & atuin
 - `06-` SSH (templated), `07-` opts, `08-` aliases (heavy kubectl aliasing), `09-` keybindings (templated)
@@ -68,4 +72,4 @@ Secrets use [age](https://age-encryption.org/) encryption. The identity key is a
 
 ### Git Config
 
-`dot_gitconfig.tmpl` uses directory-based `includeIf` to switch git author identity depending on which project directory you're in (personal vs. work repos). SSH signing is used on most machines; GPG on `tobi-endeavouros`.
+`home/dot_gitconfig.tmpl` uses directory-based `includeIf` to switch git author identity depending on which project directory you're in (personal vs. work repos). SSH signing is used on most machines; GPG on `tobi-endeavouros`.

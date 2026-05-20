@@ -1,8 +1,8 @@
 #!/bin/bash
 set -eufo pipefail
 
-# shellcheck source=../../lib/lib.sh
-source "${CHEZMOI_SOURCE_DIR}/lib/lib.sh"
+# shellcheck disable=SC1091
+source "${CHEZMOI_SOURCE_DIR}/../lib/lib.sh"
 
 NANORC_FILE="$HOME/.nanorc"
 NANORC_SYNTAX_HIGHLIGHTING_DIR="$HOME/.local/share/nano-syntax-highlighting"
