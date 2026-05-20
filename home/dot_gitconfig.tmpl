@@ -15,7 +15,7 @@
 [user]
 	email = 22715034+twobiers@users.noreply.github.com
 	name = twobiers
-{{- $sshPublicKey := protonPass (printf "pass://Personal/SSH Key Desktop/Public key" .proton.pass.personal.shareId) -}}
+{{- $sshPublicKey := protonPass "pass://Personal/SSH Key Desktop/Public key" -}}
 {{- if $sshPublicKey }}
   signingkey = "{{- printf "key::%s" ($sshPublicKey | trim) -}}"
 {{- end }}
