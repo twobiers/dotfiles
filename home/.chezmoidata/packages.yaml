@@ -5,7 +5,6 @@ packages:
         sources:
           ppas:
             - jdxcode/mise
-            - mkasberg/ghostty-ubuntu
         packages:
           - git
           - zsh
@@ -16,17 +15,22 @@ packages:
           - podman-compose
           - uidmap # Required for podman
           - passt # Required for podman
-          - ghostty
           - zoxide
           - jq
           - gh
+    desktop:
+      apt:
+        sources:
+          ppas:
+            - mkasberg/ghostty-ubuntu
+        packages:
+          - ghostty
           - easyeffects
         conditional_packages:
           - when:
               any_installed: [nautilus]
             packages:
               - python3-nautilus
-
     work:
       apt:
         packages: []
