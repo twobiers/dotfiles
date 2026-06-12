@@ -1,4 +1,7 @@
-#!/usr/bin/env bash
+#!/usr/bin/env zsh
+
+# Load fzf key bindings (Ctrl+R history, Ctrl+T file, Alt+C dir)
+source /usr/share/doc/fzf/examples/key-bindings.zsh
 
 # Use fd if installed
 if [[ -x fd ]]; then
