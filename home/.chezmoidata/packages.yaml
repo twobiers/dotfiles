@@ -24,9 +24,6 @@ packages:
           - gh
     desktop:
       apt:
-        sources:
-          ppas:
-            - mkasberg/ghostty-ubuntu
         packages:
           - ghostty
           - easyeffects
