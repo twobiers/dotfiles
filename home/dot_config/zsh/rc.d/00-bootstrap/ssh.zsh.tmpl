@@ -2,4 +2,6 @@
 
 {{ if dig "personal" false .profiles -}}
 export SSH_AUTH_SOCK="{{ .chezmoi.homeDir }}/.ssh/proton-pass-agent.sock"
+{{ else if dig "work" false .profiles -}}
+export SSH_AUTH_SOCK="{{ .chezmoi.homeDir }}/.1password/agent.sock"
 {{ end -}}

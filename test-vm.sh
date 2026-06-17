@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 set -euo pipefail
 VM="chezmoi-test"
 SNAPSHOT="chezmoi-test-4"

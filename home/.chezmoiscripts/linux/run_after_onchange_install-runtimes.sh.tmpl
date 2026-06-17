@@ -1,4 +1,5 @@
-#!/bin/bash
+{{- if not (eq .chezmoi.osRelease.id "nixos") }}
+#!/usr/bin/env bash
 
 set -euo pipefail
 
@@ -12,3 +13,4 @@ mise use -g node@latest
 mise use -g python@latest
 mise use -g uv@latest
 mise use -g java@temurin
+{{- end }}

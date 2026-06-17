@@ -2,13 +2,14 @@
 {{- $personal := false }}
 {{- $devbox := false }}
 {{- $hostname := .chezmoi.hostname -}}
+{{- $isWorkMachine := eq .chezmoi.hostname "tobi-procyde-fw13" }}
 
 {{- $machineProfiles := dict
     "tobi-ubuntu" (list "common" "desktop" "personal")
     "tobi-ThinkPad-E15-Gen-3" (list "common" "desktop" "personal")
     "tobi-chezmoi-test-VirtualBox" (list "common" "desktop" "personal" "work")
     "tobi-devbox" (list "common" "devbox" "work")
-    "tobi-fw13" (list "common" "desktop" "work")
+    "tobi-procyde-fw13" (list "common" "work")
 }}
 {{- $profiles := list "common" }}
 {{- if hasKey $machineProfiles $hostname }}
@@ -52,5 +53,7 @@ encryption = "age"
 [data.memory]
   size = {{ $memoryInGb }}
 
+{{- if not $isWorkMachine }}
 [hooks.read-source-state.pre]
   command = ".local/share/chezmoi/home/.setup.sh"
+{{- end }}

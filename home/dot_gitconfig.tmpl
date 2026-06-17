@@ -13,16 +13,23 @@
     editor = code --wait
     fsmonitor = true
 [user]
-	email = 22715034+twobiers@users.noreply.github.com
-	name = twobiers
-{{- $sshPublicKey := protonPass "pass://Personal/SSH Key Personal/Public key" -}}
+    email = 22715034+twobiers@users.noreply.github.com
+    name = twobiers
+{{- $sshPublicKey := "" }}
+{{- if dig "personal" false .profiles }}
+{{- $sshPublicKey = protonPass "pass://Personal/SSH Key Personal/Public key" -}}
+{{- else if dig "work" false .profiles }}
+{{- $sshPublicKey = onepasswordRead "op://Employee/SSH Key/public key" -}}
+{{- end }}
 {{- if $sshPublicKey }}
-  signingkey = "{{- printf "key::%s" ($sshPublicKey | trim) -}}"
+    signingkey = "{{- printf "key::%s" ($sshPublicKey | trim) -}}"
 {{- end }}
 
 # Conditional Author includes
 # [includeIf "gitdir/i:<directory>/**"]
 #    path = ~/.config/git/author-<name>.inc
+[includeIf "gitdir/i:PROCYDE/**"]
+   path = ~/.config/git/author-procyde.inc
 
 [url "git@github.com:"]
 	  insteadOf = "https://github.com/"

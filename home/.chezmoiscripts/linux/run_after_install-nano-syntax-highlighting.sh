@@ -1,4 +1,5 @@
-#!/bin/bash
+#!/usr/bin/env bash
+
 set -eufo pipefail
 
 # shellcheck disable=SC1091
