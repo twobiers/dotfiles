@@ -7,6 +7,11 @@ test-vm.sh
 # Don't leak any crypto
 .config/age/**
 
+{{- if dig "work" false .profiles }}
+# Using the provided default for now
+.config/opencode/opencode.json
+{{- end }}
+
 
 # Exclude configs to prevent a blown up home directory
 {{- if not (lookPath "kubectl") }}
