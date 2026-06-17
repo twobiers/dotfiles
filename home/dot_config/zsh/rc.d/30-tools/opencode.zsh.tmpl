@@ -1,0 +1,17 @@
+#!/usr/bin/env zsh
+
+if test -f $HOME/.opencode/bin; then
+  export PATH="$HOME/.opencode/bin:$PATH"
+fi
+
+if [[ $(which opencode &>/dev/null && echo $?) == 0 ]]; then
+  {{- if dig "work" false .profiles }}
+  _opencode="$(command -v opencode)"
+  if [[ -x "${_opencode}" ]]; then
+    function opencode() {
+      export PIA_API_KEY=$(op read "op://Employee/PIA API Key/credential")
+      "${_opencode}" "$@"
+    }
+  fi
+  {{- end }}
+fi
