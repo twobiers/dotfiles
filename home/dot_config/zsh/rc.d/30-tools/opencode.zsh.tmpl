@@ -6,12 +6,6 @@ fi
 
 if [[ $(which opencode &>/dev/null && echo $?) == 0 ]]; then
   {{- if dig "work" false .profiles }}
-  _opencode="$(command -v opencode)"
-  if [[ -x "${_opencode}" ]]; then
-    function opencode() {
-      export PIA_API_KEY=$(op read "op://Employee/PIA API Key/credential")
-      "${_opencode}" "$@"
-    }
-  fi
+  export PIA_API_KEY=$(op read "op://Employee/PIA Personal API Key/password")
   {{- end }}
 fi
