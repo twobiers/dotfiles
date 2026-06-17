@@ -6,6 +6,6 @@ fi
 
 if [[ $(which opencode &>/dev/null && echo $?) == 0 ]]; then
   {{- if dig "work" false .profiles }}
-  export PIA_API_KEY=$(op read "op://Employee/PIA Personal API Key/password")
+  export PIA_API_KEY="{{ onepasswordRead "op://Employee/PIA Personal API Key/password" }}"
   {{- end }}
 fi
