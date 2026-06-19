@@ -1,0 +1,9 @@
+#!/usr/bin/env bash
+
+if command -v code >/dev/null 2>&1; then
+    exec code --wait "$@"
+elif command -v codium >/dev/null 2>&1; then
+    exec codium --wait "$@"
+else
+    exec nano "$@"
+fi
