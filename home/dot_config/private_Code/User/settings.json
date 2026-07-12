@@ -1,15 +1,17 @@
 {
-  "terminal.integrated.fontFamily": "'JetBrainsMono NF', Consolas, 'Courier New', monospace",
+  // Editor
   "editor.fontFamily": "'JetBrainsMono Nerd Font', 'JetBrainsMono NF', Consolas, 'Courier New', monospace",
-  "editor.largeFileOptimizations": false,
-  "vs-kubernetes": {
-    "vs-kubernetes.crd-code-completion": "enabled"
-  },
   "editor.fontLigatures": true,
-  "editor.inlineSuggest.enabled": true,
+  "editor.largeFileOptimizations": false,
   "editor.formatOnSave": true,
   "editor.formatOnSaveMode": "modificationsIfAvailable",
+  "editor.inlineSuggest.enabled": true,
+  "editor.inlineSuggest.showToolbar": "always",
+  "terminal.integrated.fontFamily": "'JetBrainsMono NF', Consolas, 'Courier New', monospace",
   "files.insertFinalNewline": true,
+  "files.autoSave": "afterDelay",
+  "workbench.colorTheme": "Dark 2026",
+  "workbench.editor.empty.hint": "hidden",
 
   // Go
   "[go]": {
@@ -20,10 +22,18 @@
   "go.useLanguageServer": true,
   "go.lintTool": "golangci-lint",
   "go.lintOnSave": "workspace",
+  "gopls": {
+    "ui.semanticTokens": true
+  },
 
-  // JS/TS
-  "[javascript][typescript]": {
-    "updateImportsOnFileMove.enabled": "always",
+  // HTML
+  "[html]": {
+    "editor.defaultFormatter": "vscode.html-language-features"
+  },
+
+  // Helm
+  "[helm]": {
+    "editor.formatOnSave": false
   },
 
   // Java
@@ -33,6 +43,43 @@
   },
   "java.format.settings.url": ".vscode/java-formatter.xml",
   "java.configuration.updateBuildConfiguration": "automatic",
+
+  // JavaScript / TypeScript
+  "[javascript][typescript]": {
+    "updateImportsOnFileMove.enabled": "always",
+  },
+
+  // JSON
+  "[json]": {
+    "editor.defaultFormatter": "vscode.json-language-features"
+  },
+
+  // JSONC
+  "[jsonc]": {
+    "editor.defaultFormatter": "vscode.json-language-features"
+  },
+
+  // Markdown
+  "[markdown]": {
+    "editor.defaultFormatter": "yzhang.markdown-all-in-one"
+  },
+
+  // Nix
+  "[nix]": {
+    "editor.defaultFormatter": "NixOS.nixfmt"
+  },
+  "nix.enableLanguageServer": true,
+  "nix.serverPath": "nixd",
+  "nix.serverArguments": ["--semantic-tokens=true"],
+  "nix.formatterPath": "nixfmt",
+  "nix.serverSettings": {
+    "nixd": {
+      "formatting": {
+        "command": ["nixfmt"]
+      }
+    }
+  },
+  "NixOS.nixfmt/bin": "nixfmt",
 
   // Python
   "[python]": {
@@ -44,38 +91,40 @@
     }
   },
 
-  "[json]": {
-    "editor.defaultFormatter": "vscode.json-language-features"
+  // YAML
+  "[yaml]": {
+    "editor.defaultFormatter": "redhat.vscode-yaml"
   },
+  "yaml.disableSchemaDetection": [
+    "**/.github/workflows/*.yml",
+    "**/.github/workflows/*.yaml",
+    "**/.gitea/workflows/*.yml",
+    "**/.gitea/workflows/*.yaml",
+    "**/.forgejo/workflows/*.yml",
+    "**/.forgejo/workflows/*.yaml"
+  ],
 
-  "[markdown]": {
-    "editor.defaultFormatter": "yzhang.markdown-all-in-one"
-  },
-
-  "[html]": {
-    "editor.defaultFormatter": "vscode.html-language-features"
-  },
-
+  // Extensions
+  "ansible.lightspeed.enabled": false,
+  "claudeCode.preferredLocation": "panel",
+  "cSpell.enabled": false,
+  "errorLens.enabled": true,
   "errorLens.enabledDiagnosticLevels": [
     "error",
     "warning",
     "hint",
     "info"
   ],
+  "errorLens.delay": 1000,
   "github.copilot.enable": {
     "*": true,
     "plaintext": false,
     "markdown": false,
     "sql": true
   },
-  "errorLens.enabled": true,
-  "gopls": {
-    "ui.semanticTokens": true
-  },
-  "errorLens.delay": 1000,
-  "typescript.": "always",
-  "editor.inlineSuggest.showToolbar": "always",
-  "workbench.colorTheme": "Dark 2026",
+  "git.confirmSync": false,
+  "gitlens.ai.model": "vscode",
+  "gitlens.ai.vscode.model": "copilot:gpt-4.1",
   "json.schemaDownload.trustedDomains": {
     "https://schemastore.azurewebsites.net/": true,
     "https://raw.githubusercontent.com/microsoft/vscode/": true,
@@ -86,20 +135,10 @@
     "https://developer.microsoft.com/json-schemas/": true,
     "https://biomejs.dev": true
   },
-  "gitlens.ai.model": "vscode",
-  "gitlens.ai.vscode.model": "copilot:gpt-4.1",
-  "cSpell.enabled": false,
-  "workbench.editor.empty.hint": "hidden",
-  "git.confirmSync": false,
-  "claudeCode.preferredLocation": "panel",
-  "yaml.disableSchemaDetection": [
-    "**/.github/workflows/*.yml",
-    "**/.github/workflows/*.yaml",
-    "**/.gitea/workflows/*.yml",
-    "**/.gitea/workflows/*.yaml",
-    "**/.forgejo/workflows/*.yml",
-    "**/.forgejo/workflows/*.yaml"
-  ],
+  "typescript.": "always",
+  "vs-kubernetes": {
+    "vs-kubernetes.crd-code-completion": "enabled"
+  },
 
   // Telemetry
   "telemetry.telemetryLevel": "off",
