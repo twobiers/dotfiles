@@ -143,5 +143,10 @@
   // Telemetry
   "telemetry.telemetryLevel": "off",
   "redhat.telemetry.enabled": false,
-  "github.copilot.advanced": { "telemetry.enabled": false }
+  "github.copilot.advanced": {
+    "telemetry.enabled": false
+  },
+  "security.workspace.trust.trustedFolders": [
+    "/home/tobi/Repos"
+  ],
 }
