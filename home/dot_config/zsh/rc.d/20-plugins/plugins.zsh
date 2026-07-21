@@ -1,5 +1,9 @@
 #!/usr/bin/env zsh
 
+ZSH_CACHE_DIR="${XDG_CACHE_HOME:-$HOME/.cache}/ohmyzsh"
+mkdir -p "$ZSH_CACHE_DIR"
+mkdir -p "$ZSH_CACHE_DIR/completions"
+
 znap source ohmyzsh/ohmyzsh \
   lib/{clipboard,compfix,directories} \
   plugins/{git,golang,helm,kind,kubectl,podman,ssh,systemd,terraform}
