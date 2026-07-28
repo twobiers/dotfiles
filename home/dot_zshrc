@@ -3,6 +3,9 @@
 PROMPT_EOL_MARK=''
 ENABLE_CORRECTION="true"
 
+[ -f ~/.nix-profile/etc/profile.d/hm-session-vars.sh ] && \
+  source ~/.nix-profile/etc/profile.d/hm-session-vars.sh
+
 for d in $HOME/.config/zsh/rc.d/<->-*(Nn/); do
   for f in "$d"/*.zsh(Nn); do source "$f"; done
 done
