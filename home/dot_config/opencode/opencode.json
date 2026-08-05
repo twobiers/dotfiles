@@ -5,6 +5,16 @@
       "@dietrichgebert/ponytail"
     ],
     "lsp": true,
+    "mcp": {
+      "nixos": {
+        "command": [
+          "nix",
+          "run",
+          "github:utensils/mcp-nixos",
+          "--"
+        ]
+      }
+    },
     "permission": {
         "bash": {
             "*": "ask",
