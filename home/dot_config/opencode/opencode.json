@@ -4,6 +4,7 @@
     "plugin": [
       "@dietrichgebert/ponytail"
     ],
+    "lsp": true,
     "permission": {
         "bash": {
             "*": "ask",
