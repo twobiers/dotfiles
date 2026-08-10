@@ -1,7 +1,7 @@
 font-family = "JetBrainsMono Nerd Font"
 theme = "GitHub Dark"
 split-inherit-working-directory = true
-shell-integration-features=cursor,sudo,title,ssh-env,ssh-terminfo
+shell-integration-features=cursor,sudo,title
 keybind = ctrl+shift+d=new_split:auto
 keybind = ctrl+shift+arrow_down=goto_split:down
 keybind = ctrl+shift+arrow_left=goto_split:left
