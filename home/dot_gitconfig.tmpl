@@ -1,20 +1,20 @@
 [gpg]
   format = "ssh"
 [gpg "ssh"]
-	allowedSignersFile = {{ .chezmoi.homeDir }}/.ssh/allowed_signers
+  allowedSignersFile = {{ .chezmoi.homeDir }}/.ssh/allowed_signers
 
 [column]
-    ui = auto
+  ui = auto
 [commit]
-    gpgsign = true
+  gpgsign = true
 [core]
-    longpaths = true
-    excludesFile = {{ .chezmoi.homeDir }}/.gitignore
-    editor = git-editor
-    fsmonitor = true
+  longpaths = true
+  excludesFile = {{ .chezmoi.homeDir }}/.gitignore
+  editor = git-editor
+  fsmonitor = true
 [user]
-    email = 22715034+twobiers@users.noreply.github.com
-    name = twobiers
+  email = 22715034+twobiers@users.noreply.github.com
+  name = twobiers
 {{- $sshPublicKey := "" }}
 {{- if dig "personal" false .profiles }}
 {{- $sshPublicKey = protonPass "pass://Personal/SSH Key Personal/Public key" -}}
@@ -22,73 +22,75 @@
 {{- $sshPublicKey = onepasswordRead "op://Employee/SSH Key/public key" -}}
 {{- end }}
 {{- if $sshPublicKey }}
-    signingkey = "{{- printf "key::%s" ($sshPublicKey | trim) -}}"
+  signingkey = "{{- printf "key::%s" ($sshPublicKey | trim) -}}"
 {{- end }}
 
 # Conditional Author includes
 # [includeIf "gitdir/i:<directory>/**"]
 #    path = ~/.config/git/author-<name>.inc
 [includeIf "gitdir/i:PROCYDE/**"]
-   path = ~/.config/git/author-procyde.inc
+  path = ~/.config/git/author-procyde.inc
 [includeIf "gitdir/i:jupiter8595746/**"]
-   path = ~/.config/git/author-jupiter.inc
+  path = ~/.config/git/author-jupiter.inc
 
 [url "git@github.com:"]
-	  insteadOf = "https://github.com/"
+  insteadOf = "https://github.com/"
 [url "git@github.com:"]
-	  insteadOf = "gh:"
+  insteadOf = "gh:"
 [url "git@gitlab.com:"]
-	  insteadOf = "https://gitlab.com/"
+  insteadOf = "https://gitlab.com/"
 [url "git@gitlab.com:"]
-	  insteadOf = "gl:"
+  insteadOf = "gl:"
 
 [alias]
-    yolo = "!git add -A && git commit -m \"$(curl --silent --fail http://whatthecommit.com/index.txt)\""
-    c = commit --verbose
-    ca = commit -a --verbose
-    cm = commit -m
-    cam = commit -a -m
-    cane = commit --amend --no-edit
+  yolo = "!git add -A && git commit -m \"$(curl --silent --fail http://whatthecommit.com/index.txt)\""
+  c = commit --verbose
+  ca = commit -a --verbose
+  cm = commit -m
+  cam = commit -a -m
+  cane = commit --amend --no-edit
 
-    d = diff
-    dc = diff --cached
-    ds = diff --staged
+  d = diff
+  dc = diff --cached
+  ds = diff --staged
 
-    s = status -s
+  s = status -s
 
-    l = log --pretty=format:"%C(yellow)%h\\ %ad%Cred%d\\ %Creset%s%Cblue\\ [%cn]" --decorate --date=short
-    # ll = "log --pretty=format:\"%C(yellow)%h%Creset %C(blue)%ad%Creset %s\" --date=format:'%Y-%m-%d %H:%M:%S'"
-    ll = "log --graph --topo-order --decorate --all --boundary --date=short --abbrev-commit --pretty=format:'%Cgreen%ad %Cred%h%Creset -%C(yellow)%d%Creset %s %Cblue[%cn]%Creset %Cblue%G?%Creset'"
-    lll = "log --graph --topo-order --boundary --decorate --all --date=iso8601-strict --no-abbrev-commit --abbrev=40 --pretty=format:'␟%ad␟%h␟%s␟%cn <%ce>␟%G?' | git name-rev --stdin --always --name-only | awk 'BEGIN { FS="␟"; OFS="␟"; } { $4 = substr($4, 1, 50); print $0; }' | column -s'␟' -t"
-    change-commits = "!f() { VAR=$1; OLD=$2; NEW=$3; shift 3; git filter-branch --env-filter \"if [[ \\\"$`echo $VAR`\\\" = '$OLD' ]]; then export $VAR='$NEW'; fi\" $@; }; f"
+  l = log --pretty=format:"%C(yellow)%h\\ %ad%Cred%d\\ %Creset%s%Cblue\\ [%cn]" --decorate --date=short
+  # ll = "log --pretty=format:\"%C(yellow)%h%Creset %C(blue)%ad%Creset %s\" --date=format:'%Y-%m-%d %H:%M:%S'"
+  ll = "log --graph --topo-order --decorate --all --boundary --date=short --abbrev-commit --pretty=format:'%Cgreen%ad %Cred%h%Creset -%C(yellow)%d%Creset %s %Cblue[%cn]%Creset %Cblue%G?%Creset'"
+  lll = "log --graph --topo-order --boundary --decorate --all --date=iso8601-strict --no-abbrev-commit --abbrev=40 --pretty=format:'␟%ad␟%h␟%s␟%cn <%ce>␟%G?' | git name-rev --stdin --always --name-only | awk 'BEGIN { FS="␟"; OFS="␟"; } { $4 = substr($4, 1, 50); print $0; }' | column -s'␟' -t"
+  change-commits = "!f() { VAR=$1; OLD=$2; NEW=$3; shift 3; git filter-branch --env-filter \"if [[ \\\"$`echo $VAR`\\\" = '$OLD' ]]; then export $VAR='$NEW'; fi\" $@; }; f"
 
-    gfx='git commit --fixup $(git log $(git merge-base main HEAD)..HEAD --oneline| fzf| cut -d" " -f1)'
+  gfx='git commit --fixup $(git log $(git merge-base main HEAD)..HEAD --oneline| fzf| cut -d" " -f1)'
 [log]
-    date = iso
+  date = iso
 [pull]
-    rebase = true
+  rebase = true
 [push]
-    autosetupremote = true
+  autosetupremote = true
 [diff]
-    algorithm = histogram
+  algorithm = histogram
 [init]
-    defaultBranch = main
+  defaultBranch = main
 [rerere]
-    enabled = true
+  enabled = true
 [branch]
-	  sort = -committerdate
+  sort = -committerdate
 [tag]
-    sort = version:refname
+  sort = version:refname
 [rebase]
-    autoSquash = true
-    autoStash = true
-    updateRefs = true
+  autoSquash = true
+  autoStash = true
+  updateRefs = true
+[merge]
+  conflictstyle = zdiff3
 [diff]
-    algorithm = histogram
-    colorMoved = plain
-    mnemonicPrefix = true
-    renames = true
+  algorithm = histogram
+  colorMoved = plain
+  mnemonicPrefix = true
+  renames = true
 [fetch]
-    prune = true
-    pruneTags = true
-    all = true
+  prune = true
+  pruneTags = true
+  all = true
