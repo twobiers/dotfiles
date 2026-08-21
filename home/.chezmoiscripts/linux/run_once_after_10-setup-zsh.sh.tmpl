@@ -1,4 +1,4 @@
-{{- if not (eq .chezmoi.osRelease.id "nixos") }}
+{{- if not (eq .chezmoi.osRelease.id "nixos") -}}
 #!/usr/bin/env bash
 set -eufo pipefail
 
@@ -7,8 +7,8 @@ source "${CHEZMOI_SOURCE_DIR}/../lib/lib.sh"
 
 log::info "Begin Setting Up Zsh"
 
-export SHELL="/usr/bin/env zsh"
-chsh -s "/usr/bin/env zsh"
+export SHELL="$(command -v zsh)"
+chsh -s "$(command -v zsh)"
 
 log::info "Finish Setting Up Zsh"
 {{- end }}
