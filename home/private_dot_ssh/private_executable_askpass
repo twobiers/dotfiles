@@ -1,0 +1,22 @@
+#!/usr/bin/env bash
+# Password askpass for NodeFactory-* hosts only. Answers only user@host
+# pairs listed in ~/.ssh/askpass.allow; everything else (host keys,
+# key passphrases, other hosts) exits 1 so ssh fails fast instead of looping.
+# $1 looks like "user@host's password: " (host = resolved HostName).
+
+ALLOW="$HOME/.ssh/askpass.allow"
+VAULT="ofq6rjt3v6fkf4jmmevbltqreu"
+
+entry=$(printf '%s' "$1" | sed -n "s/^\\(.*\\)'s password: /\\1/p")
+[ -z "$entry" ] && exit 1
+
+grep -Fxq "$entry" "$ALLOW" || exit 1
+
+user=${entry%%@*}
+host=${entry#*@}
+
+# 1Password item names can't contain '@', so items are named ssh-<user>-<host>
+item="ssh-$user-$host"
+if ! op read --no-newline "op://$VAULT/$item/password"; then
+  op read --no-newline "op://$VAULT/ssh-nodefactory-default/password" || exit 1
+fi
