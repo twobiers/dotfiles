@@ -1,76 +1,74 @@
 {
   "$schema": "https://opencode.ai/config.json",
-  "autoupdate": false,
-  "plugin": [
+  "default_agent": "build",
+  "update": "disable",
+  "plugins": [
     "@dietrichgebert/ponytail"
   ],
-  "lsp": false,
   "mcp": {
-    "nixos": {
-      "command": [
-        "nix",
-        "run",
-        "github:utensils/mcp-nixos",
-        "--"
-      ]
+    "servers": {
+      "nixos": {
+        "type": "local",
+        "command": [
+          "nix",
+          "run",
+          "github:utensils/mcp-nixos",
+          "--"
+        ],
+        "disabled": false
+      }
     }
   },
-  "permission": {
-    "bash": {
-      "*": "ask",
-      "git *": "allow",
-      "grep *": "allow",
-      "curl *": "allow",
-      "curl *-X POST*": "ask",
-      "curl *-X PUT*": "ask",
-      "curl *-X PATCH*": "ask",
-      "curl *-X DELETE*": "ask",
-      "curl *--request*": "ask",
-      "curl * -d *": "ask",
-      "curl *--data*": "ask",
-      "curl *--json*": "ask",
-      "curl * -F *": "ask",
-      "curl * -T *": "ask",
-      "curl *| *": "ask",
-      "ls*": "allow",
-      "pwd": "allow",
-      "cat *": "allow",
-      "head *": "allow",
-      "tail *": "allow",
-      "rg *": "allow",
-      "wc *": "allow",
-      "git status*": "allow",
-      "git diff*": "allow",
-      "git log*": "allow",
-      "git show*": "allow",
-      "git branch": "allow",
-      "kubectl get *": "allow",
-      "kubectl describe *": "allow",
-      "kubectl logs *": "allow",
-      "kubectl top *": "allow",
-      "kubectl apply*": "ask",
-      "kubectl delete*": "ask",
-      "kubectl patch*": "ask",
-      "kubectl edit*": "ask",
-      "kubectl exec*": "ask",
-      "helm upgrade*": "ask",
-      "helm uninstall*": "ask",
-      "argocd app sync*": "ask",
-      "git push*": "deny",
-      "rm -rf*": "deny"
-    },
-    "edit": {
-      "*": "allow"
-    },
-    "glob": "allow",
-    "grep": "allow",
-    "list": "allow",
-    "read": {
-      "*": "allow",
-      "*.env": "deny",
-      "*.env.*": "deny",
-      "*.env.example": "allow"
-    },
-    "webfetch": "allow"
-  }
+  "permissions": [
+    { "action": "shell", "resource": "git *", "effect": "allow" },
+    { "action": "shell", "resource": "grep *", "effect": "allow" },
+    { "action": "shell", "resource": "git status*", "effect": "allow" },
+    { "action": "shell", "resource": "git diff*", "effect": "allow" },
+    { "action": "shell", "resource": "git log*", "effect": "allow" },
+    { "action": "shell", "resource": "git show*", "effect": "allow" },
+    { "action": "shell", "resource": "git branch", "effect": "allow" },
+    { "action": "shell", "resource": "ls*", "effect": "allow" },
+    { "action": "shell", "resource": "pwd", "effect": "allow" },
+    { "action": "shell", "resource": "cat *", "effect": "allow" },
+    { "action": "shell", "resource": "head *", "effect": "allow" },
+    { "action": "shell", "resource": "tail *", "effect": "allow" },
+    { "action": "shell", "resource": "rg *", "effect": "allow" },
+    { "action": "shell", "resource": "wc *", "effect": "allow" },
+    { "action": "shell", "resource": "kubectl get *", "effect": "allow" },
+    { "action": "shell", "resource": "kubectl describe *", "effect": "allow" },
+    { "action": "shell", "resource": "kubectl logs *", "effect": "allow" },
+    { "action": "shell", "resource": "kubectl top *", "effect": "allow" },
+    { "action": "shell", "resource": "curl *", "effect": "allow" },
+    { "action": "shell", "resource": "curl *-X POST*", "effect": "ask" },
+    { "action": "shell", "resource": "curl *-X PUT*", "effect": "ask" },
+    { "action": "shell", "resource": "curl *-X PATCH*", "effect": "ask" },
+    { "action": "shell", "resource": "curl *-X DELETE*", "effect": "ask" },
+    { "action": "shell", "resource": "curl *--request*", "effect": "ask" },
+    { "action": "shell", "resource": "curl * -d *", "effect": "ask" },
+    { "action": "shell", "resource": "curl *--data*", "effect": "ask" },
+    { "action": "shell", "resource": "curl *--json*", "effect": "ask" },
+    { "action": "shell", "resource": "curl * -F *", "effect": "ask" },
+    { "action": "shell", "resource": "curl * -T *", "effect": "ask" },
+    { "action": "shell", "resource": "curl *| *", "effect": "ask" },
+    { "action": "shell", "resource": "kubectl apply*", "effect": "ask" },
+    { "action": "shell", "resource": "kubectl delete*", "effect": "ask" },
+    { "action": "shell", "resource": "kubectl patch*", "effect": "ask" },
+    { "action": "shell", "resource": "kubectl edit*", "effect": "ask" },
+    { "action": "shell", "resource": "kubectl exec*", "effect": "ask" },
+    { "action": "shell", "resource": "helm upgrade*", "effect": "ask" },
+    { "action": "shell", "resource": "helm uninstall*", "effect": "ask" },
+    { "action": "shell", "resource": "argocd app sync*", "effect": "ask" },
+    { "action": "shell", "resource": "git push*", "effect": "deny" },
+    { "action": "shell", "resource": "rm -rf*", "effect": "deny" },
+    { "action": "shell", "resource": "*", "effect": "ask" },
+    { "action": "edit", "resource": "*", "effect": "allow" },
+    { "action": "glob", "resource": "*", "effect": "allow" },
+    { "action": "grep", "resource": "*", "effect": "allow" },
+    { "action": "list", "resource": "*", "effect": "allow" },
+    { "action": "read", "resource": "*.env", "effect": "deny" },
+    { "action": "read", "resource": "*.env.*", "effect": "deny" },
+    { "action": "read", "resource": "*.env.example", "effect": "allow" },
+    { "action": "read", "resource": "*", "effect": "allow" },
+    { "action": "webfetch", "resource": "*", "effect": "allow" }
+  ]
 }
