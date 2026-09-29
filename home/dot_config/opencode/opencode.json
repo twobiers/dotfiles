@@ -19,7 +19,45 @@
     "bash": {
       "*": "ask",
       "git *": "allow",
-      "grep *": "allow"
+      "grep *": "allow",
+      "curl *": "allow",
+      "curl *-X POST*": "ask",
+      "curl *-X PUT*": "ask",
+      "curl *-X PATCH*": "ask",
+      "curl *-X DELETE*": "ask",
+      "curl *--request*": "ask",
+      "curl * -d *": "ask",
+      "curl *--data*": "ask",
+      "curl *--json*": "ask",
+      "curl * -F *": "ask",
+      "curl * -T *": "ask",
+      "curl *| *": "ask",
+      "ls*": "allow",
+      "pwd": "allow",
+      "cat *": "allow",
+      "head *": "allow",
+      "tail *": "allow",
+      "rg *": "allow",
+      "wc *": "allow",
+      "git status*": "allow",
+      "git diff*": "allow",
+      "git log*": "allow",
+      "git show*": "allow",
+      "git branch": "allow",
+      "kubectl get *": "allow",
+      "kubectl describe *": "allow",
+      "kubectl logs *": "allow",
+      "kubectl top *": "allow",
+      "kubectl apply*": "ask",
+      "kubectl delete*": "ask",
+      "kubectl patch*": "ask",
+      "kubectl edit*": "ask",
+      "kubectl exec*": "ask",
+      "helm upgrade*": "ask",
+      "helm uninstall*": "ask",
+      "argocd app sync*": "ask",
+      "git push*": "deny",
+      "rm -rf*": "deny"
     },
     "edit": {
       "*": "allow"
@@ -32,6 +70,7 @@
       "*.env": "deny",
       "*.env.*": "deny",
       "*.env.example": "allow"
-    }
+    },
+    "webfetch": "allow"
   }
 }
