@@ -5,6 +5,21 @@
   "plugins": [
     "@dietrichgebert/ponytail"
   ],
+  "provider": {
+    "procyde": {
+      "npm": "@ai-sdk/openai-compatible",
+      "name": "Procyde Intelligent Assistant",
+      "options": {
+        "baseURL": "https://pia.procyde.online/v1",
+        "apiKey": "{env:PIA_API_KEY}"
+      },
+      "models": {
+        "PIA-1": {
+          "name": "PIA-1"
+        }
+      }
+    }
+  },
   "mcp": {
     "servers": {
       "nixos": {

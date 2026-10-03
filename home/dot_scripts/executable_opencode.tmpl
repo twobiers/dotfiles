@@ -1,0 +1,44 @@
+#!/usr/bin/env bash
+# Wrapper that injects PIA_API_KEY only into the opencode process tree,
+# instead of exporting it to every shell.
+
+self="$(realpath "${BASH_SOURCE[0]}")"
+OPENCODE_BIN=""
+while IFS= read -r candidate; do
+  if [[ -x "$candidate" && "$(realpath "$candidate")" != "$self" ]]; then
+    OPENCODE_BIN="$candidate"
+    break
+  fi
+done < <(type -ap opencode; printf '%s\n' "$HOME/.opencode/bin/opencode" "$HOME/.local/bin/opencode" /usr/local/bin/opencode /usr/bin/opencode)
+
+if [[ -z "$OPENCODE_BIN" ]]; then
+  echo "opencode wrapper: opencode binary not found" >&2
+  exit 127
+fi
+
+if [[ -z "${PIA_API_KEY:-}" ]]; then
+{{- if dig "work" false .profiles }}
+  PIA_API_KEY="$(op read "op://Employee/PIA Personal API Key/password" 2>/dev/null)"
+{{- else if dig "personal" false .profiles }}
+  PIA_API_KEY="$(pass-cli item view "pass://PROCYDE/PIA API Key/API Key" 2>/dev/null | tr -d '\n')"
+{{- end }}
+fi
+
+if [[ -n "${PIA_API_KEY:-}" ]]; then
+  export PIA_API_KEY
+else
+  echo "opencode wrapper: could not load PIA_API_KEY, the procyde provider will not work" >&2
+fi
+
+# The background service resolves provider keys from its own environment.
+# Restart it if it was started without the key (e.g. not through this wrapper).
+if [[ -n "${PIA_API_KEY:-}" && -d /proc ]]; then
+  for pid in $(pgrep -u "$UID" -f "opencode serve --service"); do
+    if ! tr '\0' '\n' <"/proc/$pid/environ" 2>/dev/null | grep -q '^PIA_API_KEY=.'; then
+      "$OPENCODE_BIN" service restart >/dev/null 2>&1
+      break
+    fi
+  done
+fi
+
+exec "$OPENCODE_BIN" "$@"
