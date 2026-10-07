@@ -1,6 +1,4 @@
-import { Plugin } from "@opencode/plugin"
-
-export default Plugin.define({
+export default {
   id: "env-protection",
   async setup(ctx) {
     await ctx.tool.hook("execute.before", (event) => {
@@ -10,4 +8,4 @@ export default Plugin.define({
       }
     })
   },
-})
+}

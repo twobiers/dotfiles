@@ -3,7 +3,8 @@
   "default_agent": "build",
   "update": "disable",
   "plugins": [
-    "@dietrichgebert/ponytail"
+    "@dietrichgebert/ponytail",
+    "superpowers@git+https://github.com/obra/superpowers.git"
   ],
   "provider": {
     "procyde": {
@@ -35,6 +36,19 @@
     }
   },
   "permissions": [
+    { "action": "shell", "resource": "git push*", "effect": "deny" },
+    { "action": "shell", "resource": "rm -rf*", "effect": "ask" },
+    { "action": "shell", "resource": "curl *-X POST*", "effect": "ask" },
+    { "action": "shell", "resource": "curl *-X PUT*", "effect": "ask" },
+    { "action": "shell", "resource": "curl *-X PATCH*", "effect": "ask" },
+    { "action": "shell", "resource": "curl *-X DELETE*", "effect": "ask" },
+    { "action": "shell", "resource": "curl *--request*", "effect": "ask" },
+    { "action": "shell", "resource": "curl * -d *", "effect": "ask" },
+    { "action": "shell", "resource": "curl *--data*", "effect": "ask" },
+    { "action": "shell", "resource": "curl *--json*", "effect": "ask" },
+    { "action": "shell", "resource": "curl * -F *", "effect": "ask" },
+    { "action": "shell", "resource": "curl * -T *", "effect": "ask" },
+    { "action": "shell", "resource": "curl *| *", "effect": "ask" },
     { "action": "shell", "resource": "git *", "effect": "allow" },
     { "action": "shell", "resource": "grep *", "effect": "allow" },
     { "action": "shell", "resource": "git status*", "effect": "allow" },
@@ -54,17 +68,6 @@
     { "action": "shell", "resource": "kubectl logs *", "effect": "allow" },
     { "action": "shell", "resource": "kubectl top *", "effect": "allow" },
     { "action": "shell", "resource": "curl *", "effect": "allow" },
-    { "action": "shell", "resource": "curl *-X POST*", "effect": "ask" },
-    { "action": "shell", "resource": "curl *-X PUT*", "effect": "ask" },
-    { "action": "shell", "resource": "curl *-X PATCH*", "effect": "ask" },
-    { "action": "shell", "resource": "curl *-X DELETE*", "effect": "ask" },
-    { "action": "shell", "resource": "curl *--request*", "effect": "ask" },
-    { "action": "shell", "resource": "curl * -d *", "effect": "ask" },
-    { "action": "shell", "resource": "curl *--data*", "effect": "ask" },
-    { "action": "shell", "resource": "curl *--json*", "effect": "ask" },
-    { "action": "shell", "resource": "curl * -F *", "effect": "ask" },
-    { "action": "shell", "resource": "curl * -T *", "effect": "ask" },
-    { "action": "shell", "resource": "curl *| *", "effect": "ask" },
     { "action": "shell", "resource": "kubectl apply*", "effect": "ask" },
     { "action": "shell", "resource": "kubectl delete*", "effect": "ask" },
     { "action": "shell", "resource": "kubectl patch*", "effect": "ask" },
@@ -73,8 +76,6 @@
     { "action": "shell", "resource": "helm upgrade*", "effect": "ask" },
     { "action": "shell", "resource": "helm uninstall*", "effect": "ask" },
     { "action": "shell", "resource": "argocd app sync*", "effect": "ask" },
-    { "action": "shell", "resource": "git push*", "effect": "deny" },
-    { "action": "shell", "resource": "rm -rf*", "effect": "deny" },
     { "action": "shell", "resource": "*", "effect": "ask" },
     { "action": "edit", "resource": "*", "effect": "allow" },
     { "action": "glob", "resource": "*", "effect": "allow" },
