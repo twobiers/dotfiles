@@ -6,6 +6,17 @@
     "@dietrichgebert/ponytail",
     "superpowers@git+https://github.com/obra/superpowers.git"
   ],
+  "tui": {
+    "scroll_speed": 1,
+    "scroll_acceleration": {
+      "enabled": false
+    }
+  },
+  "instructions": [
+    "AGENTS.md",
+    "README.md",
+    ".agent/*.md"
+  ],
   "provider": {
     "procyde": {
       "npm": "@ai-sdk/openai-compatible",

@@ -1,0 +1,51 @@
+{
+    "rulebook_version": 1,
+    "name": "kube-rules",
+    "version": "1.0.0",
+    "allowed_commands": [
+        "kubectl",
+        "helm",
+        "argocd"
+    ],
+    "rules": [
+        {
+            "name": "kubectl-mutations",
+            "command": "kubectl",
+            "block_args": [
+                "delete",
+                "replace",
+                "drain",
+                "cordon",
+                "uncordon",
+                "taint"
+            ],
+            "reason": "Mutating kubectl verbs are blocked for the agent."
+        },
+        {
+            "name": "helm-mutations",
+            "command": "helm",
+            "block_args": [
+                "install",
+                "upgrade",
+                "uninstall",
+                "delete",
+                "rollback"
+            ],
+            "reason": "Mutating helm verbs are blocked for the agent."
+        },
+        {
+            "name": "argocd-mutations",
+            "command": "argocd",
+            "block_args": [
+                "sync",
+                "delete",
+                "rollback",
+                "terminate-op",
+                "set",
+                "patch",
+                "create"
+            ],
+            "reason": "Mutating argocd verbs are blocked for the agent."
+        }
+    ]
+}
