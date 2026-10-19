@@ -4,7 +4,7 @@
   "update": "disable",
   "plugins": [
     "@dietrichgebert/ponytail",
-    "superpowers@git+https://github.com/obra/superpowers.git"
+    "superlite@git+https://github.com/iha2/superlite.git"
   ],
   "instructions": [
     "AGENTS.md",
