@@ -1,3 +1,4 @@
+{{- $hasDelta := lookPath "delta" -}}
 [gpg]
   format = "ssh"
 [gpg "ssh"]
@@ -12,6 +13,11 @@
   excludesFile = {{ .chezmoi.homeDir }}/.gitignore
   editor = git-editor
   fsmonitor = true
+{{- if $hasDelta }}
+  pager = delta
+{{- else }}
+  pager = less -FRX
+{{- end }}
 [user]
   email = 22715034+twobiers@users.noreply.github.com
   name = twobiers
@@ -69,8 +75,6 @@
   rebase = true
 [push]
   autosetupremote = true
-[diff]
-  algorithm = histogram
 [init]
   defaultBranch = main
 [rerere]
@@ -90,6 +94,13 @@
   colorMoved = plain
   mnemonicPrefix = true
   renames = true
+{{- if $hasDelta }}
+[interactive]
+  diffFilter = delta --color-only
+[delta]
+  navigate = true
+  side-by-side = false
+{{- end }}
 [fetch]
   prune = true
   pruneTags = true
