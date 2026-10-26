@@ -16,6 +16,69 @@
   // Window
   "window.title": "${rootName} - ${activeEditorShort}",
 
+  // Prevent catastrophic imports/watches when a workspace is opened high
+  // in the tree (e.g. $HOME) — see the 2026-10-26 JDT GC-thrash incident
+  "files.exclude": {
+    "**/.cache": true,
+    "**/.devenv*": true,
+    "**/.direnv": true,
+    "**/.git": true,
+    "**/.gradle": true,
+    "**/.m2": true,
+    "**/.mozilla": true,
+    "**/.nix-*": true,
+    "**/.opencode": true,
+    "**/.venv": true,
+    "**/node_modules": true,
+    "**/result": true,
+    "**/target": true
+  },
+  "search.exclude": {
+    "**/.cache": true,
+    "**/.devenv*": true,
+    "**/.direnv": true,
+    "**/.m2": true,
+    "**/.mozilla": true,
+    "**/.nix-*": true,
+    "**/.opencode": true,
+    "**/.venv": true,
+    "**/node_modules": true,
+    "**/result": true,
+    "**/target": true
+  },
+  "files.watcherExclude": {
+    "**/.cache/**": true,
+    "**/.devenv*/**": true,
+    "**/.direnv/**": true,
+    "**/.git/objects/**": true,
+    "**/.gradle/**": true,
+    "**/.m2/**": true,
+    "**/.mozilla/**": true,
+    "**/.nix-*/**": true,
+    "**/.opencode/**": true,
+    "**/.venv/**": true,
+    "**/node_modules/**": true,
+    "**/result/**": true,
+    "**/target/**": true
+  },
+  "java.import.exclusions": [
+    "**/.cache/**",
+    "**/.devenv*/**",
+    "**/.direnv/**",
+    "**/.git/**",
+    "**/.gradle/**",
+    "**/.m2/**",
+    "**/.mozilla/**",
+    "**/.nix-*/**",
+    "**/.opencode/**",
+    "**/.venv/**",
+    "**/node_modules/**",
+    "**/result/**",
+    "**/target/**",
+    "**/etc/**",
+    "**/var/**"
+  ],
+
   // Go
   "[go]": {
     "editor.defaultFormatter": "golang.go",
