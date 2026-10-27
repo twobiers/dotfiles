@@ -4,7 +4,9 @@ source <(kubie generate-completion zsh)
 
 # Don't inherit KUBECONFIG from parent shells (e.g. inside a kubie shell);
 # kubie manages context switching itself, starship/kubectl fall back to ~/.kube/config
-unset KUBECONFIG
+# — but never clobber a kubie shell's own KUBECONFIG, or the first prompt in a
+# freshly spawned kubie shell shows the wrong context
+[[ -n "$KUBIE_KUBECONFIG" ]] || unset KUBECONFIG
 
 
 # kubectl function to edit a configmap in a temporary file
