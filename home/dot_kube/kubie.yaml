@@ -1,3 +1,9 @@
 prompt:
   # starship already shows context and namespace
   disable: true
+fzf:
+  mouse: true
+  reverse: false
+  ignore_case: false
+  info_hidden: false
+  height: "20%"
