@@ -1,0 +1,3 @@
+prompt:
+  # starship already shows context and namespace
+  disable: true

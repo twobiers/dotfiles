@@ -3,7 +3,13 @@
 if [[ $(which kubectl &>/dev/null && echo $?) == 0 ]]; then
   alias k="kubectl"
   znap source ohmyzsh/ohmyzsh \
-    plugins/{kubectl,kubectx}
+    plugins/kubectl
+  if [[ $(which kubie &>/dev/null && echo $?) == 0 ]]; then
+    alias kubectx='kubie ctx'
+    alias kubens='kubie ns'
+    alias kctx='kubie ctx'
+    alias kns='kubie ns'
+  fi
   alias k='kubectl'
   alias ksys='kubectl --namespace=kube-system'
   alias ka='kubectl apply --recursive -f'
