@@ -1,0 +1,99 @@
+#!/usr/bin/env python3
+"""Merge chezmoi's VS Code baseline into the live VS Code user config.
+
+Baseline keys are enforced (they win on conflict); keys that only exist in
+the live file are preserved, so local changes made through the VS Code UI
+survive. Run on every `chezmoi apply` (see .chezmoiscripts/) or by hand.
+
+Usage: vscode-sync [--dry-run]
+"""
+
+import json
+import re
+import shutil
+import sys
+import time
+from pathlib import Path
+
+BASELINE = Path.home() / ".config" / "vscode-baseline"
+TARGET = Path.home() / ".config" / "Code" / "User"
+FILES = ["settings.json", "keybindings.json"]
+
+
+def strip_jsonc(text: str) -> str:
+    # VS Code settings are JSONC: strip // and /* */ comments without
+    # touching // inside strings, then remove trailing commas
+    out = []
+    i, n = 0, len(text)
+    in_str = False
+    while i < n:
+        c = text[i]
+        if in_str:
+            out.append(c)
+            if c == "\\" and i + 1 < n:
+                out.append(text[i + 1])
+                i += 2
+                continue
+            if c == '"':
+                in_str = False
+            i += 1
+        elif c == '"':
+            in_str = True
+            out.append(c)
+            i += 1
+        elif c == "/" and i + 1 < n and text[i + 1] == "/":
+            i = text.find("\n", i)
+            if i == -1:
+                break
+        elif c == "/" and i + 1 < n and text[i + 1] == "*":
+            i = text.find("*/", i)
+            if i == -1:
+                break
+            i += 2
+        else:
+            out.append(c)
+            i += 1
+    return re.sub(r",(\s*[}\]])", r"\1", "".join(out))
+
+
+def load_jsonc(path: Path):
+    return json.loads(strip_jsonc(path.read_text()))
+
+
+def merge(base, local):
+    # baseline wins on conflict; local-only keys are kept
+    if isinstance(base, dict) and isinstance(local, dict):
+        out = dict(local)
+        for k, v in base.items():
+            out[k] = merge(v, out[k]) if k in out else v
+        return out
+    return base
+
+
+def sync(name: str, dry: bool) -> None:
+    base_path = BASELINE / name
+    live_path = TARGET / name
+    if not base_path.exists():
+        sys.exit(f"missing baseline: {base_path}")
+    merged = merge(load_jsonc(base_path), load_jsonc(live_path) if live_path.exists() else {})
+    current = live_path.read_text() if live_path.exists() else ""
+    new = json.dumps(merged, indent=4, ensure_ascii=False) + "\n"
+    if new == current:
+        print(f"{name}: up to date")
+        return
+    if not dry:
+        if live_path.exists():
+            shutil.copy2(live_path, live_path.with_suffix(f".json.bak-{time.strftime('%Y%m%d-%H%M%S')}"))
+        live_path.parent.mkdir(parents=True, exist_ok=True)
+        live_path.write_text(new)
+    print(f"{name}: {'would update' if dry else 'updated'} ({len(new)} bytes)")
+
+
+def main():
+    dry = "--dry-run" in sys.argv
+    for name in FILES:
+        sync(name, dry)
+
+
+if __name__ == "__main__":
+    main()
