@@ -18,7 +18,13 @@ if type "docker" &> /dev/null; then
   export COMPOSE_DOCKER_CLI_BUILD=1
 fi
 
-if type "code" &> /dev/null; then
+# In a VS Code integrated terminal, open files in the existing window;
+# otherwise use a terminal editor. --wait blocks until the file is closed.
+if [[ "$TERM_PROGRAM" == "vscode" ]] && type "code" &>/dev/null; then
+  export EDITOR="code --wait"
+elif type "micro" &>/dev/null; then
+  export EDITOR="micro"
+elif type "code" &>/dev/null; then
   export EDITOR="code --wait"
 fi
 
