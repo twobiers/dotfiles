@@ -9,8 +9,17 @@ test-vm.sh
 
 
 # Exclude configs to prevent a blown up home directory
+
+# micro runtime state
+.config/micro/backups/**
+.config/micro/buffers/**
+
+# VS Code user config is merged from .config/vscode-baseline by vscode-sync
+# (baseline keys enforced, local changes preserved), never managed directly
+.config/Code/User/**
 {{- if not (dig "work" false .profiles) }}
   .ssh/config.work
+  .config/zsh/rc.d/30-tools/ssh-work.zsh
 {{- end }}
 {{- if not (dig "personal" false .profiles) }}
   .ssh/config.private
