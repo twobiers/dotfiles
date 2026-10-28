@@ -1,2 +1,5 @@
+{{- if dig "personal" false .profiles }}
 Include ~/.ssh/config.private
+{{- else if dig "work" false .profiles }}
 Include ~/.ssh/config.work
+{{- end }}
