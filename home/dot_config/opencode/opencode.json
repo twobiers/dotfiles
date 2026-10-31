@@ -4,7 +4,8 @@
   "update": "disable",
   "plugins": [
     "@dietrichgebert/ponytail",
-    "superpowers@git+https://github.com/obra/superpowers.git"
+    "superpowers@git+https://github.com/obra/superpowers.git",
+    "opencode-mem@v2.38.0"
   ],
   "instructions": [
     "AGENTS.md",
