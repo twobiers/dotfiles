@@ -4,9 +4,22 @@
 - No filler phrases ("this commit", "various fixes", "minor changes")
 
 ## Code comments
-- Only comment non-obvious reasoning, tradeoffs, or gotchas
-- Never describe what the code visibly does
-- Don't restate function/variable names in prose
+
+Default to no comment. Prefer better names, smaller functions or types.
+
+Only comment to explain:
+
+- **why** something non-obvious is done (constraint, trade-off, workaround + issue link)
+- **what breaks** if the obvious change is made
+- the **contract** of exported/public APIs
+
+Never:
+
+- restate what the code does
+- describe your changes or history ("added", "fixed", "now uses"); that goes in the commit message
+- leave commented-out code or untracked TODOs
+
+When changing code, fix or delete any comment it makes wrong. Don't touch comments in unrelated code.
 
 ## Scope discipline
 - Don't refactor, rename, or reformat code outside the requested change
