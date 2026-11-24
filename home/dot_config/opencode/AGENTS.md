@@ -33,3 +33,27 @@
 ## Diffs & output
 - Show diffs for review before applying multi-file changes
 - Don't regenerate/rewrite an entire file when a targeted patch works
+
+
+## Waiting for state changes
+Avoid using a bare `sleep N` to wait. Block on the actual condition, always with an explicit timeout.
+
+| Waiting for                          | Use                                                                                                                 |
+| ------------------------------------ | ------------------------------------------------------------------------------------------------------------------- |
+| Pod/Deployment ready                 | `kubectl rollout status deploy/x --timeout=120s` / `kubectl wait --for=condition=Ready pod -l app=x --timeout=120s` |
+| Arbitrary field                      | `kubectl wait --for=jsonpath='{.status.phase}'=Bound pvc/x --timeout=60s`                                           |
+| Deletion                             | `kubectl wait --for=delete pod/x --timeout=60s`                                                                     |
+| Job                                  | `kubectl wait --for=condition=complete job/x --timeout=300s` (on timeout also check `condition=failed`)             |
+| CRs (Certificate, ExternalSecret, …) | `kubectl wait --for=condition=Ready certificate/x --timeout=120s`                                                   |
+| ArgoCD app                           | `argocd app wait x --sync --health --timeout 300`                                                                   |
+| HTTP endpoint                        | `curl -sf --retry 30 --retry-delay 2 --retry-all-errors --retry-connrefused URL`                                    |
+| Log line                             | `timeout 120 kubectl logs -f pod/x \| grep -m1 'pattern'`                                                           |
+| File appears                         | `inotifywait -e create,moved_to --timeout 60 DIR`                                                                   |
+| Process exit                         | `wait $PID` or `tail --pid=$PID -f /dev/null`                                                                       |
+| Containers                           | `docker compose up --wait`, `docker wait`                                                                           |
+
+If no event or wait primitive exists, use a bounded poll:
+`timeout 60 bash -c 'until <check>; do sleep 1; done'`
+
+Never use `kubectl get -w` or any unbounded `-f` follow without `timeout` (they never return).
+On timeout: diagnose (`kubectl describe`, `kubectl get events --sort-by=.lastTimestamp`, logs). Do not retry with a longer sleep.
