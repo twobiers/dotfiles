@@ -7,3 +7,11 @@ fzf:
   ignore_case: false
   info_hidden: false
   height: "20%"
+# include extension-less kubeconfig files (oidc@*, k8s.*); kubie's own
+# config is always excluded automatically
+configs:
+  include:
+    - ~/.kube/config
+    - ~/.kube/*
+  exclude:
+    - ~/.kube/.*
