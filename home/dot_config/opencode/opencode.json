@@ -17,12 +17,23 @@
       "npm": "@ai-sdk/openai-compatible",
       "name": "Procyde Intelligent Assistant",
       "options": {
-        "baseURL": "https://pia.procyde.online/v1",
-        "apiKey": "{env:PIA_API_KEY}"
+        "baseURL": "https://pia.procyde.online/v1"
       },
       "models": {
         "PIA-1": {
           "name": "PIA-1"
+        }
+      }
+    },
+    "procyde-bifrost": {
+      "npm": "@ai-sdk/openai-compatible",
+      "name": "PROCYDE Biforst",
+      "options": {
+        "baseURL": "https://ai.procyde.online/v1"
+      },
+      "models": {
+        "PIA-1": {
+          "name": "PIA-1-BIFROST"
         }
       }
     }
