@@ -86,8 +86,9 @@ kctx() {
   emulate -L zsh
   [[ -n "$(__kctx_list)" ]] || { print -u2 "kctx: no kubernetes contexts found"; return 1 }
   local sel
-  # fzf options mirror the fzf block in ~/.kube/kubie.yaml
-  sel=$(__kctx_order | fzf --height=33% --mouse --tabstop=40 --prompt='ctx> ') || return 0
+  # fzf options mirror the fzf block in ~/.kube/kubie.yaml; --mouse omitted:
+  # removed in current fzf, mouse is on by default
+  sel=$(__kctx_order | fzf --height=33% --tabstop=40 --prompt='ctx> ') || return 0
   [[ -n "$sel" ]] || return 0
   local ctx="${sel%%$'\t'*}"
   __kctx_log "$ctx"
