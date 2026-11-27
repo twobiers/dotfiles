@@ -6,7 +6,7 @@ fzf:
   reverse: false
   ignore_case: false
   info_hidden: false
-  height: "20%"
+  height: "33%"
 # include extension-less kubeconfig files (oidc@*, k8s.*); kubie's own
 # config is always excluded automatically
 configs:
@@ -15,3 +15,10 @@ configs:
     - ~/.kube/*
   exclude:
     - ~/.kube/.*
+
+# Usage log for the MRU context picker (zsh rc.d/40-runtimes/kubernetes.zsh).
+# Self-contained on purpose: the spawned shell may not have the zsh helpers
+# sourced, and the path must stay in sync with KCTX_HISTORY there.
+hooks:
+  start_ctx: >-
+    mkdir -p "$HOME/.local/state/kubie" && printf '%s\t%s\n' "$(date +%s)" "$(kubie info ctx 2>/dev/null)" >> "$HOME/.local/state/kubie/context-history"
